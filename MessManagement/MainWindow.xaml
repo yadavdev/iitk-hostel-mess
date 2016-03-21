@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MessManagement"
         mc:Ignorable="d"
-        Title="Mess Management" Height="720" Width="1280">
+        Title="Mess Management" Height="640" Width="852" MaxHeight="640" MaxWidth="852" MinHeight="640" MinWidth="852">
 
     <DockPanel LastChildFill="False">
         <Menu x:Name="menu" DockPanel.Dock="Top">
@@ -26,7 +26,7 @@
             </StatusBarItem>
         </StatusBar>
         <Grid>
-            <Label x:Name="label_welcome" HorizontalContentAlignment="Center" Content="Welcome"  VerticalAlignment="Top" FontSize="48" ScrollViewer.VerticalScrollBarVisibility="Disabled" Foreground="#FF14B9EB" Margin="436,70,-436,0"/>
+            <Label x:Name="label_welcome" HorizontalContentAlignment="Center" Content="Welcome" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="48" ScrollViewer.VerticalScrollBarVisibility="Disabled" Foreground="#FF14B9EB" Margin="326,38,-326,0"/>
         </Grid>
     </DockPanel>
 

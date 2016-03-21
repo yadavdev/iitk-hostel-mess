@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MessManagement"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="Mess Management" Height="720" Width="1280">
+
+    <DockPanel LastChildFill="False">
+        <Menu x:Name="menu" DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Exit" />
+            </MenuItem>
+            <MenuItem Header="_Options">
+                <MenuItem Header="_Test Option 1" />
+            </MenuItem>
+            <MenuItem Header="_About">
+                <MenuItem Header="_License" />
+                <MenuItem Header="_Contributors" />
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <Label x:Name="label" Content="Created By: Devashish Yadav and Gaurav, Hall-2 IIT Kanpur"/>
+            </StatusBarItem>
+        </StatusBar>
+        <Grid>
+            <Label x:Name="label_welcome" HorizontalContentAlignment="Center" Content="Welcome"  VerticalAlignment="Top" FontSize="48" ScrollViewer.VerticalScrollBarVisibility="Disabled" Foreground="#FF14B9EB" Margin="436,70,-436,0"/>
+        </Grid>
+    </DockPanel>
+
 </Window>

@@ -24,5 +24,10 @@ namespace MessManagement
         {
             InitializeComponent();
         }
+
+        private void button_login_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

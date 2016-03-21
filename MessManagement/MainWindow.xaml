@@ -25,8 +25,16 @@
                 <Label x:Name="label" Content="Created By: Devashish Yadav and Gaurav, Hall-2 IIT Kanpur"/>
             </StatusBarItem>
         </StatusBar>
-        <Grid>
-            <Label x:Name="label_welcome" HorizontalContentAlignment="Center" Content="Welcome" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="48" ScrollViewer.VerticalScrollBarVisibility="Disabled" Foreground="#FF14B9EB" Margin="326,38,-326,0"/>
+        <Grid Width="843">
+            <Label x:Name="label_welcome" HorizontalContentAlignment="Center" Content="Welcome" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="48" ScrollViewer.VerticalScrollBarVisibility="Disabled" Foreground="#FF14B9EB" Margin="315,46,322,0"/>
+            <Label x:Name="label_login" Content="Login to Continue:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18.667" Margin="262,142,0,0"/>
+            <Label x:Name="label_id" Content="Login:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="7.026,8.846" Margin="337,182,0,0" FontSize="13.333" FontWeight="Bold"/>
+            <Label x:Name="label_pass" Content="Password:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="7.026,8.846" Margin="315,211,0,0" FontSize="13.333" FontWeight="Bold"/>
+            <TextBox x:Name="textBox_id" HorizontalAlignment="Left" Height="20" TextWrapping="NoWrap" VerticalAlignment="Top" Width="120" Margin="401,187,0,0" FontSize="13.333" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled"/>
+            <PasswordBox x:Name="passwordBox_password" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="401,219,0,0" FontSize="13.333"/>
+            <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="219" Stroke="Black" VerticalAlignment="Top" Width="413" Margin="226,125,0,0" Panel.ZIndex="-1"/>
+            <Button x:Name="button_login" Content="Enter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="446,256,0,0" Click="button_login_Click"/>
+
         </Grid>
     </DockPanel>
 

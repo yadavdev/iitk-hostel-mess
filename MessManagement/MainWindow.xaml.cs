@@ -23,11 +23,25 @@ namespace MessManagement
         public MainWindow()
         {
             InitializeComponent();
+            Switcher.pageSwitcher = this;
+            Switcher.Switch(new Login());
+        }
+        public void Navigate(UserControl nextPage)
+        {
+            this.Content = nextPage;
         }
 
-        private void button_login_Click(object sender, RoutedEventArgs e)
+        public void Navigate(UserControl nextPage, object state)
         {
+            this.Content = nextPage;
+            IsSwitchable s = nextPage as IsSwitchable;
 
+            if (s != null)
+                s.UtilizeState(state);
+            else
+                throw new ArgumentException("NextPage is not ISwitchable! "
+                  + nextPage.Name.ToString());
         }
     }
+
 }

@@ -42,7 +42,7 @@
         </StatusBar>
         <Grid>
             <TabControl>
-                <TabItem Header="Monday" >
+                <TabItem Header="Monday">
                     <TabControl TabStripPlacement="Left">
                         <TabItem  Header="Breakfast">
                             <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
@@ -53,7 +53,7 @@
                                         <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Button x:Name="button_remove" Style="{StaticResource btn-danger}"   Click="button_remove_Click" >
+                                                    <Button x:Name="button_remove00" Style="{StaticResource btn-danger}"   Click="button_remove00_Click" >
                                                         <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
                                                     </Button>
                                                 </DataTemplate>
@@ -61,7 +61,7 @@
                                         </DataGridTemplateColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <Button x:Name="button00" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_Click">
+                                <Button x:Name="button_add00" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add00_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
@@ -78,7 +78,7 @@
                                         <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Button x:Name="button_remove" Style="{StaticResource btn-danger}"   Click="button_remove_Click" >
+                                                    <Button x:Name="button_remove01" Style="{StaticResource btn-danger}"   Click="button_remove01_Click" >
                                                         <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
                                                     </Button>
                                                 </DataTemplate>
@@ -86,7 +86,7 @@
                                         </DataGridTemplateColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <Button x:Name="button01" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_Click">
+                                <Button x:Name="button_add01" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add01_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
@@ -103,7 +103,7 @@
                                         <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <Button x:Name="button_remove" Style="{StaticResource btn-danger}"   Click="button_remove_Click" >
+                                                    <Button x:Name="button_remove02" Style="{StaticResource btn-danger}"   Click="button_remove02_Click" >
                                                         <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
                                                     </Button>
                                                 </DataTemplate>
@@ -111,7 +111,7 @@
                                         </DataGridTemplateColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <Button x:Name="button02" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_Click">
+                                <Button x:Name="button_add02" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add02_Click">
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
                                         <TextBlock xml:space="preserve"> Add</TextBlock>

@@ -6,5 +6,5 @@
         xmlns:local="clr-namespace:MessManagement"
         mc:Ignorable="d"
         Title="Mess Management" Height="640" Width="852" MaxHeight="640" MaxWidth="852"  ResizeMode="CanMinimize">
-
+    
 </Window>

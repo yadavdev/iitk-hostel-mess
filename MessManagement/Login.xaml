@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MessManagement"
              mc:Ignorable="d" 
-             d:DesignHeight="640" d:DesignWidth="852">
+             d:DesignHeight="640" d:DesignWidth="852" Background="White">
     <DockPanel LastChildFill="False">
         <Menu x:Name="menu" DockPanel.Dock="Top">
             <MenuItem Header="_File">
@@ -24,7 +24,7 @@
                 <Label x:Name="label" Content="Created By: Devashish Yadav and Gaurav, Hall-2 IIT Kanpur"/>
             </StatusBarItem>
         </StatusBar>
-        <Grid Width="843">
+        <Grid Width="852">
             <Label x:Name="label_welcome" HorizontalContentAlignment="Center" Content="Welcome" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="48" ScrollViewer.VerticalScrollBarVisibility="Disabled" Foreground="#FF14B9EB" Margin="315,46,322,0"/>
             <Label x:Name="label_login" Content="Login to Continue:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18.667" Margin="262,142,0,0"/>
             <Label x:Name="label_id" Content="Login:" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="7.026,8.846" Margin="337,182,0,0" FontSize="13.333" FontWeight="Bold"/>

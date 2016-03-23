@@ -32,41 +32,17 @@ namespace MessManagement
 
         private void button_add00_Click(object sender, RoutedEventArgs e)
         {
-            Menu00.CommitEdit();
-            if (weeklymenu["0"]["0"].Count < MaxExtras)
-            {
-                weeklymenu["0"]["0"].Add(new DayMenu() { Name = "New Item", Price = 0 });
-                Menu00.Items.Refresh();
-
-            }
-            else
-                Menu00.Items.Refresh();
+            AddExtra(ref Menu00, "0", "0");
         }
 
         private void button_add01_Click(object sender, RoutedEventArgs e)
         {
-            Menu01.CommitEdit();
-            if (weeklymenu["0"]["1"].Count < MaxExtras)
-            {
-                weeklymenu["0"]["1"].Add(new DayMenu() { Name = "New Item", Price = 0 });
-                Menu01.Items.Refresh();
-
-            }
-            else
-                Menu01.Items.Refresh();
+            AddExtra(ref Menu01, "0", "1");
         }
 
         private void button_add02_Click(object sender, RoutedEventArgs e)
         {
-            Menu02.CommitEdit();
-            if (weeklymenu["0"]["2"].Count < MaxExtras)
-            {
-                weeklymenu["0"]["2"].Add(new DayMenu() { Name = "New Item", Price = 0 });
-                Menu02.Items.Refresh();
-
-            }
-            else
-                Menu02.Items.Refresh();
+            AddExtra(ref Menu02, "0", "2");
         }
         private void button_remove00_Click(object sender, RoutedEventArgs e)
         {
@@ -81,6 +57,16 @@ namespace MessManagement
             RemoveExtra(ref Menu02, "0", "2");
         }
 
+        private void AddExtra(ref DataGrid dg, string day, string meal)
+        {
+            dg.CommitEdit();
+            if (weeklymenu[day][meal].Count < MaxExtras)
+            {
+                weeklymenu[day][meal].Add(new DayMenu() { Name = "New Item", Price = 0 });
+
+            }
+            dg.Items.Refresh();
+        }
         private void RemoveExtra(ref DataGrid dg, string day, string meal)
         {
             dg.CommitEdit();

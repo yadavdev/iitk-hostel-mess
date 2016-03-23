@@ -70,54 +70,26 @@ namespace MessManagement
         }
         private void button_remove00_Click(object sender, RoutedEventArgs e)
         {
-            Menu00.CommitEdit();
-            if (Menu00.SelectedItems.Count > 0)
-            {
-                try
-                {
-                    var selectedIndex = Menu00.SelectedIndex;
-                    weeklymenu["0"]["0"].RemoveAt(selectedIndex);
-                }
-                catch (Exception exception)
-                {
-                    Console.Write("\n\n" + exception.ToString() + "\n\n");
-                }
-                finally
-                {
-                    Menu00.Items.Refresh();
-                }
-            }
+            RemoveExtra(ref Menu00, "0", "0");
         }
         private void button_remove01_Click(object sender, RoutedEventArgs e)
         {
-            Menu01.CommitEdit();
-            if (Menu01.SelectedItems.Count > 0)
-            {
-                try
-                {
-                    var selectedIndex = Menu01.SelectedIndex;
-                    weeklymenu["0"]["1"].RemoveAt(selectedIndex);
-                }
-                catch (Exception exception)
-                {
-                    Console.Write("\n\n" + exception.ToString() + "\n\n");
-                }
-                finally
-                {
-                    Menu01.Items.Refresh();
-                }
-            }
+            RemoveExtra(ref Menu01, "0", "1");
         }
         private void button_remove02_Click(object sender, RoutedEventArgs e)
         {
-            
-            Menu02.CommitEdit();
-            if (Menu02.SelectedItems.Count > 0)
+            RemoveExtra(ref Menu02, "0", "2");
+        }
+
+        private void RemoveExtra(ref DataGrid dg, string day, string meal)
+        {
+            dg.CommitEdit();
+            if (dg.SelectedItems.Count > 0)
             {
                 try
                 {
-                    var selectedIndex = Menu02.SelectedIndex;
-                    weeklymenu["0"]["2"].RemoveAt(selectedIndex);
+                    var selectedIndex = dg.SelectedIndex;
+                    weeklymenu[day][meal].RemoveAt(selectedIndex);
                 }
                 catch (Exception exception)
                 {
@@ -125,7 +97,7 @@ namespace MessManagement
                 }
                 finally
                 {
-                    Menu02.Items.Refresh();
+                    dg.Items.Refresh();
                 }
             }
         }

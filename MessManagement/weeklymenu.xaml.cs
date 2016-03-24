@@ -21,6 +21,7 @@ namespace MessManagement
     public partial class WeeklyMenu : UserControl
     {
         int MaxExtras = 4;
+        int FixedMenuMax = 6;
         Dictionary<String, Dictionary<String, List<DayMenu>>> weeklymenu = new Dictionary<String, Dictionary<String, List<DayMenu>>>();
 
         public WeeklyMenu()
@@ -204,17 +205,53 @@ namespace MessManagement
         {
             RemoveExtra(ref Menu62, "6", "2");
         }
-
+        /*Event Handers for Daily Fixed*/
+        private void button_add70_Click(object sender, RoutedEventArgs e)
+        {
+            AddExtra(ref Menu70, "7", "0");
+        }
+        private void button_add71_Click(object sender, RoutedEventArgs e)
+        {
+            AddExtra(ref Menu71, "7", "1");
+        }
+        private void button_add72_Click(object sender, RoutedEventArgs e)
+        {
+            AddExtra(ref Menu72, "7", "2");
+        }
+        private void button_remove70_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveExtra(ref Menu70, "7", "0");
+        }
+        private void button_remove71_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveExtra(ref Menu71, "7", "1");
+        }
+        private void button_remove72_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveExtra(ref Menu72, "7", "2");
+        }
         /*Add an extra row to the list of the given day and meal*/
         private void AddExtra(ref DataGrid dg, string day, string meal)
         {
             dg.CommitEdit();
-            if (weeklymenu[day][meal].Count < MaxExtras)
+            if (day != "7")
             {
-                weeklymenu[day][meal].Add(new DayMenu() { Name = "New Item", Price = 0 });
+                if (weeklymenu[day][meal].Count < MaxExtras)
+                {
+                    weeklymenu[day][meal].Add(new DayMenu() { Name = "New Item", Price = 0 });
 
+                }
+                dg.Items.Refresh();
             }
-            dg.Items.Refresh();
+            else
+            {
+                if (weeklymenu[day][meal].Count < FixedMenuMax)
+                {
+                    weeklymenu[day][meal].Add(new DayMenu() { Name = "New Item", Price = 0 });
+
+                }
+                dg.Items.Refresh();
+            }
         }
 
         /*Remove an extra row from the list of the given day and meal*/
@@ -241,7 +278,7 @@ namespace MessManagement
 
         private void LoadMenus()
         {
-            for (int i=0; i < 7; i++)
+            for (int i=0; i < 8; i++)
             {
                 string day = i.ToString();
                 weeklymenu.Add(day, new Dictionary<String, List<DayMenu>>());
@@ -280,6 +317,10 @@ namespace MessManagement
             Menu60.ItemsSource = weeklymenu["6"]["0"];
             Menu61.ItemsSource = weeklymenu["6"]["1"];
             Menu62.ItemsSource = weeklymenu["6"]["2"];
+            /*Daily Fixed*/
+            Menu70.ItemsSource = weeklymenu["7"]["0"];
+            Menu71.ItemsSource = weeklymenu["7"]["1"];
+            Menu72.ItemsSource = weeklymenu["7"]["2"];
         }
 
 

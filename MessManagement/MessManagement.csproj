@@ -73,6 +73,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="IsSwitchable.cs" />
+    <Compile Include="LatestMemberTransactions.xaml.cs">
+      <DependentUpon>LatestMemberTransactions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -86,6 +89,10 @@
     <Compile Include="WeeklyMenu.xaml.cs">
       <DependentUpon>WeeklyMenu.xaml</DependentUpon>
     </Compile>
+    <Page Include="LatestMemberTransactions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -157,6 +164,9 @@
   <ItemGroup>
     <Resource Include="Resource\Images\VSO_Add_whiteNoHalo_12x_16x.png" />
     <Resource Include="Resource\Images\VSO_Close_whiteNoHalo_12x_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\Previous_16x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

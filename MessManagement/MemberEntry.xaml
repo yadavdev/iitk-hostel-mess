@@ -62,8 +62,8 @@
                 <Button x:Name="button_enter" Style="{StaticResource btn-info}" Content="Enter" Click="button_enter_Click" Height="60" Width="100"/>
             </StackPanel>
             <Label x:Name="label_error" Content="_" HorizontalAlignment="Left" Margin="180,274,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="398"/>
-            <Button x:Name="button_latest_transactions" Style="{StaticResource btn-default}" Content="View Latest Transactions" HorizontalAlignment="Left" Margin="564,494,0,0" VerticalAlignment="Top" Width="199" FontSize="16"/>
-
+            <Button x:Name="button_latest_transactions" Style="{StaticResource btn-default}" Content="View Latest Transactions" HorizontalAlignment="Left" Margin="564,494,0,0" VerticalAlignment="Top" Width="199" FontSize="16" Click="button_latest_transactions_Click"/>
+           
         </Grid>
     </DockPanel>
 </UserControl>

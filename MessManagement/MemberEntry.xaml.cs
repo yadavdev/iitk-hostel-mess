@@ -67,7 +67,8 @@ namespace MessManagement
 
         private void button_latest_transactions_Click(object sender, RoutedEventArgs e)
         {
-
+            Switcher.Switch(new LatestMemberTransactions());
         }
+        
     }
 }

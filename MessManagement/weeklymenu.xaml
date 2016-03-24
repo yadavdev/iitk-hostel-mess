@@ -121,6 +121,480 @@
                         </TabItem>
                     </TabControl>
                 </TabItem>
+                <TabItem Header="Tuesday">
+                    <TabControl TabStripPlacement="Left">
+                        <TabItem  Header="Breakfast">
+                            <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
+                                <DataGrid x:Name="Menu10" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="button_remove10" Style="{StaticResource btn-danger}"   Click="button_remove10_Click" >
+                                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="button_add10" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add10_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                                        <TextBlock xml:space="preserve"> Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </TabItem>
+                        <TabItem  Header="Lunch">
+                            <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
+                                <DataGrid x:Name="Menu11" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="button_remove11" Style="{StaticResource btn-danger}"   Click="button_remove11_Click" >
+                                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="button_add11" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add11_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                                        <TextBlock xml:space="preserve"> Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </TabItem>
+                        <TabItem  Header="Dinner">
+                            <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
+                                <DataGrid x:Name="Menu12" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="button_remove12" Style="{StaticResource btn-danger}"   Click="button_remove12_Click" >
+                                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="button_add12" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add12_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                                        <TextBlock xml:space="preserve"> Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </TabItem>
+                <TabItem Header="Wednesday">
+                    <TabControl TabStripPlacement="Left">
+                        <TabItem  Header="Breakfast">
+                            <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
+                                <DataGrid x:Name="Men20" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="button_remove20" Style="{StaticResource btn-danger}"   Click="button_remove20_Click" >
+                                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="button_add20" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add20_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                                        <TextBlock xml:space="preserve"> Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </TabItem>
+                        <TabItem  Header="Lunch">
+                            <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
+                                <DataGrid x:Name="Menu21" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="button_remove21" Style="{StaticResource btn-danger}"   Click="button_remove21_Click" >
+                                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="button_add21" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add21_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                                        <TextBlock xml:space="preserve"> Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </TabItem>
+                        <TabItem  Header="Dinner">
+                            <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
+                                <DataGrid x:Name="Menu22" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="button_remove12" Style="{StaticResource btn-danger}"   Click="button_remove22_Click" >
+                                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="button_add22" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add22_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                                        <TextBlock xml:space="preserve"> Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </TabItem>
+                <TabItem Header="Thursday">
+                    <TabControl TabStripPlacement="Left">
+                        <TabItem  Header="Breakfast">
+                            <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
+                                <DataGrid x:Name="Menu30" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="button_remove30" Style="{StaticResource btn-danger}"   Click="button_remove30_Click" >
+                                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="button_add30" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add30_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                                        <TextBlock xml:space="preserve"> Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </TabItem>
+                        <TabItem  Header="Lunch">
+                            <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
+                                <DataGrid x:Name="Menu31" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="button_remove31" Style="{StaticResource btn-danger}"   Click="button_remove31_Click" >
+                                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="button_add31" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add31_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                                        <TextBlock xml:space="preserve"> Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </TabItem>
+                        <TabItem  Header="Dinner">
+                            <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
+                                <DataGrid x:Name="Menu32" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="button_remove32" Style="{StaticResource btn-danger}"   Click="button_remove32_Click" >
+                                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="button_add32" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add32_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                                        <TextBlock xml:space="preserve"> Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </TabItem>
+                <TabItem Header="Friday">
+                    <TabControl TabStripPlacement="Left">
+                        <TabItem  Header="Breakfast">
+                            <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
+                                <DataGrid x:Name="Menu40" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="button_remove40" Style="{StaticResource btn-danger}"   Click="button_remove40_Click" >
+                                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="button_add40" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add40_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                                        <TextBlock xml:space="preserve"> Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </TabItem>
+                        <TabItem  Header="Lunch">
+                            <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
+                                <DataGrid x:Name="Menu41" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="button_remove41" Style="{StaticResource btn-danger}"   Click="button_remove41_Click" >
+                                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="button_add41" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add41_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                                        <TextBlock xml:space="preserve"> Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </TabItem>
+                        <TabItem  Header="Dinner">
+                            <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
+                                <DataGrid x:Name="Menu42" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="button_remove42" Style="{StaticResource btn-danger}"   Click="button_remove42_Click" >
+                                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="button_add42" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add42_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                                        <TextBlock xml:space="preserve"> Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </TabItem>
+                <TabItem Header="Saturday">
+                    <TabControl TabStripPlacement="Left">
+                        <TabItem  Header="Breakfast">
+                            <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
+                                <DataGrid x:Name="Menu50" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="button_remove50" Style="{StaticResource btn-danger}"   Click="button_remove50_Click" >
+                                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="button_add50" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add50_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                                        <TextBlock xml:space="preserve"> Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </TabItem>
+                        <TabItem  Header="Lunch">
+                            <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
+                                <DataGrid x:Name="Menu51" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="button_remove51" Style="{StaticResource btn-danger}"   Click="button_remove51_Click" >
+                                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="button_add51" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add51_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                                        <TextBlock xml:space="preserve"> Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </TabItem>
+                        <TabItem  Header="Dinner">
+                            <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
+                                <DataGrid x:Name="Menu52" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="button_remove52" Style="{StaticResource btn-danger}"   Click="button_remove52_Click" >
+                                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="button_add52" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add52_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                                        <TextBlock xml:space="preserve"> Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </TabItem>
+                <TabItem Header="Sunday">
+                    <TabControl TabStripPlacement="Left">
+                        <TabItem  Header="Breakfast">
+                            <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
+                                <DataGrid x:Name="Menu60" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="button_remove60" Style="{StaticResource btn-danger}"   Click="button_remove60_Click" >
+                                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="button_add60" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add60_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                                        <TextBlock xml:space="preserve"> Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </TabItem>
+                        <TabItem  Header="Lunch">
+                            <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
+                                <DataGrid x:Name="Menu61" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="button_remove61" Style="{StaticResource btn-danger}"   Click="button_remove61_Click" >
+                                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="button_add61" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add61_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                                        <TextBlock xml:space="preserve"> Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </TabItem>
+                        <TabItem  Header="Dinner">
+                            <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
+                                <DataGrid x:Name="Menu62" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button x:Name="button_remove62" Style="{StaticResource btn-danger}"   Click="button_remove62_Click" >
+                                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="button_add62" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_add62_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                                        <TextBlock xml:space="preserve"> Add</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </TabItem>
             </TabControl>
 
         </Grid>

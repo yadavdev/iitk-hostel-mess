@@ -24,5 +24,10 @@ namespace MessManagement
         {
             InitializeComponent();
         }
+
+        private void button_back_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new MemberEntry());
+        }
     }
 }

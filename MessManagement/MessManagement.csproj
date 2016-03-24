@@ -79,6 +79,9 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainExtraEntry.xaml.cs">
+      <DependentUpon>MainExtraEntry.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MemberEntry.xaml.cs">
       <DependentUpon>MemberEntry.xaml</DependentUpon>
     </Compile>
@@ -96,6 +99,10 @@
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainExtraEntry.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -167,6 +174,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\Images\Previous_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\member_256x256.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

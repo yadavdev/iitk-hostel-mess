@@ -46,14 +46,32 @@
             </StatusBarItem>
         </StatusBar>
         <Grid Width="852">
-            <Button x:Name="button_back" Style="{StaticResource btn-default}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="324,552,0,0" Click="button_back_Click">
+            <Image x:Name="image_id" HorizontalAlignment="Left" Height="175" Source="Resource/Images/member_256x256.png" Margin="23,25,0,0" VerticalAlignment="Top" Width="140" Stretch="Fill" />
+            <DataGrid x:Name="fixedextra" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="207,111,31,289" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="200*"/>
+                    <DataGridTextColumn Header="Price" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="50*"/>
+                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}" Width="50*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid x:Name="todayspecialextra" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="207,340,31,56"  >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="200*"/>
+                    <DataGridTextColumn Header="Price" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="50*"/>
+                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}" Width="50*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Label x:Name="label_name" Content="John The Legend" HorizontalAlignment="Left" Margin="207,25,0,0" VerticalAlignment="Top" FontSize="24" Width="527"/>
+            <Label x:Name="label_rollno" Content="150001" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="23,220,0,0" VerticalAlignment="Top" FontSize="24" Width="140"/>
+            <Button x:Name="button_back" Style="{StaticResource btn-default}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="749,25,0,0" Click="button_back_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Resource/Images/Previous_16x.png"  Height="14" />
                     <TextBlock xml:space="preserve"> Cancel</TextBlock>
                 </StackPanel>
             </Button>
-            <Image x:Name="image_id" HorizontalAlignment="Left" Height="175" Source="Resource/Images/member_256x256.png" Margin="23,25,0,0" VerticalAlignment="Top" Width="140" Stretch="Fill" />
-
+            <Label x:Name="label1" Content="Extras" HorizontalAlignment="Left" Margin="207,75,0,0" VerticalAlignment="Top" Width="154" FontSize="16"/>
+            <Label x:Name="label2" Content="Today's Special" HorizontalAlignment="Left" Margin="207,301,0,0" VerticalAlignment="Top" Width="154" FontSize="16"/>
+            <Button x:Name="button_enter" Content="Enter"  Style="{StaticResource btn-success}" HorizontalAlignment="Left" Margin="396,506,0,0" VerticalAlignment="Top" Width="244"/>
         </Grid>
     </DockPanel>
 </UserControl>

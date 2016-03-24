@@ -35,30 +35,6 @@ namespace MessManagement
             todayextralist.Add(new DayMenu() { Name = "Palak Paneer", Price = 22 });
             menutoday.ItemsSource = todayextralist;
         }
-        
-        private void button_strike(object sender, RoutedEventArgs e)
-        {
-            menutoday.CommitEdit();
-            if (menutoday.SelectedItems.Count > 0)
-            {
-                try
-                {
-                    var rowIndex = menutoday.SelectedIndex;
-                    var row = (DataGridRow)menutoday.ItemContainerGenerator.ContainerFromIndex(rowIndex);
-                    Console.Write("\n\n" + row.GetType() + "\n\n");
-                    row.Background = Brushes.Black;
-                    
-                }
-                catch (Exception exception)
-                {
-                    Console.Write("\n\n" + exception.ToString() + "\n\n");
-                }
-                finally
-                {
-                    //menutoday.Items.Refresh();
-                }
-            }
-        }
 
         private void button_enter_Click(object sender, RoutedEventArgs e)
         {

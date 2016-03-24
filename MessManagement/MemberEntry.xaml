@@ -15,7 +15,16 @@
             <Setter Property="VerticalGridLinesBrush" Value="#DDD" />
             <Setter Property="HorizontalGridLinesBrush" Value="#DDD" />
             <Setter Property="Background" Value="Transparent" />
-            <Setter Property="AlternatingRowBackground" Value="#EEE" />
+        </Style>
+        <Style TargetType="{x:Type DataGridRow}">
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="Black" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="{x:Static SystemColors.HighlightColor}"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="{x:Static SystemColors.HighlightTextColor}"/>
+            </Style.Resources>
         </Style>
     </UserControl.Resources>
 
@@ -40,15 +49,15 @@
         </StatusBar>
         <Grid Width="852">
             <Grid Margin="10,0,10,20">
-                <DataGrid x:Name="MenuToday" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,10,20,447" >
+                <DataGrid x:Name="menutoday" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,10,20,447" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
-                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
-                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="300*"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="150"/>
+                        <DataGridTemplateColumn Header="" IsReadOnly="True" Width="15*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button x:Name="button_remove00" Style="{StaticResource btn-danger}"    >
-                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                    <Button x:Name="button_strike" Style="{StaticResource btn-warning}"   Click="button_strike" >
+                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14" />
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

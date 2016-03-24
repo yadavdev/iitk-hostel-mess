@@ -204,7 +204,7 @@
                     <TabControl TabStripPlacement="Left">
                         <TabItem  Header="Breakfast">
                             <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
-                                <DataGrid x:Name="Men20" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
+                                <DataGrid x:Name="Menu20" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
                                         <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>

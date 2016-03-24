@@ -9,22 +9,22 @@
 
     <UserControl.Resources>
         <Style x:Key="Menu" TargetType="DataGrid">
-            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontSize" Value="16" />
             <Setter Property="FontFamily" Value="Helvetica Neue,Helvetica,Arial,sans-serif"/>
             <Setter Property="Padding" Value="5" />
             <Setter Property="HeadersVisibility" Value="Column" />
             <Setter Property="VerticalGridLinesBrush" Value="#DDD" />
             <Setter Property="HorizontalGridLinesBrush" Value="#DDD" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="AlternatingRowBackground" Value="#EEE" />
+            <Setter Property="Background" Value="Beige" />
+            <Setter Property="BorderBrush" Value="Transparent" />
         </Style>
-        <Style TargetType="{x:Type DataGridRow}">
+        <!--<Style TargetType="{x:Type DataGridRow}">
             <Style.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
                 <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent"/>
             </Style.Resources>
-        </Style>
+        </Style> -->
     </UserControl.Resources>
 
     <DockPanel LastChildFill="False">
@@ -47,31 +47,31 @@
         </StatusBar>
         <Grid Width="852">
             <Image x:Name="image_id" HorizontalAlignment="Left" Height="175" Source="Resource/Images/member_256x256.png" Margin="23,25,0,0" VerticalAlignment="Top" Width="140" Stretch="Fill" />
-            <DataGrid x:Name="fixedextra" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="207,111,31,289" >
+            <DataGrid x:Name="fixedextra" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserDeleteRows = "False" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="207,93,31,258" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="200*"/>
-                    <DataGridTextColumn Header="Price" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="50*"/>
-                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}" Width="50*"/>
+                    <DataGridTextColumn Header="Unit Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="50*"/>
+                    <DataGridTextColumn Header="Enter Quantity" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}" Width="80*"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid x:Name="todayspecialextra" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="207,340,31,56"  >
+            <DataGrid x:Name="todayspecialextra" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserDeleteRows = "False" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="207,340,31,56"  >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="200*"/>
-                    <DataGridTextColumn Header="Price" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="50*"/>
-                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}" Width="50*"/>
+                    <DataGridTextColumn Header="Unit Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="50*"/>
+                    <DataGridTextColumn Header="Enter Quantity" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}" Width="80*"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Label x:Name="label_name" Content="John The Legend" HorizontalAlignment="Left" Margin="207,25,0,0" VerticalAlignment="Top" FontSize="24" Width="527"/>
-            <Label x:Name="label_rollno" Content="150001" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="23,220,0,0" VerticalAlignment="Top" FontSize="24" Width="140"/>
+            <Label x:Name="label_rollno" Content="150001" FontWeight="Bold" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="23,220,0,0" VerticalAlignment="Top" FontSize="24" Width="140"/>
             <Button x:Name="button_back" Style="{StaticResource btn-default}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="749,25,0,0" Click="button_back_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Resource/Images/Previous_16x.png"  Height="14" />
                     <TextBlock xml:space="preserve"> Cancel</TextBlock>
                 </StackPanel>
             </Button>
-            <Label x:Name="label1" Content="Extras" HorizontalAlignment="Left" Margin="207,75,0,0" VerticalAlignment="Top" Width="154" FontSize="16"/>
+            <Label x:Name="label1" Content="Daily Extras" HorizontalAlignment="Left" Margin="207,62,0,0" VerticalAlignment="Top" Width="154" FontSize="16"/>
             <Label x:Name="label2" Content="Today's Special" HorizontalAlignment="Left" Margin="207,301,0,0" VerticalAlignment="Top" Width="154" FontSize="16"/>
-            <Button x:Name="button_enter" Content="Enter"  Style="{StaticResource btn-success}" HorizontalAlignment="Left" Margin="396,506,0,0" VerticalAlignment="Top" Width="244"/>
+            <Button x:Name="button_enter" Content="Enter"  Style="{StaticResource btn-success}" HorizontalAlignment="Left" Margin="396,506,0,0" VerticalAlignment="Top" Width="244" Height="43" FontSize="18.667"/>
         </Grid>
     </DockPanel>
 </UserControl>

@@ -38,7 +38,8 @@ namespace MessManagement
 
         private void button_enter_Click(object sender, RoutedEventArgs e)
         {
-
+            /*Logic to Store and Check Member Id from database*/
+            Switcher.Switch(new MainExtraEntry());
         }
 
         private void button_latest_transactions_Click(object sender, RoutedEventArgs e)

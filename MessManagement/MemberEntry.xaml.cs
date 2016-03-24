@@ -29,8 +29,10 @@ namespace MessManagement
         }
         private void LoadExtras()
         {
-            todayextralist.Add(new DayMenu() { Name = "Rasgulla", Price = 14 });
-            todayextralist.Add(new DayMenu() { Name = "Chicken Curry", Price = 14 });
+            todayextralist.Add(new DayMenu() { Name = "Rasgulla", Price = 10 });
+            todayextralist.Add(new DayMenu() { Name = "Chicken Curry", Price = 65 });
+            todayextralist.Add(new DayMenu() { Name = "Gajar Ka Halwa", Price = 15 });
+            todayextralist.Add(new DayMenu() { Name = "Palak Paneer", Price = 22 });
             menutoday.ItemsSource = todayextralist;
         }
         
@@ -58,5 +60,14 @@ namespace MessManagement
             }
         }
 
+        private void button_enter_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void button_latest_transactions_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

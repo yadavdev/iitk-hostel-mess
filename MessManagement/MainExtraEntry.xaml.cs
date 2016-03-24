@@ -37,7 +37,8 @@ namespace MessManagement
 
         private void button_enter_Click(object sender, RoutedEventArgs e)
         {
-
+            UpdateDatabase(); /*And Add to Latest Transaction*/
+            Switcher.Switch(new MemberEntry());
         }
         private void LoadExtras()
         {
@@ -53,6 +54,10 @@ namespace MessManagement
             today_fixed.Add(new DailyMenuEntry() { Name = "Chicken Curry", Quantity = 0, Price = 86 });
             today_fixed.Add(new DailyMenuEntry() { Name = "Veg Curry", Quantity = 0, Price = 345 });
             today_fixed.Add(new DailyMenuEntry() { Name = "Hall2 Special Curry", Quantity = 0, Price = 104 });
+        }
+        private void UpdateDatabase()
+        {
+
         }
     }
 

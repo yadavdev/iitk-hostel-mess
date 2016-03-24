@@ -241,17 +241,45 @@ namespace MessManagement
 
         private void LoadMenus()
         {
-            weeklymenu.Add("0", new Dictionary<String, List<DayMenu>>());
-            weeklymenu["0"].Add("0", new List<DayMenu>());
-            weeklymenu["0"].Add("1", new List<DayMenu>());
-            weeklymenu["0"].Add("2", new List<DayMenu>());
-
-            weeklymenu["0"]["0"].Add(new DayMenu() { Name = "Rasgulla", Price = 14 });
-            weeklymenu["0"]["1"].Add(new DayMenu() { Name = "GulabJamun", Price = 20 });
-            weeklymenu["0"]["2"].Add(new DayMenu() { Name = "ChikenCurry", Price = 25 });
+            for (int i=0; i < 7; i++)
+            {
+                string day = i.ToString();
+                weeklymenu.Add(day, new Dictionary<String, List<DayMenu>>());
+                weeklymenu[day].Add("0", new List<DayMenu>());
+                weeklymenu[day].Add("1", new List<DayMenu>());
+                weeklymenu[day].Add("2", new List<DayMenu>());
+                weeklymenu[day]["0"].Add(new DayMenu() { Name = "Rasgulla" + day, Price = 14 });
+                weeklymenu[day]["1"].Add(new DayMenu() { Name = "GulabJamun" + day, Price = 20 });
+                weeklymenu[day]["2"].Add(new DayMenu() { Name = "ChikenCurry" + day, Price = 65 });
+            }
+            /*Monday*/
             Menu00.ItemsSource = weeklymenu["0"]["0"];
             Menu01.ItemsSource = weeklymenu["0"]["1"];
             Menu02.ItemsSource = weeklymenu["0"]["2"];
+            /*Tuesday*/
+            Menu10.ItemsSource = weeklymenu["1"]["0"];
+            Menu11.ItemsSource = weeklymenu["1"]["1"];
+            Menu12.ItemsSource = weeklymenu["1"]["2"];
+            /*Wednesday*/
+            Menu20.ItemsSource = weeklymenu["2"]["0"];
+            Menu21.ItemsSource = weeklymenu["2"]["1"];
+            Menu22.ItemsSource = weeklymenu["2"]["2"];
+            /*Thursday*/
+            Menu30.ItemsSource = weeklymenu["3"]["0"];
+            Menu31.ItemsSource = weeklymenu["3"]["1"];
+            Menu32.ItemsSource = weeklymenu["3"]["2"];
+            /*Friday*/
+            Menu40.ItemsSource = weeklymenu["4"]["0"];
+            Menu41.ItemsSource = weeklymenu["4"]["1"];
+            Menu42.ItemsSource = weeklymenu["4"]["2"];
+            /*Saturday*/
+            Menu50.ItemsSource = weeklymenu["5"]["0"];
+            Menu51.ItemsSource = weeklymenu["5"]["1"];
+            Menu52.ItemsSource = weeklymenu["5"]["2"];
+            /*Sunday*/
+            Menu60.ItemsSource = weeklymenu["6"]["0"];
+            Menu61.ItemsSource = weeklymenu["6"]["1"];
+            Menu62.ItemsSource = weeklymenu["6"]["2"];
         }
 
 

@@ -24,5 +24,15 @@ namespace MessManagement
         {
             InitializeComponent();
         }
+
+        private void button_back_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void button_generate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

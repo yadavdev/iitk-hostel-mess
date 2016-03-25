@@ -25,8 +25,27 @@
             <StatusBarItem>
                 <Label x:Name="label" Content="Created By: Devashish Yadav and Gaurav, Hall-2 IIT Kanpur"/>
             </StatusBarItem>
+            <ProgressBar x:Name="progressbar_memberdues" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="494"/>
         </StatusBar>
         <Grid Width="851">
+            <Button x:Name="button_back" Style="{StaticResource btn-default}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="26,25,0,0" Click="button_back_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Resource/Images/Previous_16x.png"  Height="14" />
+                    <TextBlock xml:space="preserve"> Back</TextBlock>
+                </StackPanel>
+            </Button>
+            <Label x:Name="label1" Content="Generate Excel file of Dues for Billing" HorizontalAlignment="Left" Margin="164,64,0,0" VerticalAlignment="Top" Width="580" FontSize="16"/>
+            <Label x:Name="label2" Content="Enter Fixed Monthly Amount" HorizontalAlignment="Left" Margin="164,100,0,0" VerticalAlignment="Top" FontSize="14"/>
+            <Label x:Name="label3" Content="Enter Start Date(Included)" HorizontalAlignment="Left" Margin="164,169,0,0" VerticalAlignment="Top" Width="187" FontSize="14" />
+            <Label x:Name="label4" Content="Enter End Date(Included)" HorizontalAlignment="Left" Margin="164,238,0,0" VerticalAlignment="Top" Width="187" FontSize="14" />
+            <DatePicker x:Name="startdate" HorizontalAlignment="Left" Margin="164,198,0,0" VerticalAlignment="Top"/>
+            <DatePicker x:Name="enddate" HorizontalAlignment="Left" Margin="164,267,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="textBox_fixed_amount" HorizontalAlignment="Left" Height="23" Margin="164,134,0,0" TextWrapping="NoWrap" Text="0" VerticalAlignment="Top" Width="120" FontSize="14"/>
+            <CheckBox x:Name="checkBox_rebate" Content="Check and include Rebate Table?" HorizontalAlignment="Left" Margin="164,320,0,0" VerticalAlignment="Top" FontSize="14" />
+            <Button x:Name="button_generate" Content="Start" Style="{StaticResource btn-info}" HorizontalAlignment="Left" Margin="194,374,0,0" VerticalAlignment="Top" Width="157" Height="32" Click="button_generate_Click"/>
+            <Label x:Name="label_status" Content="__" HorizontalAlignment="Left" Margin="164,435,0,0" VerticalAlignment="Top" Width="441" FontSize="14" />
+
+
 
         </Grid>
     </DockPanel>

@@ -72,6 +72,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EditMember.xaml.cs">
+      <DependentUpon>EditMember.xaml</DependentUpon>
+    </Compile>
     <Compile Include="IsSwitchable.cs" />
     <Compile Include="LatestMemberTransactions.xaml.cs">
       <DependentUpon>LatestMemberTransactions.xaml</DependentUpon>
@@ -95,6 +98,10 @@
     <Compile Include="WeeklyMenu.xaml.cs">
       <DependentUpon>WeeklyMenu.xaml</DependentUpon>
     </Compile>
+    <Page Include="EditMember.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LatestMemberTransactions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

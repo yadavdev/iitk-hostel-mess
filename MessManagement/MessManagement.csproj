@@ -192,6 +192,12 @@
   <ItemGroup>
     <Resource Include="Resource\Images\member_256x256.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\VSO_Save_whiteNoHalo_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\Restart_16x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

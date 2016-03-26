@@ -53,11 +53,28 @@ namespace MessManagement
         private void button_add_Click(object sender, RoutedEventArgs e)
         {
             editmember.CommitEdit();
+            //DO check that rollno doesn't already exist(Database will give error, catch and notify user or check beforehand)
+            // Query Rollno to check existance
+            memberlist.Add(new EditMemberList() { RollNo = 13153, Name = "John Simons", Remarks = "Hall-New" });
+            editmember.Items.Refresh();
         }
 
         private void button_remove_Click(object sender, RoutedEventArgs e)
         {
             editmember.CommitEdit();
+            try
+            {
+                var selectedIndex = editmember.SelectedIndex;
+                memberlist.RemoveAt(selectedIndex);
+            }
+            catch (Exception exception)
+            {
+                Console.Write("\n\n" + exception.ToString() + "\n\n");
+            }
+            finally
+            {
+                editmember.Items.Refresh();
+            }
         }
 
         private void button_reload_Click(object sender, RoutedEventArgs e)

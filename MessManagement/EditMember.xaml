@@ -19,13 +19,7 @@
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="AlternatingRowBackground" Value="#EEE" />
         </Style>
-        <Style TargetType="{x:Type DataGridRow}">
-            <Style.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black" />
-                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent"/>
-            </Style.Resources>
-        </Style>
+        
     </UserControl.Resources>
 
     <DockPanel LastChildFill="False">
@@ -52,10 +46,10 @@
                     <DataGridTextColumn Header="RollNo" Binding="{Binding RollNo, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="60*"/>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="200*"/>
                     <DataGridTextColumn Header="Remarks" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="150*"/>
-                    <DataGridTemplateColumn Header="" IsReadOnly="True" Width="60*">
+                    <DataGridTemplateColumn Header="" IsReadOnly="True" Width="40*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="button_remove00" Style="{StaticResource btn-warning}"   Click="button_remove_trans_Click" >
+                                <Button x:Name="button_remove" Style="{StaticResource btn-danger}"   Click="button_remove_Click" >
                                     <StackPanel Orientation="Horizontal">
                                         <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
                                         <TextBlock xml:space="preserve"> Delete</TextBlock>
@@ -69,7 +63,19 @@
             <Button x:Name="button_back" Style="{StaticResource btn-default}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_back_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Resource/Images/Previous_16x.png"  Height="14" />
-                    <TextBlock xml:space="preserve"> Back</TextBlock>
+                    <TextBlock xml:space="preserve"><Run Text=" Back"/></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="button_add" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="773,17,0,0" Click="button_add_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                    <TextBlock xml:space="preserve"> Add</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="button_save" Style="{StaticResource btn-success}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="98,17,0,0" Click="button_save_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                    <TextBlock xml:space="preserve"> Save Changes</TextBlock>
                 </StackPanel>
             </Button>
         </Grid>

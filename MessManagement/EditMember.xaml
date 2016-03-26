@@ -45,7 +45,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="RollNo" Binding="{Binding RollNo, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="60*"/>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="200*"/>
-                    <DataGridTextColumn Header="Remarks" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="150*"/>
+                    <DataGridTextColumn Header="Remarks" Binding="{Binding Remarks, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="150*"/>
                     <DataGridTemplateColumn Header="" IsReadOnly="True" Width="40*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

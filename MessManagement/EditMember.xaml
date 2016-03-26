@@ -74,8 +74,14 @@
             </Button>
             <Button x:Name="button_save" Style="{StaticResource btn-success}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="98,17,0,0" Click="button_save_Click">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                    <Image Source="Resource/Images/VSO_Save_whiteNoHalo_16x.png"  Height="14" />
                     <TextBlock xml:space="preserve"> Save Changes</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="button_reload" Style="{StaticResource btn-warning}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="636,17,0,0" Click="button_reload_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Resource/Images/Restart_16x.png"  Height="14" />
+                    <TextBlock xml:space="preserve"><Run Text=" Reload/Reset"/></TextBlock>
                 </StackPanel>
             </Button>
         </Grid>

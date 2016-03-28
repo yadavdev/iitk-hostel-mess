@@ -20,10 +20,12 @@ namespace MessManagement
     /// </summary>
     public partial class VendorsInvoices : UserControl
     {
-
+        Dictionary<uint, List<PurchaseInvoice>> invoiceslist = new Dictionary<uint, List<PurchaseInvoice>>();
+        List<String> vendorlist = new List<string>();
         public VendorsInvoices()
         {
             InitializeComponent();
+            LoadDefault();
         }
 
         private void button_save_Click(object sender, RoutedEventArgs e)
@@ -49,8 +51,24 @@ namespace MessManagement
         {
 
         }
+
+        private void LoadDefault()
+        {
+
+
+            invoiceslist.Add(0, new List<PurchaseInvoice>());
+            invoiceslist[0].Add(new PurchaseInvoice() { SNo = 21, InvNo = 43242, Purchase = 433, Item = "Milk", Discount = 43, NetAmount = 489, InvDate = DateTime.Now });
+
+            gridinvoice.ItemsSource = invoiceslist[0];
+            vendorlistBox.ItemsSource = vendorlist;
+        }
+
+        private void vendorlistBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
-    public class VendorInvoice
+    public class PurchaseInvoice
     {
         public uint SNo { get; set; }
         public uint InvNo { get; set; }
@@ -59,5 +77,10 @@ namespace MessManagement
         public int Purchase { get; set; }
         public int Discount { get; set; }
         public int NetAmount { get; set; }
+    }
+    public class VendorListClass
+    {
+        public uint SNo { get; set; }
+        public String Name { get; set; }
     }
 }

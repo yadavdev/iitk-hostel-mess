@@ -42,7 +42,7 @@
             </StatusBarItem>
         </StatusBar>
         <Grid Width="852">
-            <DataGrid x:Name="vendorinvoice" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,10,0" >
+            <DataGrid x:Name="gridinvoice" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,10,0" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="SNo" Binding="{Binding SNo, UpdateSourceTrigger=LostFocus}" Width="30*"/>
                     <DataGridTextColumn Header="Inv.No" Binding="{Binding InvNo, UpdateSourceTrigger=LostFocus}" Width="60*"/>
@@ -100,6 +100,7 @@
                     <TextBlock xml:space="preserve"><Run Text=" Reload/Reset"/></TextBlock>
                 </StackPanel>
             </Button>
+            <ListBox x:Name="vendorlistBox" HorizontalAlignment="Left" Height="28" Margin="245,17,0,0" VerticalAlignment="Top" Width="250" RenderTransformOrigin="0.513,0.25" SelectionChanged="vendorlistBox_SelectionChanged"/>
         </Grid>
     </DockPanel>
 </UserControl>

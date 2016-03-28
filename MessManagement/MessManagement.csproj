@@ -72,6 +72,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EditEmployee.xaml.cs">
+      <DependentUpon>EditEmployee.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditMember.xaml.cs">
       <DependentUpon>EditMember.xaml</DependentUpon>
     </Compile>
@@ -101,6 +104,10 @@
     <Compile Include="WeeklyMenu.xaml.cs">
       <DependentUpon>WeeklyMenu.xaml</DependentUpon>
     </Compile>
+    <Page Include="EditEmployee.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="EditMember.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

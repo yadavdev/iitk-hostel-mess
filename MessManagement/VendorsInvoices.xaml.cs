@@ -20,8 +20,8 @@ namespace MessManagement
     /// </summary>
     public partial class VendorsInvoices : UserControl
     {
-        Dictionary<uint, List<PurchaseInvoice>> invoiceslist = new Dictionary<uint, List<PurchaseInvoice>>();
-        List<String> vendorlist = new List<string>();
+        Dictionary<uint, List<PurchaseInvoiceClass>> invoiceslist = new Dictionary<uint, List<PurchaseInvoiceClass>>();
+        List<VendorListClass> vendorlist = new List<VendorListClass>();
         public VendorsInvoices()
         {
             InitializeComponent();
@@ -56,8 +56,12 @@ namespace MessManagement
         {
 
 
-            invoiceslist.Add(0, new List<PurchaseInvoice>());
-            invoiceslist[0].Add(new PurchaseInvoice() { SNo = 21, InvNo = 43242, Purchase = 433, Item = "Milk", Discount = 43, NetAmount = 489, InvDate = DateTime.Now });
+            invoiceslist.Add(0, new List<PurchaseInvoiceClass>());
+            invoiceslist[0].Add(new PurchaseInvoiceClass() { SNo = 21, InvNo = 43242, Purchase = 433, Item = "Milk", Discount = 43, NetAmount = 489, InvDate = DateTime.Now });
+
+            vendorlist.Add( new VendorListClass() {VendorNo = 1, Name="Abeigil Enterprises" });
+            vendorlist.Add(new VendorListClass() { VendorNo = 2, Name = "Alif & Sons" });
+            vendorlist.Add(new VendorListClass() { VendorNo = 3, Name = "Mess Dairies" });
 
             gridinvoice.ItemsSource = invoiceslist[0];
             vendorlistBox.ItemsSource = vendorlist;
@@ -68,7 +72,7 @@ namespace MessManagement
 
         }
     }
-    public class PurchaseInvoice
+    public class PurchaseInvoiceClass
     {
         public uint SNo { get; set; }
         public uint InvNo { get; set; }
@@ -80,7 +84,8 @@ namespace MessManagement
     }
     public class VendorListClass
     {
-        public uint SNo { get; set; }
-        public String Name { get; set; }
+        public uint VendorNo { get; set; }
+        public string Name { get; set; }
     }
+
 }

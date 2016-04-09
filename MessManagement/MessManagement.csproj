@@ -72,6 +72,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="dropdown.xaml.cs">
+      <DependentUpon>dropdown.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditEmployee.xaml.cs">
       <DependentUpon>EditEmployee.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,9 @@
     <Compile Include="MemberEntry.xaml.cs">
       <DependentUpon>MemberEntry.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MenuChoose.xaml.cs">
+      <DependentUpon>MenuChoose.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Switcher.cs" />
     <Compile Include="template.xaml.cs">
       <DependentUpon>template.xaml</DependentUpon>
@@ -104,6 +110,10 @@
     <Compile Include="WeeklyMenu.xaml.cs">
       <DependentUpon>WeeklyMenu.xaml</DependentUpon>
     </Compile>
+    <Page Include="dropdown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EditEmployee.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -141,6 +151,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MemberEntry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuChoose.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

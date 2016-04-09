@@ -22,12 +22,24 @@ namespace MessManagement
     {
         List<DailyMenuEntry> today_fixed = new List<DailyMenuEntry>();
         List<DailyMenuEntry> today_special = new List<DailyMenuEntry>();
-        public MainExtraEntry()
+        int memberid = 0;
+        string membername = "";
+        public MainExtraEntry(int arg)
         {
-            InitializeComponent();
-            LoadExtras();
-            todayspecialextra.ItemsSource = today_special;
-            fixedextra.ItemsSource = today_fixed;
+            try
+            {
+                InitializeComponent();
+                memberid = arg;
+                LoadExtras();
+                todayspecialextra.ItemsSource = today_special;
+                fixedextra.ItemsSource = today_fixed;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message + "\nClick Okay to go back", "An Error Occured", MessageBoxButton.OK, MessageBoxImage.Error);
+                Switcher.Switch(new MemberEntry());
+            }
+
         }
 
         private void button_back_Click(object sender, RoutedEventArgs e)
@@ -42,18 +54,29 @@ namespace MessManagement
         }
         private void LoadExtras()
         {
-            today_special.Add(new DailyMenuEntry() { Name = "Chicken Curry", Quantity = 0, Price = 86 });
-            today_special.Add(new DailyMenuEntry() { Name = "Veg Curry", Quantity = 0, Price = 345 });
-            today_special.Add(new DailyMenuEntry() {  Name = "Hall2 Special Curry", Quantity = 0, Price = 104 });
-            today_special.Add(new DailyMenuEntry() { Name = "Hall2 Special Curry", Quantity = 0, Price = 104 });
-            today_special.Add(new DailyMenuEntry() { Name = "Hall2 Special Curry", Quantity = 0, Price = 104 });
+            try
+            {
+                //load from database where membername = memberid
+                //set membername = datafromquery['name']
+                label_name.Content = membername;
+                label_rollno.Content = memberid;
+                today_special.Add(new DailyMenuEntry() { Name = "Chicken Curry", Quantity = 0, Price = 86 });
+                today_special.Add(new DailyMenuEntry() { Name = "Veg Curry", Quantity = 0, Price = 345 });
+                today_special.Add(new DailyMenuEntry() { Name = "Hall2 Special Curry", Quantity = 0, Price = 104 });
+                today_special.Add(new DailyMenuEntry() { Name = "Hall2 Special Curry", Quantity = 0, Price = 104 });
+                today_special.Add(new DailyMenuEntry() { Name = "Hall2 Special Curry", Quantity = 0, Price = 104 });
 
-            today_fixed.Add(new DailyMenuEntry() { Name = "Chicken Curry", Quantity = 0, Price = 86 });
-            today_fixed.Add(new DailyMenuEntry() { Name = "Veg Curry", Quantity = 0, Price = 345 });
-            today_fixed.Add(new DailyMenuEntry() { Name = "Hall2 Special Curry", Quantity = 0, Price = 104 });
-            today_fixed.Add(new DailyMenuEntry() { Name = "Chicken Curry", Quantity = 0, Price = 86 });
-            today_fixed.Add(new DailyMenuEntry() { Name = "Veg Curry", Quantity = 0, Price = 345 });
-            today_fixed.Add(new DailyMenuEntry() { Name = "Hall2 Special Curry", Quantity = 0, Price = 104 });
+                today_fixed.Add(new DailyMenuEntry() { Name = "Chicken Curry", Quantity = 0, Price = 86 });
+                today_fixed.Add(new DailyMenuEntry() { Name = "Veg Curry", Quantity = 0, Price = 345 });
+                today_fixed.Add(new DailyMenuEntry() { Name = "Hall2 Special Curry", Quantity = 0, Price = 104 });
+                today_fixed.Add(new DailyMenuEntry() { Name = "Chicken Curry", Quantity = 0, Price = 86 });
+                today_fixed.Add(new DailyMenuEntry() { Name = "Veg Curry", Quantity = 0, Price = 345 });
+                today_fixed.Add(new DailyMenuEntry() { Name = "Hall2 Special Curry", Quantity = 0, Price = 104 });
+            }
+            catch(Exception ex){
+                MessageBox.Show("Error: " + ex.Message + "\nClick okay to go back", "Database Error Occured", MessageBoxButton.OK, MessageBoxImage.Error);
+                Switcher.Switch(new MemberEntry());
+            }
         }
         private void UpdateDatabase()
         {

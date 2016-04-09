@@ -107,8 +107,12 @@ namespace MessManagement
             gridinvoice.ItemsSource = invoiceslist[0];
             //vendorcombobox.ItemsSource = vendorlist;
         }
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
-        private void vendorcombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        }
+
+        private void button_excel_Click(object sender, RoutedEventArgs e)
         {
 
         }

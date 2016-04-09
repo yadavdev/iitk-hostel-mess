@@ -42,7 +42,7 @@
             </StatusBarItem>
         </StatusBar>
         <Grid Width="852">
-            <DataGrid x:Name="gridinvoice" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,10,0" >
+            <DataGrid x:Name="gridinvoice" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,89,10,0" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="SNo" Binding="{Binding SNo, UpdateSourceTrigger=LostFocus}" Width="30*"/>
                     <DataGridTextColumn Header="Inv.No" Binding="{Binding InvNo, UpdateSourceTrigger=LostFocus}" Width="60*"/>
@@ -94,13 +94,25 @@
                     <TextBlock xml:space="preserve"> Save Changes</TextBlock>
                 </StackPanel>
             </Button>
-            <Button x:Name="button_reload" Style="{StaticResource btn-warning}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="636,17,0,0" Click="button_reload_Click">
+            <Button x:Name="button_reload" Style="{StaticResource btn-warning}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="653,17,0,0" Click="button_reload_Click">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Resource/Images/Restart_16x.png"  Height="14" />
                     <TextBlock xml:space="preserve"><Run Text=" Reload/Reset"/></TextBlock>
                 </StackPanel>
             </Button>
-            <ListBox x:Name="vendorlistBox" HorizontalAlignment="Left" Height="28" Margin="245,17,0,0" VerticalAlignment="Top" Width="250" RenderTransformOrigin="0.513,0.25" SelectionChanged="vendorlistBox_SelectionChanged"/>
+            <ComboBox x:Name="vendorlistbox" Margin="85,17,482,503"  ItemsSource="{Binding}" SelectionChanged="ComboBox_SelectionChanged" />
+            <Button x:Name="button_save_Copy" Style="{StaticResource btn-success}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="526,17,0,0" Click="button_save_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Resource/Images/VSO_Save_whiteNoHalo_16x.png"  Height="14" />
+                    <TextBlock xml:space="preserve"><Run Text=" Save Changes"/></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="button_excel" Style="{StaticResource btn-success}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="674,56,0,0" Click="button_excel_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Resource/Images/VSO_Save_whiteNoHalo_16x.png"  Height="14" />
+                    <TextBlock xml:space="preserve"><Run Text=" Generate Excel File"/></TextBlock>
+                </StackPanel>
+            </Button>
         </Grid>
     </DockPanel>
 </UserControl>

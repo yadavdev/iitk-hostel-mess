@@ -18,7 +18,7 @@
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="AlternatingRowBackground" Value="#EEE" />
         </Style>
-        
+
     </UserControl.Resources>
 
 
@@ -37,19 +37,19 @@
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
-                <Label x:Name="label" Content="Created By: Devashish Yadav and Gaurav, Hall-2 IIT Kanpur"/>
+                <Label x:Name="label"/>
             </StatusBarItem>
         </StatusBar>
         <Grid>
             <TabControl>
                 <TabItem Header="Monday">
-                    <TabControl TabStripPlacement="Left">
+                    <TabControl TabStripPlacement="Left" Margin="0,-2,0,3"  >
                         <TabItem  Header="Breakfast">
                             <Grid Margin="10" KeyboardNavigation.TabNavigation="None">
                                 <DataGrid x:Name="Menu00" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,0,0" >
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
-                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>
+                                        <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="300*"/>
+                                        <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="150"/>
                                         <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
@@ -67,6 +67,8 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox00_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox00_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
                             </Grid>
                         </TabItem>
                         <TabItem  Header="Lunch">
@@ -92,6 +94,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox01_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox01_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+                                
                             </Grid>
                         </TabItem>
                         <TabItem  Header="Dinner">
@@ -117,6 +122,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox02_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox02_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -146,6 +154,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox10_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox10_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                         <TabItem  Header="Lunch">
@@ -171,6 +182,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox11_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox11_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                         <TabItem  Header="Dinner">
@@ -196,6 +210,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox12_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox12_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -225,6 +242,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox20_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox20_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                         <TabItem  Header="Lunch">
@@ -250,6 +270,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox21_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox21_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                         <TabItem  Header="Dinner">
@@ -275,6 +298,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox22_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox22_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -304,6 +330,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox30_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox30_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                         <TabItem  Header="Lunch">
@@ -329,6 +358,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox31_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox31_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                         <TabItem  Header="Dinner">
@@ -354,6 +386,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox32_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox32_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -383,6 +418,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox40_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox40_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                         <TabItem  Header="Lunch">
@@ -408,6 +446,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox41_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox41_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                         <TabItem  Header="Dinner">
@@ -433,6 +474,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox42_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox42_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -462,6 +506,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox50_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox50_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                         <TabItem  Header="Lunch">
@@ -487,6 +534,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox51_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox51_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                         <TabItem  Header="Dinner">
@@ -512,6 +562,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox52_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox52_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -541,6 +594,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox60_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox60_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                         <TabItem  Header="Lunch">
@@ -566,6 +622,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox61_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox61_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                         <TabItem  Header="Dinner">
@@ -591,6 +650,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox62_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox62_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -620,6 +682,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox70_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox70_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                         <TabItem  Header="Lunch">
@@ -645,6 +710,9 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox71_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox71_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                         <TabItem  Header="Dinner">
@@ -670,12 +738,15 @@
                                         <TextBlock xml:space="preserve"> Add</TextBlock>
                                     </StackPanel>
                                 </Button>
+                                <TextBox x:Name="textBox72_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Item Name" Margin="92,17,0,0" Width="280"/>
+                                <TextBox x:Name="textBox72_price" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Price" Margin="377,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+
                             </Grid>
                         </TabItem>
                     </TabControl>
                 </TabItem>
             </TabControl>
-            
+
 
         </Grid>
     </DockPanel>

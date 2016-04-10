@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using MySql.Data.MySqlClient;
 namespace MessManagement
 {
     /// <summary>
@@ -22,10 +22,28 @@ namespace MessManagement
     {
         int MaxExtras = 4;
         int FixedMenuMax = 6;
+        string cs =
+            "SERVER=localhost;" +
+            "DATABASE=mess_db;" +
+            "UID=root;" +
+            "PASSWORD=gaurav;";
+        MySqlConnection conn = null;
         Dictionary<String, Dictionary<String, List<DayMenu>>> weeklymenu = new Dictionary<String, Dictionary<String, List<DayMenu>>>();
 
         public WeeklyMenu()
         {
+            try
+            {
+                conn = new MySqlConnection(cs);
+                conn.Open();
+                Console.WriteLine("MySQL version : {0}", conn.ServerVersion);
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+
+            }
             InitializeComponent();
             LoadMenus();
 
@@ -33,15 +51,16 @@ namespace MessManagement
         /*Event Handers for Monday*/
         private void button_add00_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu00, "0", "0");
+            AddtoDB(ref Menu00, "0", "0", ref textBox00_name, ref textBox00_price);
+           
         }
         private void button_add01_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu01, "0", "1");
+            AddtoDB(ref Menu01, "0", "1", ref textBox01_name, ref textBox01_price);
         }
         private void button_add02_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu02, "0", "2");
+            AddtoDB(ref Menu02, "0", "2", ref textBox02_name, ref textBox02_price);
         }
         private void button_remove00_Click(object sender, RoutedEventArgs e)
         {
@@ -58,15 +77,15 @@ namespace MessManagement
         /*Event Handers for Tuesday*/
         private void button_add10_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu10, "1", "0");
+            AddtoDB(ref Menu10, "1", "0", ref textBox10_name, ref textBox10_price);
         }
         private void button_add11_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu11, "1", "1");
+            AddtoDB(ref Menu11, "1", "1", ref textBox11_name, ref textBox11_price);
         }
         private void button_add12_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu12, "1", "2");
+            AddtoDB(ref Menu12, "1", "2", ref textBox12_name, ref textBox12_price);
         }
         private void button_remove10_Click(object sender, RoutedEventArgs e)
         {
@@ -83,15 +102,15 @@ namespace MessManagement
         /*Event Handers for Wednesday*/
         private void button_add20_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu20, "2", "0");
+            AddtoDB(ref Menu20, "2", "0", ref textBox20_name, ref textBox20_price);
         }
         private void button_add21_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu21, "2", "1");
+            AddtoDB(ref Menu21, "2", "1", ref textBox21_name, ref textBox21_price);
         }
         private void button_add22_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu22, "2", "2");
+            AddtoDB(ref Menu22, "2", "2", ref textBox22_name, ref textBox22_price);
         }
         private void button_remove20_Click(object sender, RoutedEventArgs e)
         {
@@ -108,15 +127,15 @@ namespace MessManagement
         /*Event Handers for Thursday*/
         private void button_add30_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu30, "3", "0");
+            AddtoDB(ref Menu30, "3", "0", ref textBox30_name, ref textBox30_price);
         }
         private void button_add31_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu31, "3", "1");
+            AddtoDB(ref Menu31, "3", "1", ref textBox31_name, ref textBox31_price);
         }
         private void button_add32_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu32, "3", "2");
+            AddtoDB(ref Menu32, "3", "2", ref textBox32_name, ref textBox32_price);
         }
         private void button_remove30_Click(object sender, RoutedEventArgs e)
         {
@@ -133,15 +152,15 @@ namespace MessManagement
         /*Event Handers for Friday*/
         private void button_add40_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu40, "4", "0");
+            AddtoDB(ref Menu40, "4", "0", ref textBox40_name, ref textBox40_price);
         }
         private void button_add41_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu41, "4", "1");
+            AddtoDB(ref Menu41, "4", "1", ref textBox41_name, ref textBox41_price);
         }
         private void button_add42_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu42, "4", "2");
+            AddtoDB(ref Menu42, "4", "2", ref textBox42_name, ref textBox42_price);
         }
         private void button_remove40_Click(object sender, RoutedEventArgs e)
         {
@@ -158,15 +177,15 @@ namespace MessManagement
         /*Event Handers for Saturday*/
         private void button_add50_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu50, "5", "0");
+            AddtoDB(ref Menu50, "5", "0", ref textBox50_name, ref textBox50_price);
         }
         private void button_add51_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu51, "5", "1");
+            AddtoDB(ref Menu51, "5", "1", ref textBox51_name, ref textBox51_price);
         }
         private void button_add52_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu52, "5", "2");
+            AddtoDB(ref Menu52, "5", "2", ref textBox52_name, ref textBox52_price);
         }
         private void button_remove50_Click(object sender, RoutedEventArgs e)
         {
@@ -183,15 +202,15 @@ namespace MessManagement
         /*Event Handers for Sunday*/
         private void button_add60_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu60, "6", "0");
+            AddtoDB(ref Menu60, "6", "0", ref textBox60_name, ref textBox60_price);
         }
         private void button_add61_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu61, "6", "1");
+            AddtoDB(ref Menu61, "6", "1", ref textBox61_name, ref textBox61_price);
         }
         private void button_add62_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu62, "6", "2");
+            AddtoDB(ref Menu62, "6", "2", ref textBox62_name, ref textBox62_price);
         }
         private void button_remove60_Click(object sender, RoutedEventArgs e)
         {
@@ -208,15 +227,15 @@ namespace MessManagement
         /*Event Handers for Daily Fixed*/
         private void button_add70_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu70, "7", "0");
+            AddtoDB(ref Menu70, "7", "0", ref textBox70_name, ref textBox70_price);
         }
         private void button_add71_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu71, "7", "1");
+            AddtoDB(ref Menu71, "7", "1", ref textBox71_name, ref textBox71_price);
         }
         private void button_add72_Click(object sender, RoutedEventArgs e)
         {
-            AddExtra(ref Menu72, "7", "2");
+            AddtoDB(ref Menu72, "7", "2", ref textBox72_name, ref textBox72_price);
         }
         private void button_remove70_Click(object sender, RoutedEventArgs e)
         {
@@ -239,7 +258,7 @@ namespace MessManagement
                 if (weeklymenu[day][meal].Count < MaxExtras)
                 {
                     weeklymenu[day][meal].Add(new DayMenu() { Name = "New Item", Price = 0 });
-
+                    Console.WriteLine(weeklymenu[day][meal]);
                 }
                 dg.Items.Refresh();
             }
@@ -275,7 +294,58 @@ namespace MessManagement
                 }
             }
         }
+        private void AddtoDB(ref DataGrid dg, string day, string meal, ref TextBox itemnamebox, ref TextBox pricebox)
+        {
+            int price = 0;
+            string item_name = "";
+            dg.CommitEdit();
+            try
+            {
+                if (int.Parse(pricebox.Text) > 0)
+                    price = int.Parse(pricebox.Text);
 
+                if (itemnamebox.Text == "")
+                    MessageBox.Show("Enter valid Article name");
+                else
+                {
+                    item_name = itemnamebox.Text;
+                    /*Enter in database*/
+                    try
+                    {
+                        string str = "SELECT * from student where roll =" + argtosend.ToString();
+                        Console.WriteLine(str);
+                        MySqlDataReader dr = null;
+                        MySqlCommand cmd = new MySqlCommand(str, conn);
+                        dr = cmd.ExecuteReader();
+                        if (!dr.Read())
+                        {
+                            label_error.Content = "Roll No not found";
+                            if (dr != null)
+                            {
+                                dr.Close();
+                            }
+                        }
+                        else
+                        {
+                            Switcher.Switch(new MainExtraEntry(argtosend));
+                        }
+                    }
+                    catch
+                    {
+                        label_error.Content = "Database query failed.";
+                    }
+                    weeklymenu[day][meal].Add(new DayMenu() { Name = item_name, Price = price });
+
+
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("Enter valid Price amount");
+            }
+            dg.Items.Refresh();
+        }
         private void LoadMenus()
         {
             for (int i=0; i < 8; i++)
@@ -323,7 +393,7 @@ namespace MessManagement
             Menu72.ItemsSource = weeklymenu["7"]["2"];
         }
 
-
+       
     }
 
     public class DayMenu

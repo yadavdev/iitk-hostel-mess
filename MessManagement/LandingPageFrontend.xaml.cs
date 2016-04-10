@@ -16,13 +16,23 @@ using System.Windows.Shapes;
 namespace MessManagement
 {
     /// <summary>
-    /// Interaction logic for LandingPage.xaml
+    /// Interaction logic for LandingPageFrontend.xaml
     /// </summary>
-    public partial class LandingPage : UserControl
+    public partial class LandingPageFrontend : UserControl
     {
-        public LandingPage()
+        public LandingPageFrontend()
         {
             InitializeComponent();
+        }
+
+        private void button_student_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        private void button_admin_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -21,7 +21,6 @@ namespace MessManagement
     /// </summary>
     public partial class MemberEntry : UserControl
     {
-        List<DayMenu> todayextralist = new List<DayMenu>();
         string cs =
             "SERVER=localhost;" +
             "DATABASE=mess_db;" +
@@ -47,11 +46,7 @@ namespace MessManagement
         }
         private void LoadExtras()
         {
-            todayextralist.Add(new DayMenu() { Name = "Rasgulla", Price = 10 });
-            todayextralist.Add(new DayMenu() { Name = "Chicken Curry", Price = 65 });
-            todayextralist.Add(new DayMenu() { Name = "Gajar Ka Halwa", Price = 15 });
-            todayextralist.Add(new DayMenu() { Name = "Palak Paneer", Price = 22 });
-            menutoday.ItemsSource = todayextralist;
+            menutoday.ItemsSource = MenuTemp.tempmenu;
         }
 
         private void button_enter_Click(object sender, RoutedEventArgs e)

@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using MySql.Data.MySqlClient;
 namespace MessManagement
 {
     /// <summary>
@@ -22,11 +22,28 @@ namespace MessManagement
     public partial class MemberEntry : UserControl
     {
         List<DayMenu> todayextralist = new List<DayMenu>();
-
+        string cs =
+            "SERVER=localhost;" +
+            "DATABASE=mess_db;" +
+            "UID=root;" +
+            "PASSWORD=gaurav;";
+        MySqlConnection conn = null;
         public MemberEntry()
         {
             InitializeComponent();
             LoadExtras();
+            try
+            {
+                conn = new MySqlConnection(cs);
+                conn.Open();
+                Console.WriteLine("MySQL version : {0}", conn.ServerVersion);
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+
+            }
         }
         private void LoadExtras()
         {
@@ -40,10 +57,35 @@ namespace MessManagement
         private void button_enter_Click(object sender, RoutedEventArgs e)
         {
             /*Logic to Store and Check Member Id from database*/
-            try {
+            try
+            {
                 int argtosend = int.Parse(id_field.Text);
+                Console.WriteLine(argtosend.ToString());
                 //check if in database
-                Switcher.Switch(new MainExtraEntry(argtosend));
+                try
+                {
+                    string str = "SELECT * from student where roll ="+ argtosend.ToString();
+                    Console.WriteLine(str);
+                    MySqlDataReader dr = null;
+                    MySqlCommand cmd = new MySqlCommand(str, conn);
+                    dr = cmd.ExecuteReader();
+                    if (!dr.Read())
+                    {
+                        label_error.Content = "Roll No not found";
+                        if (dr != null)
+                        {
+                            dr.Close();
+                        }
+                    }
+                    else
+                    {
+                        Switcher.Switch(new MainExtraEntry(argtosend));
+                    }  
+                }
+                catch
+                {
+                    label_error.Content = "Database query failed.";
+                }
             }
             catch
             {

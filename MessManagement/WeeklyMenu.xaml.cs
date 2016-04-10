@@ -298,6 +298,8 @@ namespace MessManagement
         {
             int price = 0;
             string item_name = "";
+            int db_day = int.Parse(day) * 10 + int.Parse(meal);
+            Console.WriteLine(db_day);
             dg.CommitEdit();
             try
             {
@@ -312,31 +314,24 @@ namespace MessManagement
                     /*Enter in database*/
                     try
                     {
-                        string str = "SELECT * from student where roll =" + argtosend.ToString();
-                        Console.WriteLine(str);
-                        MySqlDataReader dr = null;
-                        MySqlCommand cmd = new MySqlCommand(str, conn);
-                        dr = cmd.ExecuteReader();
-                        if (!dr.Read())
-                        {
-                            label_error.Content = "Roll No not found";
-                            if (dr != null)
-                            {
-                                dr.Close();
-                            }
-                        }
-                        else
-                        {
-                            Switcher.Switch(new MainExtraEntry(argtosend));
-                        }
+                        MySqlCommand cmd = new MySqlCommand();
+                        cmd.Connection = conn;
+                        cmd.CommandText = "INSERT INTO menu VALUES(@article,@rate,@day)";
+                        cmd.Prepare();
+                        Console.WriteLine(item_name);
+                        Console.WriteLine(price);
+                        cmd.Parameters.AddWithValue("@article", item_name);
+                        cmd.Parameters.AddWithValue("@rate",price);
+                        cmd.Parameters.AddWithValue("@day",db_day);
+                        cmd.ExecuteNonQuery();
+                        weeklymenu[day][meal].Add(new DayMenu() { Name = item_name, Price = price });
                     }
                     catch
                     {
-                        label_error.Content = "Database query failed.";
+                        Console.WriteLine( "Database query failed.");
+                        MessageBox.Show("Possibly Article alredy exists! or Try Again");
                     }
-                    weeklymenu[day][meal].Add(new DayMenu() { Name = item_name, Price = price });
-
-
+                    
                 }
 
             }
@@ -355,10 +350,39 @@ namespace MessManagement
                 weeklymenu[day].Add("0", new List<DayMenu>());
                 weeklymenu[day].Add("1", new List<DayMenu>());
                 weeklymenu[day].Add("2", new List<DayMenu>());
-                weeklymenu[day]["0"].Add(new DayMenu() { Name = "Rasgulla" + day, Price = 14 });
-                weeklymenu[day]["1"].Add(new DayMenu() { Name = "GulabJamun" + day, Price = 20 });
-                weeklymenu[day]["2"].Add(new DayMenu() { Name = "ChikenCurry" + day, Price = 65 });
+
+                //  weeklymenu[day]["0"].Add(new DayMenu() { Name = "Rasgulla" + day, Price = 14 });
+                //  weeklymenu[day]["1"].Add(new DayMenu() { Name = "GulabJamun" + day, Price = 20 });
+                //  weeklymenu[day]["2"].Add(new DayMenu() { Name = "ChikenCurry" + day, Price = 65 });
+                for (int j=0;j<3;j++)
+                {
+                    string meal = j.ToString();
+                    int db_day = 10 * i + j;
+                    try
+                    {
+                        string str = "SELECT * from menu where day =" + db_day.ToString();
+                        Console.WriteLine(str);
+                        MySqlDataReader dr = null;
+                        MySqlCommand cmd = new MySqlCommand(str, conn);
+                        dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            weeklymenu[day][meal].Add(new DayMenu() { Name = dr.GetString(0), Price = dr.GetInt32(1) });
+                            //  label_error.Content = "Roll No not found";
+                        }
+                        if (dr != null)
+                            dr.Close();
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Database query failed");
+                    }
+                    
+                }
+                
+
             }
+
             /*Monday*/
             Menu00.ItemsSource = weeklymenu["0"]["0"];
             Menu01.ItemsSource = weeklymenu["0"]["1"];

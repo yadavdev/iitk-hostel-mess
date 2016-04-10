@@ -83,6 +83,9 @@
       <DependentUpon>EditMember.xaml</DependentUpon>
     </Compile>
     <Compile Include="IsSwitchable.cs" />
+    <Compile Include="LandingPage.xaml.cs">
+      <DependentUpon>LandingPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LatestMemberTransactions.xaml.cs">
       <DependentUpon>LatestMemberTransactions.xaml</DependentUpon>
     </Compile>
@@ -121,6 +124,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="EditMember.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LandingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -33,8 +33,8 @@ namespace MessManagement
             try
             {
                 conn = new MySqlConnection(cs);
-                conn.Open();
-                Console.WriteLine("MySQL version : {0}", conn.ServerVersion);
+                //conn.Open();
+                //Console.WriteLine("MySQL version : {0}", conn.ServerVersion);
 
             }
             catch (MySqlException ex)
@@ -59,13 +59,21 @@ namespace MessManagement
                 {
                     string sql = "SELECT * from login WHERE id=@id and password=@password";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    cmd.Connection.Open();
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.Parameters.AddWithValue("@password", password);
                     MySqlDataReader dr = null;
                     dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
-                        Switcher.Switch(new LandingPage());
+                        if (dr.GetInt32(2) == 1)
+                        {
+                            Switcher.Switch(new LandingPageAdmin());
+                        }
+                        else
+                        {
+                            Switcher.Switch(new LandingPageFrontend());
+                        }
                         Console.WriteLine("Check after Switch 1,2,3");
                     }
                     else
@@ -75,7 +83,7 @@ namespace MessManagement
                     if (dr != null)
                         dr.Close();
                     if (conn != null)
-                        conn.Close();
+                        cmd.Connection.Close();
                 }
 
                 

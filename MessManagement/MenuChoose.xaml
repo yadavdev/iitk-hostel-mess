@@ -44,7 +44,7 @@
                 <ColumnDefinition Width="360*"/>
                 <ColumnDefinition Width="491*"/>
             </Grid.ColumnDefinitions>
-            <ComboBox x:Name="comboboxlist_day" Margin="85,17,110,503"  ItemsSource="{Binding}" SelectionChanged="ComboBox_SelectionChanged" />
+            <ComboBox x:Name="comboboxlist_day" Margin="85,17,110,503"  ItemsSource="{Binding}" SelectionChanged="ComboBox_day_SelectionChanged" />
             <DataGrid x:Name="tempmenu" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,84,0,0" Grid.ColumnSpan="2" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
@@ -77,7 +77,7 @@
                     <TextBlock xml:space="preserve">Done</TextBlock>
                 </StackPanel>
             </Button>
-            <ComboBox x:Name="comboboxlist_meal" Margin="250,17,456,503" SelectionChanged="ComboBox_SelectionChanged" Grid.ColumnSpan="2" />
+            <ComboBox x:Name="comboboxlist_meal" Margin="250,17,456,503" SelectionChanged="ComboBox_meal_SelectionChanged" Grid.ColumnSpan="2" />
         </Grid>
     </DockPanel>
 </UserControl>

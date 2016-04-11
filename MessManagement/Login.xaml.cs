@@ -21,20 +21,20 @@ namespace MessManagement
     /// </summary>
     public partial class Login : UserControl
     {
-        string cs =
+        private string cs =
             "SERVER=localhost;" +
-            "DATABASE=mess_db;" +
+            "DATABASE=mess_login;" +
             "UID=root;" +
             "PASSWORD=gaurav;";
-        MySqlConnection conn = null;
+       private MySqlConnection conn = null;
         public Login()
         {
             InitializeComponent();
             try
             {
                 conn = new MySqlConnection(cs);
-                //conn.Open();
-                //Console.WriteLine("MySQL version : {0}", conn.ServerVersion);
+                conn.Open();
+                Console.WriteLine("MySQL version : {0}", conn.ServerVersion);
 
             }
             catch (MySqlException ex)
@@ -59,14 +59,14 @@ namespace MessManagement
                 {
                     string sql = "SELECT * from login WHERE id=@id and password=@password";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
-                    cmd.Connection.Open();
+                    //cmd.Connection.Open();
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.Parameters.AddWithValue("@password", password);
                     MySqlDataReader dr = null;
                     dr = cmd.ExecuteReader();
                     if (dr.Read())
                     {
-                        if (dr.GetInt32(2) == 1)
+                        if (dr.GetInt32(2) == 0)
                         {
                             Switcher.Switch(new LandingPageAdmin());
                         }
@@ -74,6 +74,8 @@ namespace MessManagement
                         {
                             Switcher.Switch(new LandingPageFrontend());
                         }
+                        if (conn != null)
+                            conn.Close();
                         Console.WriteLine("Check after Switch 1,2,3");
                     }
                     else
@@ -82,8 +84,6 @@ namespace MessManagement
                     }
                     if (dr != null)
                         dr.Close();
-                    if (conn != null)
-                        cmd.Connection.Close();
                 }
 
                 

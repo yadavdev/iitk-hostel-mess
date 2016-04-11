@@ -78,15 +78,34 @@ namespace MessManagement
         private void button_continue_Click(object sender, RoutedEventArgs e)
         {
             tempmenu.CommitEdit();
+            if (conn != null)
+                conn.Close();
             Switcher.Switch(new MemberEntry());
         }
         private void button_remove_Click(object sender, RoutedEventArgs e)
         {
-
+            tempmenu.CommitEdit();
+            if (tempmenu.SelectedItems.Count > 0)
+            {
+                try
+                {
+                    var selectedIndex = tempmenu.SelectedIndex;
+                    MenuTemp.tempmenu.RemoveAt(selectedIndex);
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show("Removing Item Failed. Retry or Contact Administrator", "Remove Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Console.Write("\n\n" + exception.ToString() + "\n\n");
+                }
+                finally
+                {
+                    tempmenu.Items.Refresh();
+                }
+            }
         }
         private void button_back_Click(object sender, RoutedEventArgs e)
         {
-
+            Switcher.Switch(new LandingPageFrontend());
         }
         private void button_add_Click(object sender, RoutedEventArgs e)
         {
@@ -120,6 +139,7 @@ namespace MessManagement
             catch
             {
                 Console.WriteLine("Database query failed.");
+                MessageBox.Show("Loading from Database Failed. Retry or Contact Administrator", "Database Error",MessageBoxButton.OK, MessageBoxImage.Error);
             }
             tempmenu.Items.Refresh();
         }

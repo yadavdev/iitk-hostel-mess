@@ -140,8 +140,9 @@ namespace MessManagement
                         textBox_Bank.Text = "Enter Bank Name";
                         textBox_Address.Text = "Enter Address";
                         textBox_Account.Text = "Enter Account No.";
-                        employeelist.Add(new EditEmployeeList() { Name = name, Bank = bankName, Wages = wage, Category = category });
-                        }
+                    //employeelist.Add(new EditEmployeeList() { Name = name, Bank = bankName, Wages = wage, Category = category });
+                    LoadFromDatabase();
+                }
                     catch
                     {
                         Console.WriteLine("Database query failed.");
@@ -211,6 +212,7 @@ namespace MessManagement
         private int LoadFromDatabase()
         {
             uint Sno = 0;
+            employeelist.Clear();
             try
             {
                 string str = "SELECT * from employees";

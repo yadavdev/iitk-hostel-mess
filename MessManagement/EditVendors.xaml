@@ -7,6 +7,19 @@
         mc:Ignorable="d"
         d:DesignHeight="640" d:DesignWidth="852">
 
+    <UserControl.Resources>
+        <Style x:Key="Menu" TargetType="DataGrid">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontFamily" Value="Helvetica Neue,Helvetica,Arial,sans-serif"/>
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="HeadersVisibility" Value="Column" />
+            <Setter Property="VerticalGridLinesBrush" Value="#DDD" />
+            <Setter Property="HorizontalGridLinesBrush" Value="#DDD" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="AlternatingRowBackground" Value="#EEE" />
+        </Style>
+
+    </UserControl.Resources>
 
     <DockPanel LastChildFill="False">
         <Menu x:Name="menu" DockPanel.Dock="Top">
@@ -26,51 +39,44 @@
                 <Label x:Name="label" Content="Created By: Devashish Yadav and Gaurav, Hall-2 IIT Kanpur"/>
             </StatusBarItem>
         </StatusBar>
-        <Grid Width="851">
+        <Grid Width="852" Margin="0,5,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="114*"/>
+                <RowDefinition Height="473*"/>
+            </Grid.RowDefinitions>
+            <DataGrid x:Name="gridvendor" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" CanUserSortColumns="False" Style="{StaticResource Menu}" Margin="0,50,10,0"  Grid.RowSpan="2"   >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="60*"/>
+                    <DataGridTextColumn Header="Article" Binding="{Binding Article, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="60*"/>
+                    <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="button_remove" Style="{StaticResource btn-danger}"  Click="button_remove_Click" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
+                                        <TextBlock xml:space="preserve"> Del</TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button x:Name="button_back" Style="{StaticResource btn-default}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0"  Height="28">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Resource/Images/Previous_16x.png"  Height="14" />
+                    <TextBlock xml:space="preserve"><Run Text=" Back"/></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="button_add" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="735,17,0,0"  Click="button_add_Click" Height="28" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
+                    <TextBlock xml:space="preserve"> Add</TextBlock>
+                </StackPanel>
+            </Button>
+            <TextBox x:Name="textBox_article" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Article" Margin="415,17,0,0" Width="278"/>
+            <TextBox x:Name="textBox_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Vendor Name" Margin="84,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="306"  />
 
         </Grid>
-      <Grid Width="852">
-        <DataGrid x:Name="gridemployee" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" CanUserSortColumns="False" Style="{StaticResource Menu}" Margin="0,151,10,0"   >
-          <DataGrid.Columns>
-            <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="60*"/>
-            <DataGridTextColumn Header="Category" Binding="{Binding Category, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="60*"/>
-            <DataGridTextColumn Header="Wages Rate" Binding="{Binding Wages, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="60*"/>
-            <DataGridTextColumn Header="Bank" Binding="{Binding Bank, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="60*"/>
-            <DataGridTextColumn Header="AccNo." Binding="{Binding AccNo, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="60*"/>
-            <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
-              <DataGridTemplateColumn.CellTemplate>
-                <DataTemplate>
-                  <Button x:Name="button_remove" Style="{StaticResource btn-danger}"   Click="button_remove_Click" >
-                    <StackPanel Orientation="Horizontal">
-                      <Image Source="Resource/Images/VSO_Close_whiteNoHalo_12x_16x.png"  Height="14"  />
-                      <TextBlock xml:space="preserve"> Del</TextBlock>
-                    </StackPanel>
-                  </Button>
-                </DataTemplate>
-              </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-          </DataGrid.Columns>
-        </DataGrid>
-        <Button x:Name="button_back" Style="{StaticResource btn-default}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0"  Height="28">
-          <StackPanel Orientation="Horizontal">
-            <Image Source="Resource/Images/Previous_16x.png"  Height="14" />
-            <TextBlock xml:space="preserve"><Run Text=" Back"/></TextBlock>
-          </StackPanel>
-        </Button>
-        <Button x:Name="button_add" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="735,17,0,0" Click="button_add_Click" Height="28">
-          <StackPanel Orientation="Horizontal">
-            <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
-            <TextBlock xml:space="preserve"> Add</TextBlock>
-          </StackPanel>
-        </Button>
-        <TextBox x:Name="textBox_wage" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Wage" Margin="84,61,0,0" Width="155"/>
-        <TextBox x:Name="textBox_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Member Name" Margin="84,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="306"  />
-        <TextBox x:Name="textBox_category" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Wage Category" Margin="395,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
-        <TextBox x:Name="textBox_Bank" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Bank Name" Margin="244,61,0,0" Width="248"/>
-        <TextBox x:Name="textBox_Account" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Account No." Margin="497,61,0,0" Width="232"/>
-        <TextBox x:Name="textBox_Address" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Address" Margin="84,105,0,0" Width="408"/>
-        <TextBox x:Name="textBox_mobile" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Mobile No." Margin="497,105,0,0" Width="232"/>
-
-      </Grid>
     </DockPanel>
 </UserControl>

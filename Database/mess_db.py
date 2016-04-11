@@ -5,7 +5,7 @@ import sys
 # Opening databse connection
 # Preparing cursor object
 
-DATABASE_NAME = "test"
+DATABASE_NAME = "mess_db"
 try:
 	conn = MySQLdb.connect("localhost","root","gaurav")
 	cursor = conn.cursor()
@@ -46,95 +46,105 @@ except MySQLdb.Error, e:
 # 		sys.exit(0)
 
 
-cursor.execute("DROP TABLE IF EXISTS Student")
+#cursor.execute("DROP TABLE IF EXISTS Student")
 
 print cursor.execute("show tables")
 
 createtable = """CREATE TABLE IF NOT EXISTS Student (
-				name CHAR(50),
-				roll INT(6) not null unique primary key
+				name VARCHAR(45),
+				roll INT not null unique primary key,
+				remark VARCHAR(45)
 				)"""
 cursor.execute(createtable)
 
+createtable = """CREATE TABLE  IF NOT EXISTS Smt(
+				sid INT not null auto_increment primary key, 
+				roll INT not null,
+				date DATETIME not null DEFAULT CURRENT_TIMESTAMP,
+				item VARCHAR(45) not null,
+				quantity INT not null default 0,
+				foreign key(roll) references Student(roll),
+				price INT not null default 0
+				)"""
+cursor.execute(createtable)
 
 createtable = """CREATE TABLE IF NOT EXISTS Salary (
-				slrytype CHAR(20) primary key,
-				wage FLOAT(10) not null
+				slrytype VARCHAR(20) primary key,
+				wage DOUBLE not null
 				)"""
 cursor.execute(createtable)
 
 createtable = """CREATE TABLE  IF NOT EXISTS Employees(
-				sid INT(12) not null auto_increment primary key, 
-				name CHAR(50) not null,
-				addr CHAR(100),
-				mobno INT(11),
-				category CHAR(25) not null,
+				sno INT not null auto_increment primary key, 
+				name VARCHAR(45) not null,
+				addr VARCHAR(100),
+				mobno INT,
+				category VARCHAR(20) not null,
 				foreign key(slrytype) references Salary(slrytype),
-				slrytype CHAR(20) not null,
-				Accno	CHAR(35)
+				slrytype VARCHAR(20) not null,
+				Accno	VARCHAR(45)
 				)"""
 cursor.execute(createtable)
 
 
 
 createtable = """CREATE TABLE  IF NOT EXISTS  Supplier (
-				sid INT(12) not null primary key  auto_increment, 
-				name CHAR(50) not null,
-				article CHAR(50) not null
+				sid INT not null primary key  auto_increment, 
+				name VARCHAR(45) not null,
+				article VARCHAR(45) not null
 				)"""
 cursor.execute(createtable)
 
-createtable = """CREATE TABLE  IF NOT EXISTS  DailyVendorPayment(
-				date CHAR(15) primary key,
-				sid INT(12) not null ,
+createtable = """CREATE TABLE  IF NOT EXISTS  VendorInvoices(
+				sno INT not null primary key,
+				sid INT not null ,
+				invno VARCHAR(30) not null,
+				date DATETIME not null Default CURRENT_TIMESTAMP,
 				foreign key(sid) references Supplier(sid),
-				invoice CHAR(30) not null,
-				puramt FLOAT(15),
-				discount FLOAT(10)
+				puramt DOUBLE,
+				discount DOUBLE
 				)"""
 cursor.execute(createtable)
-
-
-
 
 createtable = """CREATE TABLE  IF NOT EXISTS  ClosingStock(
-				article CHAR(15) primary key,
-				unit FLOAT(15) not null,
-				bal FLOAT(15) not null,
-				rate FLOAT(15) not null
+				article VARCHAR(45) primary key,
+				unit DOUBLE not null,
+				balance DOUBLE not null,
+				rate DOUBLE not null
 				)"""
 cursor.execute(createtable)
 
 createtable = """CREATE TABLE  IF NOT EXISTS  Menu(  
-				article CHAR(15) primary key unique not null,
-				rate FLOAT(12) not null,
-				day INT(5) not null
+				article VARCHAR(45) not null,
+				rate DOUBLE not null,
+				day int not null,
+				primary key (article,day) 
 				)"""
 cursor.execute(createtable)
 
 createtable = """CREATE TABLE IF NOT EXISTS FixedMenu(  
-				article CHAR(15) not null primary key unique,
-				rate FLOAT(12) not null
+				article VARCHAR(45) not null primary key,
+				rate DOUBLE not null
 				)"""
 cursor.execute(createtable)
 
 createtable = """CREATE TABLE IF NOT EXISTS WorkerAttendence(  
-				name CHAR(15) not null ,
-				sid INT (12) not null,
-				foreign key(sid) references Employees(sid),
-				bio INT(5) not null,
-				diff INT(5) not null,
-				month CHAR(20) not null,
-				year CHAR(20) not null,
-				advance FLOAT(10) not null,
+				name VARCHAR(45) not null ,
+				sno INT  not null,
+				foreign key(sno) references Employees(sno),
+				bio INT not null,
+				diff INT not null,
+				month VARCHAR(20) not null,
+				year VARCHAR(20) not null,
+				advance DOUBLE not null,
 				primary key (name,month,year)
 				)"""
 cursor.execute(createtable)
 
 
 createtable = """CREATE TABLE IF NOT EXISTS EmployeeShare(  
-				epf FLOAT(4) not null,
-				esi FLOAT(4) not null
+				epf DOUBLE not null,
+				esi DOUBLE not null
 				)"""
 cursor.execute(createtable)
 

@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using MySql.Data.MySqlClient;
 namespace MessManagement
 {
     /// <summary>
@@ -21,21 +21,48 @@ namespace MessManagement
     public partial class LatestMemberTransactions : UserControl
     {
         List<MemberTransaction> trans_list = new List<MemberTransaction>();
+        string cs =
+            "SERVER=localhost;" +
+            "DATABASE=mess_db;" +
+            "UID=root;" +
+            "PASSWORD=gaurav;";
+        MySqlConnection conn = null;
 
         public LatestMemberTransactions()
         {
+            try
+            {
+                conn = new MySqlConnection(cs);
+                conn.Open();
+                Console.WriteLine("MySQL version : {0}", conn.ServerVersion);
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show("Dasebase Connection Failed, Go back and Try Again");
+                Console.WriteLine("Error: {0}", ex.ToString());
+
+            }
             InitializeComponent();
             LoadTrans();
         }
 
         private void button_remove_trans_Click(object sender, RoutedEventArgs e)
         {
+            button_back.IsEnabled = false;
             latestmembertransactions.CommitEdit();
             try
             {
                 Console.WriteLine("Transaction Removed.");
                 trans_list[latestmembertransactions.SelectedIndex].Price = 0;
-                trans_list[latestmembertransactions.SelectedIndex].Quantity = 0;
+                //trans_list[latestmembertransactions.SelectedIndex].Quantity = 0;
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "update smt set price = 0 where sid ="+((MemberTransaction)latestmembertransactions.SelectedItem).SNo;
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Reset Transaction Successful");
+
             }
             catch(Exception exception)
             {
@@ -44,6 +71,7 @@ namespace MessManagement
 
             }
             latestmembertransactions.Items.Refresh();
+            button_back.IsEnabled = true;
         }
 
         private void button_back_Click(object sender, RoutedEventArgs e)
@@ -60,9 +88,37 @@ namespace MessManagement
 
         private void LoadFromDatabase()
         {
-            trans_list.Add(new MemberTransaction() { SNo = 1, RollNo = 11001, Name = "Chicken Curry", Quantity = 1, Price = 86 });
-            trans_list.Add(new MemberTransaction() { SNo = 2, RollNo = 14073, Name = "Veg Curry", Quantity = 4, Price = 345 });
-            trans_list.Add(new MemberTransaction() { SNo = 3, RollNo = 11342, Name = "Hall2 Special Curry", Quantity = 2, Price = 104 });
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "Select * from smt ORDER By date DESC LIMIT 3";
+                cmd.Prepare();
+                MySqlDataReader dr = null;
+                dr = cmd.ExecuteReader();            
+                if (!dr.HasRows)
+                {
+                    MessageBox.Show("No data returned from database. Contact Administrator\n", "No data", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                { //Creating Dictionary
+                    while (dr.Read())
+                    {
+                        Console.WriteLine(dr["roll"] + " " + dr["item"]);
+                        trans_list.Add(new MemberTransaction() {SNo = Convert.ToInt32(dr["sid"]),Roll = Convert.ToInt32(dr["roll"]), Name = dr["item"].ToString(), Quantity = Convert.ToInt32(dr["quantity"]), Price = Convert.ToInt32(dr["price"]) });
+                    }
+                }
+                if (dr != null)
+                    dr.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Database queries Failed:\n" + ex.ToString());
+            }
+            //trans_list.Add(new MemberTransaction() { SNo = 1, Roll = 11001, Name = "Chicken Curry", Quantity = 1, Price = 86 });
+            //trans_list.Add(new MemberTransaction() { SNo = 2, Roll = 14073, Name = "Veg Curry", Quantity = 4, Price = 345 });
+            //trans_list.Add(new MemberTransaction() { SNo = 3, Roll = 11342, Name = "Hall2 Special Curry", Quantity = 2, Price = 104 });
         }
 
         private void UpdateDatabase()
@@ -75,7 +131,7 @@ namespace MessManagement
     public class MemberTransaction
     {
         public int SNo { get; set; }
-        public int RollNo { get; set; }
+        public int Roll { get; set; }
         public string Name { get; set; }
         public int Quantity { get; set; }
         public int Price { get; set; }

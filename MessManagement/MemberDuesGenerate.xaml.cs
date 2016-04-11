@@ -96,6 +96,11 @@ namespace MessManagement
             try
             {
                 FileInfo newFile = new FileInfo("messdues.xlsx");
+                if (newFile.Exists)
+                {
+                    newFile.Delete();  // ensures we create a new workbook
+                    newFile = new FileInfo("messdues.xlsx");
+                }
                 DateTime startdateval = startdate.SelectedDate.Value.Date;
                 DateTime enddateval = enddate.SelectedDate.Value.Date;
                 Console.WriteLine("startdate: " + string.Format("{0:yyyy-MM-dd}", startdateval));
@@ -149,11 +154,6 @@ namespace MessManagement
                                 ws.Cells[i, 5].Value = mydata.Value.Price;
                                 sno += 1;
                                 i += 1;
-                            }
-                            if (newFile.Exists)
-                            {
-                                newFile.Delete();  // ensures we create a new workbook
-                                newFile = new FileInfo("messdues.xlsx");
                             }
                             objExcelPackage.Save();
                             MessageBox.Show("Excel File generated from database!", "Generation Succed",MessageBoxButton.OK,MessageBoxImage.Information);

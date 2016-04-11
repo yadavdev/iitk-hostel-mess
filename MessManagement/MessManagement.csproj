@@ -86,6 +86,9 @@
     <Compile Include="EditMember.xaml.cs">
       <DependentUpon>EditMember.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditVendors.xaml.cs">
+      <DependentUpon>EditVendors.xaml</DependentUpon>
+    </Compile>
     <Compile Include="IsSwitchable.cs" />
     <Compile Include="AdminPanel.xaml.cs">
       <DependentUpon>AdminPanel.xaml</DependentUpon>
@@ -138,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EditVendors.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

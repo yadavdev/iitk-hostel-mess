@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
 
 namespace MessManagement
 {
@@ -20,42 +21,101 @@ namespace MessManagement
     /// </summary>
     public partial class VendorsInvoices : UserControl
     {
-        Dictionary<uint, List<PurchaseInvoiceClass>> invoiceslist = new Dictionary<uint, List<PurchaseInvoiceClass>>();
+        List<PurchaseInvoiceClass> invoiceslist = new List<PurchaseInvoiceClass>();
         List<VendorListClass> vendorlist = new List<VendorListClass>();
+        string cs =
+            "SERVER=localhost;" +
+            "DATABASE=mess_db;" +
+            "UID=root;" +
+            "PASSWORD=gaurav;";
+        MySqlConnection conn = null;
         public VendorsInvoices()
         {
-            InitializeComponent();
-            LoadDefault();
+            try
+            {
+                conn = new MySqlConnection(cs);
+                conn.Open();
+                Console.WriteLine("MySQL version : {0}", conn.ServerVersion);
+                InitializeComponent();
+                date_adder.SelectedDate = DateTime.Today;
+                LoadDefault();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                MessageBox.Show("Error Connecting to Database");
+                Switcher.Switch(new AdminPanel());
+            }
         }
         
         private void button_back_Click(object sender, RoutedEventArgs e)
         {
-            //Switcher.Switch(new ____());
+            Switcher.Switch(new AdminPanel());
         }
 
-        private void button_save_Click(object sender, RoutedEventArgs e)
+       private void button_add_Click(object sender, RoutedEventArgs e)
         {
             gridinvoice.CommitEdit();
-            int success = SaveToDatabase();
-            if (success == 1)
+            string invno = "", article = ""; double puramt = 0, disc = 0;
+            try
             {
-                //Show A POPUP THAT SAVED SUCCESSFULLY
-                //LOAD FROM DATABASE AND ASK TO CHECK THAT CHANGES ARE REFLECTED
-                int loadsuccess = LoadFromDatabase();
-                gridinvoice.Items.Refresh();
-            }
-            else
-            {
-                //SHOW A POPUP/IN A LABEL THAT SAVE FAILED and WHAT TO DO NEXT
-            }
-        }
 
-        private void button_add_Click(object sender, RoutedEventArgs e)
-        {
-            gridinvoice.CommitEdit();
-            //DO check that rollno doesn't already exist(Database will give error, catch and notify user or check beforehand)
-            // Query Rollno to check existance
-            invoiceslist[0].Add(new PurchaseInvoiceClass() { SNo = 21, InvNo = 43242, Purchase = 433, Item = "Milk", Discount = 43, NetAmount = 489, InvDate = DateTime.Now });
+                if (textBox_inv.Text == "" || textBox_inv.Text == "Enter Inv.No")
+                    MessageBox.Show("Enter valid Enter Invoice No.");
+                else
+                {
+
+                    invno = textBox_article.Text;
+                    article = textBox_article.Text;
+                    if (article == "Enter Article" || article == "")
+                        MessageBox.Show("Enter valid Article name");
+                    else
+                    {
+                        double val;
+                        if (Double.TryParse(textBox_purchaseAmt.Text, out val))
+                            {
+                            puramt = Double.Parse(textBox_purchaseAmt.Text);
+                                if (Double.TryParse(textBox_Discount.Text, out val))
+                                     {
+                                         disc = Double.Parse(textBox_Discount.Text);
+                                /*Enter in database*/
+                                string date = date_adder.SelectedDate.Value.ToShortDateString();
+                                Console.WriteLine("Vendor id is:" + vendorlistbox.SelectedValue);
+                                try
+                                {
+                                    MySqlCommand cmd = new MySqlCommand();
+                                    cmd.Connection = conn;
+                                    cmd.CommandText = "INSERT INTO vendorinvoices(sid,invno,item,date,puramt,discount) VALUES(@sid,@invno,@item,@date,@puramt,@discount)";
+                                    cmd.Prepare();
+                                    cmd.Parameters.AddWithValue("@sid", Convert.ToInt32(vendorlistbox.SelectedValue));
+                                    cmd.Parameters.AddWithValue("@date", date);
+                                    cmd.Parameters.AddWithValue("@invno", invno);
+                                    cmd.Parameters.AddWithValue("@puramt",puramt );
+                                    cmd.Parameters.AddWithValue("@discount",disc);
+                                    cmd.ExecuteNonQuery();
+                                    MessageBox.Show("Vendor successfully added");
+                                    textBox_inv.Text = "Enter Inv.No";
+                                    textBox_article.Text = "Enter Article";
+                                    textBox_purchaseAmt.Text = "Enter Purchase Amt";
+                                    textBox_Discount.Text = "Enter Discount";
+                                    
+                                }
+                                catch
+                                {
+                                    Console.WriteLine("Database query failed.");
+                                    MessageBox.Show("Database query failed. Try Again");
+                                }
+
+                            }
+                            }
+                        
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Invalid Purchase Amount or Discount!\n");
+            }
             gridinvoice.Items.Refresh();
         }
 
@@ -64,63 +124,101 @@ namespace MessManagement
             gridinvoice.CommitEdit();
             try
             {
-                var selectedIndex = gridinvoice.SelectedIndex;
-                invoiceslist[0].RemoveAt(selectedIndex);
+                uint sno = ((PurchaseInvoiceClass)gridinvoice.SelectedItem).SNo;
+                try
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.Connection = conn;
+                    cmd.CommandText = "DELETE FROM  vendorinvoices where sno = @sno ";
+                    cmd.Parameters.AddWithValue("@sno", sno);
+                    cmd.Prepare();
+                    cmd.ExecuteNonQuery();
+                    invoiceslist.Remove((PurchaseInvoiceClass)gridinvoice.SelectedItem);
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine("Dasebase Deletion Failed"+ ex.ToString());
+                    MessageBox.Show("Dasebase Deletion Failed,Please Try Again");
+                }                
             }
             catch (Exception exception)
             {
                 Console.Write("\n\n" + exception.ToString() + "\n\n");
             }
-            finally
-            {
-                gridinvoice.Items.Refresh();
-            }
-        }
-
-        private void button_reload_Click(object sender, RoutedEventArgs e)
-        {
-            gridinvoice.CommitEdit();
-            int loadsuccess = LoadFromDatabase();
             gridinvoice.Items.Refresh();
-        }
-
-        private int LoadFromDatabase()
-        {
-            invoiceslist[0].Add(new PurchaseInvoiceClass() { SNo = 21, InvNo = 43242, Purchase = 433, Item = "Milk", Discount = 43, NetAmount = 489, InvDate = DateTime.Now });
-            return 1;
-        }
-
-        private int SaveToDatabase()
-        {
-            //TO DO: Save only when changes noticed in the list (Add a check maybe)
-            return 1;
         }
 
         private void LoadDefault()
         {
-            invoiceslist.Add(0, new List<PurchaseInvoiceClass>());
+           
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "Select * from  supplier";
+                cmd.Prepare();
+                MySqlDataReader dr = null;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    vendorlist.Add(new VendorListClass() { VendorNo = Convert.ToUInt32(dr["sid"]), Name = dr["name"].ToString() });
+                }
+                if (dr != null)
+                    dr.Close();
 
-            vendorlist.Add(new VendorListClass() { VendorNo = 1, Name = "Abeigil Enterprises" });
-            vendorlist.Add(new VendorListClass() { VendorNo = 2, Name = "Alif & Sons" });
-            vendorlist.Add(new VendorListClass() { VendorNo = 3, Name = "Mess Dairies" });
-            int success = LoadFromDatabase();
-            gridinvoice.ItemsSource = invoiceslist[0];
-            //vendorcombobox.ItemsSource = vendorlist;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error During Loading Vendors:\n" + ex.ToString());
+            }
+            //vendorlist.Add(new VendorListClass() { VendorNo = 1, Name = "Abeigil Enterprises" });
+            //vendorlist.Add(new VendorListClass() { VendorNo = 2, Name = "Alif & Sons" });
+            //vendorlist.Add(new VendorListClass() { VendorNo = 3, Name = "Mess Dairies" });
+            gridinvoice.ItemsSource = invoiceslist;
+            vendorlistbox.ItemsSource = vendorlist;
+            vendorlistbox.DisplayMemberPath = "Name";
+            vendorlistbox.SelectedValuePath = "VendorNo";
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            gridinvoice.CommitEdit();
+            try
+            {
+                invoiceslist.Clear();
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.Connection = conn;
+                cmd.CommandText = "Select * from  vendorinvoices where sid=@sid";
+                cmd.Prepare();
+                cmd.Parameters.AddWithValue("@sid", vendorlistbox.SelectedValue);
+                MySqlDataReader dr = null;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    invoiceslist.Add(new PurchaseInvoiceClass() { SNo = Convert.ToUInt32(dr["sno"]), sid = Convert.ToUInt32(dr["sid"]), InvNo = dr["invno"].ToString(), InvDate = Convert.ToDateTime(dr["date"]), Purchase = Convert.ToInt32(dr["puramt"]), Discount = Convert.ToInt32(dr["discount"]) });
+                }
+                if (dr != null)
+                    dr.Close();
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error During Loading Vendors:\n" + ex.ToString());
+            }
+            gridinvoice.Items.Refresh();
         }
 
         private void button_excel_Click(object sender, RoutedEventArgs e)
         {
 
         }
+
+        
     }
     public class PurchaseInvoiceClass
     {
         public uint SNo { get; set; }
-        public uint InvNo { get; set; }
+        public uint sid { get; set; }
+        public string InvNo { get; set; }
         public DateTime InvDate { get; set; }
         public string Item { get; set; }
         public int Purchase { get; set; }

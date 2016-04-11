@@ -27,8 +27,14 @@
             </StatusBarItem>
         </StatusBar>
         <Grid Width="851">
-            <Button x:Name="button_student" Content="Member Mess Management" Style="{StaticResource btn-default}" HorizontalAlignment="Left" Margin="321,148,0,0" VerticalAlignment="Top" Width="229" Height="51" Click="button_student_Click" FontSize="16"/>
-            <Button x:Name="button_admin" Content="Mess Administration" Style="{StaticResource btn-default}" HorizontalAlignment="Left" Margin="321,235,0,0" VerticalAlignment="Top" Width="229" Height="51" Click="button_admin_Click" FontSize="16"/>
+            <Button x:Name="button_back" Style="{StaticResource btn-default}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="26,25,0,0" Click="button_back_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Resource/Images/Previous_16x.png"  Height="14" />
+                    <TextBlock xml:space="preserve"> Back</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="button_menuchoose" Content="Start Mess" Style="{StaticResource btn-default}" HorizontalAlignment="Left" Margin="321,148,0,0" VerticalAlignment="Top" Width="229" Height="51" Click="button_menuchoose_Click" FontSize="16"/>
+            <Button x:Name="button_gen_excel" Content="Generate Dues" Style="{StaticResource btn-default}" HorizontalAlignment="Left" Margin="321,235,0,0" VerticalAlignment="Top" Width="229" Height="51" Click="button_gen_excel_Click" FontSize="16"/>
 
         </Grid>
     </DockPanel>

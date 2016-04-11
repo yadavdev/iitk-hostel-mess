@@ -25,14 +25,25 @@ namespace MessManagement
             InitializeComponent();
         }
 
-        private void button_student_Click(object sender, RoutedEventArgs e)
+        private void button_back_Click(object sender, RoutedEventArgs e)
         {
-           
+            Switcher.Switch(new LandingPageAdmin());
         }
-
-        private void button_admin_Click(object sender, RoutedEventArgs e)
+        private void button_memberedit_Click(object sender, RoutedEventArgs e)
         {
-
+            Switcher.Switch(new EditMember());
+        }
+        private void button_employee_edit_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new EditEmployee());
+        }
+        private void button_vendoradd_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new VendorsInvoices());
+        }
+        private void button_invoices_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new VendorsInvoices());
         }
     }
 }

@@ -34,5 +34,10 @@ namespace MessManagement
         {
             Switcher.Switch(new AdminPanel());
         }
+
+        private void button_back_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new Login());
+        }
     }
 }

@@ -24,15 +24,20 @@ namespace MessManagement
         {
             InitializeComponent();
         }
-
-        private void button_student_Click(object sender, RoutedEventArgs e)
+        
+        private void button_menuchoose_Click(object sender, RoutedEventArgs e)
         {
-           
+            Switcher.Switch(new MenuChoose());
         }
 
-        private void button_admin_Click(object sender, RoutedEventArgs e)
+        private void button_gen_excel_Click(object sender, RoutedEventArgs e)
         {
+            Switcher.Switch(new MemberDuesGenerate());
+        }
 
+        private void button_back_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new Login());
         }
     }
 }

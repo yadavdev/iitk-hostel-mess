@@ -32,7 +32,7 @@
             <TextBox x:Name="textBox_id" HorizontalAlignment="Left" Height="20" TextWrapping="NoWrap" VerticalAlignment="Top" Width="120" Margin="401,187,0,0" FontSize="13.333" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled"/>
             <PasswordBox x:Name="passwordBox_password" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="401,219,0,0" FontSize="13.333"/>
             <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="219" Stroke="Black" VerticalAlignment="Top" Width="413" Margin="226,125,0,0" Panel.ZIndex="-1"/>
-            <Button x:Name="button_login" Content="Enter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="446,256,0,0" Click="button_login_Click"/>
+            <Button x:Name="button_login" Content="Login" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="446,256,0,0" Click="button_login_Click"/>
 
         </Grid>
     </DockPanel>

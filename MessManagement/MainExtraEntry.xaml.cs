@@ -60,6 +60,8 @@ namespace MessManagement
                 //set membername = datafromquery['name']
                 label_name.Content = membername;
                 label_rollno.Content = memberid;
+
+
                 today_special.Add(new DailyMenuEntry() { Name = "Chicken Curry", Quantity = 0, Price = 86 });
                 today_special.Add(new DailyMenuEntry() { Name = "Veg Curry", Quantity = 0, Price = 345 });
                 today_special.Add(new DailyMenuEntry() { Name = "Hall2 Special Curry", Quantity = 0, Price = 104 });

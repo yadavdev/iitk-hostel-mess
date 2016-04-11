@@ -39,6 +39,7 @@ namespace MessManagement
             }
             catch (MySqlException ex)
             {
+                MessageBox.Show("Dasebase Connection Failed, Go back and Try Again");
                 Console.WriteLine("Error: {0}", ex.ToString());
 
             }

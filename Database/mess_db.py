@@ -96,9 +96,10 @@ createtable = """CREATE TABLE  IF NOT EXISTS  Supplier (
 cursor.execute(createtable)
 
 createtable = """CREATE TABLE  IF NOT EXISTS  VendorInvoices(
-				sno INT not null primary key,
+				sno INT not null auto_increment primary key,
 				sid INT not null ,
 				invno VARCHAR(30) not null,
+				item VARCHAR(50) not null,
 				date DATETIME not null Default CURRENT_TIMESTAMP,
 				foreign key(sid) references Supplier(sid),
 				puramt DOUBLE,

@@ -79,7 +79,7 @@ namespace MessManagement
                                      {
                                          disc = Double.Parse(textBox_Discount.Text);
                                 /*Enter in database*/
-                                string date = date_adder.SelectedDate.Value.ToShortDateString();
+                                string date = string.Format("{0:yyyy-MM-dd}",date_adder.SelectedDate);
                                 Console.WriteLine("Vendor id is:" + vendorlistbox.SelectedValue);
                                 try
                                 {
@@ -89,6 +89,7 @@ namespace MessManagement
                                     cmd.Prepare();
                                     cmd.Parameters.AddWithValue("@sid", Convert.ToInt32(vendorlistbox.SelectedValue));
                                     cmd.Parameters.AddWithValue("@date", date);
+                                    cmd.Parameters.AddWithValue("@item", article);
                                     cmd.Parameters.AddWithValue("@invno", invno);
                                     cmd.Parameters.AddWithValue("@puramt",puramt );
                                     cmd.Parameters.AddWithValue("@discount",disc);
@@ -100,9 +101,9 @@ namespace MessManagement
                                     textBox_Discount.Text = "Enter Discount";
                                     
                                 }
-                                catch
+                                catch(Exception ex)
                                 {
-                                    Console.WriteLine("Database query failed.");
+                                    Console.WriteLine("Database query failed."+ex.ToString());
                                     MessageBox.Show("Database query failed. Try Again");
                                 }
 

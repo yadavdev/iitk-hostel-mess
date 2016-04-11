@@ -61,13 +61,45 @@ namespace MessManagement
         private void button_generate_Click(object sender, RoutedEventArgs e)
         {
             button_back.IsEnabled = false;
+            button_generate.IsEnabled = false;
+            Dictionary<int, StudentData> tempdata = new Dictionary<int, StudentData >();
+            try
+            {
+                string sql = "SELECT * from Student ";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                Console.WriteLine(sql);
+                MySqlDataReader dr = null;
+                dr = cmd.ExecuteReader();
+                if (!dr.HasRows)
+                {
+                    MessageBox.Show("No data returned from database. Check Dates or Contact Administrator\n", "Excel no data", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+                else
+                { //Creating Dictionary
+                    while (dr.Read())
+                    {
+                        Console.WriteLine(dr["roll"] + " " + dr["name"] );
+                        tempdata.Add(Convert.ToInt32(dr["roll"]),new StudentData());
+                        tempdata[Convert.ToInt32(dr["roll"] )].Name = dr["name"].ToString();
+                    }
+                }
+                if (dr != null)
+                    dr.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Database queries Failed:\n" + ex.ToString());
+            }
+
+
             try
             {
                 FileInfo newFile = new FileInfo("messdues.xlsx");
                 DateTime startdateval = startdate.SelectedDate.Value.Date;
-                DateTime enddateval = startdate.SelectedDate.Value.Date;
-                Console.WriteLine("startdate: " + startdateval.ToShortDateString());
-                Console.WriteLine("startdate: " + enddateval.ToShortDateString());
+                DateTime enddateval = enddate.SelectedDate.Value.Date;
+                Console.WriteLine("startdate: " + string.Format("{0:yyyy-MM-dd}", startdateval));
+                Console.WriteLine("enddate: " + string.Format("{0:yyyy-MM-dd}", enddateval));
                 /*Check if date is set or not and all fields required set*/
                 using (ExcelPackage objExcelPackage = new ExcelPackage(newFile))
                 {
@@ -79,7 +111,7 @@ namespace MessManagement
                     ws.Cells[1, 1, 1, 6].Merge = true; //Merge columns start and end range
                     ws.Cells[1, 1, 1, 6].Style.Font.Bold = true; //Font should be bold
                     ws.Cells[1, 1, 1, 6].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center; // Aligmnet is center
-                    ws.Cells[2, 1].Value = "For Date" + startdateval.ToShortDateString() + " to " + enddateval.ToShortDateString();
+                    ws.Cells[2, 1].Value = "For Dates(both inclusive): " + startdateval.ToShortDateString() + " to " + enddateval.ToShortDateString();
                     ws.Cells[3, 1].Value = "Sno";
                     ws.Cells[3, 2].Value = "Rollno";
                     ws.Cells[3, 3].Value = "Name";
@@ -87,46 +119,71 @@ namespace MessManagement
                     ws.Cells[3, 5].Value = "Total";
                     try
                     {
-                        string sql = "SELECT * from snt WHERE date>='@startdate' and date<='@enddate 23:59:59.999'";
+                        string sql = "SELECT * from Smt WHERE date<='"+ string.Format("{0:yyyy-MM-dd}", enddateval) + " 23:59:59:999' and date>='"+ string.Format("{0:yyyy-MM-dd}", startdateval) + "'";
                         MySqlCommand cmd = new MySqlCommand(sql, conn);
                         //cmd.Connection.Open();
-                        cmd.Parameters.AddWithValue("@startdate", startdateval.ToShortDateString());
-                        cmd.Parameters.AddWithValue("@password", enddateval.ToShortDateString());
+                        //cmd.Parameters.AddWithValue("@startdate", string.Format("{0:yyyy-MM-dd}", startdateval));
+                        //cmd.Parameters.AddWithValue("@enddate", string.Format("{0:yyyy-MM-dd}", enddateval));
+                        Console.WriteLine(sql);
                         MySqlDataReader dr = null;
                         dr = cmd.ExecuteReader();
-                        if (dr.Read())
+                        if(!dr.HasRows)
                         {
-                            if (dr.GetInt32(2) == 0)
-                            {
-                                Switcher.Switch(new LandingPageAdmin());
-                            }
-                            else
-                            {
-                                Switcher.Switch(new LandingPageFrontend());
-                            }
-                            if (conn != null)
-                                conn.Close();
-                            Console.WriteLine("Check after Switch 1,2,3");
+                            MessageBox.Show("No data returned from database. Check Dates or Contact Administrator\n", "Excel no data", MessageBoxButton.OK, MessageBoxImage.Warning);
                         }
                         else
-                        {
-                            MessageBox.Show("Id or Password Incorrect.\n", "Wrong Credentials", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        { //Creating Dictionary
+                            while (dr.Read())
+                            {
+                                Console.WriteLine(dr["roll"] + " " + dr["price"] );
+                                tempdata[Convert.ToInt32(dr["roll"])].Price += Convert.ToInt32(dr["price"]);
+                            }
+                            int i = 4;
+                            int sno = 1;
+                            foreach (KeyValuePair<int,StudentData> mydata in tempdata)
+                            {
+                                ws.Cells[i, 1].Value = sno;
+                                ws.Cells[i, 2].Value = mydata.Key;
+                                ws.Cells[i, 3].Value = mydata.Value.Name;
+                                ws.Cells[i, 4].Value = mydata.Value.Price;
+                                ws.Cells[i, 5].Value = mydata.Value.Price;
+                                sno += 1;
+                                i += 1;
+                            }
+                            if (newFile.Exists)
+                            {
+                                newFile.Delete();  // ensures we create a new workbook
+                                newFile = new FileInfo("messdues.xlsx");
+                            }
+                            objExcelPackage.Save();
+                            MessageBox.Show("Excel File generated from database!", "Generation Succed",MessageBoxButton.OK,MessageBoxImage.Information);
+
+                            
                         }
                         if (dr != null)
                             dr.Close();
+
                     }
                     catch(Exception ex)
                     {
                         MessageBox.Show("Error Database queries Failed:\n" + ex.ToString());
                     }
-                    objExcelPackage.Save();
+                   
                 }
             }
             catch(Exception ex)
             {
                 MessageBox.Show("Excel Generation Failed. Retry or Contact Administrator\n" + ex.ToString());
             }
-            button_back.IsEnabled = false;
+            button_back.IsEnabled = true;
+            button_generate.IsEnabled = true;
         }
     }
+    public class StudentData
+    {
+        public string Name { get; set; }
+
+        public int Price { get; set; }
+    }
+
 }

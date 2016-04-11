@@ -78,11 +78,11 @@ createtable = """CREATE TABLE  IF NOT EXISTS Employees(
 				sno INT not null auto_increment primary key, 
 				name VARCHAR(45) not null,
 				addr VARCHAR(100),
-				mobno INT,
-				category VARCHAR(20) not null,
-				foreign key(slrytype) references Salary(slrytype),
-				slrytype VARCHAR(20) not null,
-				Accno	VARCHAR(45)
+				mobno VARCHAR(10),
+				category VARCHAR(20)  not null,
+				wage LONG not null ,
+				Accno	VARCHAR(45),
+				BankName VARCHAR(45)
 				)"""
 cursor.execute(createtable)
 

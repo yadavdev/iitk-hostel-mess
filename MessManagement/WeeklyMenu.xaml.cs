@@ -277,12 +277,32 @@ namespace MessManagement
         private void RemoveExtra(ref DataGrid dg, string day, string meal)
         {
             dg.CommitEdit();
+            int db_day = int.Parse(day) * 10 + int.Parse(meal);
             if (dg.SelectedItems.Count > 0)
             {
                 try
                 {
                     var selectedIndex = dg.SelectedIndex;
-                    weeklymenu[day][meal].RemoveAt(selectedIndex);
+                    try
+                    {
+                        string item_name = weeklymenu[day][meal][selectedIndex].Name;
+                        MySqlCommand cmd = new MySqlCommand();
+                        cmd.Connection = conn;
+                        //cmd.CommandText = "DELETE FROM menu where article = \"" + item_name+"\"and day = "+ db_day.ToString();
+                        cmd.CommandText = "DELETE FROM menu where article = @item and  day = @inday";
+                        cmd.Parameters.AddWithValue("@item", item_name);
+                        cmd.Parameters.AddWithValue("@inday", db_day);
+                        cmd.Prepare();
+                        Console.WriteLine(item_name);
+                        cmd.ExecuteNonQuery();
+
+                        weeklymenu[day][meal].RemoveAt(selectedIndex);
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Dasebase Deletion Failed");
+                        MessageBox.Show("Dasebase Deletion Failed,Please Try Again");
+                    }
                 }
                 catch (Exception exception)
                 {

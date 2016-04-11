@@ -83,8 +83,14 @@
       <DependentUpon>EditMember.xaml</DependentUpon>
     </Compile>
     <Compile Include="IsSwitchable.cs" />
-    <Compile Include="LandingPage.xaml.cs">
-      <DependentUpon>LandingPage.xaml</DependentUpon>
+    <Compile Include="AdminPanel.xaml.cs">
+      <DependentUpon>AdminPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LandingPageFrontend.xaml.cs">
+      <DependentUpon>LandingPageFrontend.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LandingPageAdmin.xaml.cs">
+      <DependentUpon>LandingPageAdmin.xaml</DependentUpon>
     </Compile>
     <Compile Include="LatestMemberTransactions.xaml.cs">
       <DependentUpon>LatestMemberTransactions.xaml</DependentUpon>
@@ -127,7 +133,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LandingPage.xaml">
+    <Page Include="AdminPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LandingPageFrontend.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LandingPageAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

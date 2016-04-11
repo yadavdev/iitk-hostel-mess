@@ -45,7 +45,7 @@
                 <ColumnDefinition Width="491*"/>
             </Grid.ColumnDefinitions>
             <ComboBox x:Name="comboboxlist_day" Margin="85,17,110,503"  ItemsSource="{Binding}" SelectionChanged="ComboBox_day_SelectionChanged" />
-            <DataGrid x:Name="tempmenu" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,84,0,0" Grid.ColumnSpan="2" >
+            <DataGrid x:Name="tempmenu" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" CanUserSortColumns="False" Style="{StaticResource Menu}" Margin="0,84,0,0" Grid.ColumnSpan="2" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="300*"/>
                     <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}" Width="150"/>

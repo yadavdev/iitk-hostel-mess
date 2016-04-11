@@ -30,19 +30,20 @@ namespace MessManagement
         public MemberEntry()
         {
             InitializeComponent();
-            LoadExtras();
             try
             {
                 conn = new MySqlConnection(cs);
                 conn.Open();
                 Console.WriteLine("MySQL version : {0}", conn.ServerVersion);
-
+                LoadExtras();
             }
             catch (MySqlException ex)
             {
                 Console.WriteLine("Error: {0}", ex.ToString());
+                MessageBox.Show("Dasebase Connection Failed, Go back and Try Again or Contact Administrator");
 
             }
+
         }
         private void LoadExtras()
         {
@@ -54,12 +55,12 @@ namespace MessManagement
             /*Logic to Store and Check Member Id from database*/
             try
             {
-                int argtosend = int.Parse(id_field.Text);
-                Console.WriteLine(argtosend.ToString());
+                int rolltosend = int.Parse(id_field.Text);
+                Console.WriteLine(rolltosend.ToString());
                 //check if in database
                 try
                 {
-                    string str = "SELECT * from student where roll ="+ argtosend.ToString();
+                    string str = "SELECT * from student where roll ="+ rolltosend.ToString();
                     Console.WriteLine(str);
                     MySqlDataReader dr = null;
                     MySqlCommand cmd = new MySqlCommand(str, conn);
@@ -74,7 +75,7 @@ namespace MessManagement
                     }
                     else
                     {
-                        Switcher.Switch(new MainExtraEntry(argtosend));
+                        Switcher.Switch(new MainExtraEntry(rolltosend, dr["name"].ToString() ));
                     }  
                 }
                 catch

@@ -42,14 +42,13 @@
             </StatusBarItem>
         </StatusBar>
         <Grid Width="852">
-            <DataGrid x:Name="gridemployee" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,10,0" >
+            <DataGrid x:Name="gridemployee" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" CanUserSortColumns="False" Style="{StaticResource Menu}" Margin="0,151,10,0"   >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="SNo" Binding="{Binding SNo, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="30*"/>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" Width="60*"/>
-                    <DataGridTextColumn Header="Category" Binding="{Binding Category, UpdateSourceTrigger=LostFocus}" Width="60*"/>
-                    <DataGridTextColumn Header="Wages Rate" Binding="{Binding Wages, UpdateSourceTrigger=LostFocus}" Width="60*"/>
-                    <DataGridTextColumn Header="Bank" Binding="{Binding Bank, UpdateSourceTrigger=LostFocus}" Width="60*"/>
-                    <DataGridTextColumn Header="AccNo." Binding="{Binding AccNo, UpdateSourceTrigger=LostFocus}" Width="60*"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="60*"/>
+                    <DataGridTextColumn Header="Category" Binding="{Binding Category, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="60*"/>
+                    <DataGridTextColumn Header="Wages Rate" Binding="{Binding Wages, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="60*"/>
+                    <DataGridTextColumn Header="Bank" Binding="{Binding Bank, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="60*"/>
+                    <DataGridTextColumn Header="AccNo." Binding="{Binding AccNo, UpdateSourceTrigger=LostFocus}" IsReadOnly="True" Width="60*"/>
                     <DataGridTemplateColumn Header="" IsReadOnly="True" Width="30*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -64,30 +63,26 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button x:Name="button_back" Style="{StaticResource btn-default}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_back_Click">
+            <Button x:Name="button_back" Style="{StaticResource btn-default}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0"  Height="28">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Resource/Images/Previous_16x.png"  Height="14" />
                     <TextBlock xml:space="preserve"><Run Text=" Back"/></TextBlock>
                 </StackPanel>
             </Button>
-            <Button x:Name="button_add" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="773,17,0,0" Click="button_add_Click">
+            <Button x:Name="button_add" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="735,17,0,0" Click="button_add_Click" Height="28">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
                     <TextBlock xml:space="preserve"> Add</TextBlock>
                 </StackPanel>
             </Button>
-            <Button x:Name="button_save" Style="{StaticResource btn-success}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="98,17,0,0" Click="button_save_Click">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="Resource/Images/VSO_Save_whiteNoHalo_16x.png"  Height="14" />
-                    <TextBlock xml:space="preserve"> Save Changes</TextBlock>
-                </StackPanel>
-            </Button>
-            <Button x:Name="button_reload" Style="{StaticResource btn-warning}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="636,17,0,0" Click="button_reload_Click">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="Resource/Images/Restart_16x.png"  Height="14" />
-                    <TextBlock xml:space="preserve"><Run Text=" Reload/Reset"/></TextBlock>
-                </StackPanel>
-            </Button>
+            <TextBox x:Name="textBox_wage" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Wage" Margin="84,61,0,0" Width="155"/>
+            <TextBox x:Name="textBox_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Member Name" Margin="84,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="306"  />
+            <TextBox x:Name="textBox_category" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Wage Category" Margin="395,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="334" />
+            <TextBox x:Name="textBox_Bank" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Bank Name" Margin="244,61,0,0" Width="248"/>
+            <TextBox x:Name="textBox_Account" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Account No." Margin="497,61,0,0" Width="232"/>
+            <TextBox x:Name="textBox_Address" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Address" Margin="84,105,0,0" Width="408"/>
+            <TextBox x:Name="textBox_mobile" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Mobile No." Margin="497,105,0,0" Width="232"/>
+
         </Grid>
     </DockPanel>
 </UserControl>

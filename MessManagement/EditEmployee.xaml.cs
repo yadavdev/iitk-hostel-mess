@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MySql.Data.MySqlClient;
 
 namespace MessManagement
 {
@@ -21,9 +22,27 @@ namespace MessManagement
     public partial class EditEmployee : UserControl
     {
         List<EditEmployeeList> employeelist = new List<EditEmployeeList>();
+        string cs =
+            "SERVER=localhost;" +
+            "DATABASE=mess_db;" +
+            "UID=root;" +
+            "PASSWORD=gaurav;";
+        MySqlConnection conn = null;
 
         public EditEmployee()
         {
+            try
+            {
+                conn = new MySqlConnection(cs);
+                conn.Open();
+                Console.WriteLine("MySQL version : {0}", conn.ServerVersion);
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+
+            }
             InitializeComponent();
             LoadMemberList();
         }
@@ -54,7 +73,91 @@ namespace MessManagement
         {
             gridemployee.CommitEdit();
             //Dissallow same SNo.
-            employeelist.Add(new EditEmployeeList() { SNo = 4, Name = "Terminator Adams", Bank = "ICICI", Wages = 300, Category = "UnSkilled" });
+            string name="",category="",address="",accno="",bankName="";
+            uint wage = 0; long mobile=0;
+            try
+            {
+                if (uint.Parse(textBox_wage.Text) > 0)
+                    wage = uint.Parse(textBox_wage.Text);
+
+                if (textBox_name.Text == "" || textBox_name.Text == "Enter Member Name")
+                    MessageBox.Show("Enter valid Member name");
+                else if (textBox_category.Text == "" || textBox_category.Text == "Enter Wage Category")
+                    MessageBox.Show("Enter valid Category");
+                else
+                {
+                    try
+                    {
+                        if (long.Parse(textBox_mobile.Text) > 0)
+                        {
+                            mobile = long.Parse(textBox_mobile.Text);
+                            if (!(mobile >= 1000000000 && mobile <= 9999999999))
+                            { MessageBox.Show("Invalid Mobile Number!, Please Check"); }
+                            else
+                            {
+                                //Mobile no correct
+                                name = textBox_name.Text;
+                                category = textBox_category.Text;
+                                address = textBox_Address.Text;
+                                accno = textBox_Account.Text;
+                                bankName = textBox_Bank.Text;
+                                if (address == "Enter Address")
+                                    address = "";
+                                if (accno == "Enter Account No.")
+                                    accno = "";
+                                if (bankName == "Enter Bank Name")
+                                    bankName = "";
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Invalid Mobile Number or Wage!, Please Check");
+                    }
+                }
+                    
+
+                    /*Enter in database*/
+                    try
+                    {
+                        MySqlCommand cmd = new MySqlCommand();
+                        cmd.Connection = conn;
+                        cmd.CommandText = "INSERT INTO employees(name,addr,mobno,category,wage,accno,bankname) VALUES(@member,@addr,@mobno,@cat,@wage,@accno,@bank)";
+                        cmd.Prepare();
+                        cmd.Parameters.AddWithValue("@member", name);
+                        cmd.Parameters.AddWithValue("@addr", address);
+                        cmd.Parameters.AddWithValue("@mobno",mobile.ToString() );
+                        cmd.Parameters.AddWithValue("@cat", category);
+                        cmd.Parameters.AddWithValue("@wage", wage);
+                        cmd.Parameters.AddWithValue("@accno", accno);
+                        cmd.Parameters.AddWithValue("@bank", bankName);
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Member successfully added");
+                        textBox_name.Text = "Enter Member Name";
+                        textBox_wage.Text = "Enter Wage";
+                        textBox_mobile.Text = "Enter Mobile No.";
+                        textBox_category.Text = "Enter Wage Category";
+                        textBox_Bank.Text = "Enter Bank Name";
+                        textBox_Address.Text = "Enter Address";
+                        textBox_Account.Text = "Enter Account No.";
+                        employeelist.Add(new EditEmployeeList() { Name = name, Bank = bankName, Wages = wage, Category = category });
+                        }
+                    catch
+                    {
+                        Console.WriteLine("Database query failed.");
+                        MessageBox.Show("Possibly Member alredy exists! or Try Again");
+                    }
+                }
+            
+
+
+            catch
+            {
+                MessageBox.Show("Enter valid Wage Amount!");
+            }
+
+
+           // employeelist.Add(new EditEmployeeList() { SNo = 4, Name = "Terminator Adams", Bank = "ICICI", Wages = 300, Category = "UnSkilled" });
             gridemployee.Items.Refresh();
         }
 
@@ -63,8 +166,24 @@ namespace MessManagement
             gridemployee.CommitEdit();
             try
             {
-                var selectedIndex = gridemployee.SelectedIndex;
-                employeelist.RemoveAt(selectedIndex);
+                uint sno = ((EditEmployeeList)gridemployee.SelectedItem).SNo;
+                try
+                {
+                    MySqlCommand cmd = new MySqlCommand();
+                    cmd.Connection = conn;
+                    cmd.CommandText = "DELETE FROM employees where sno = @sno ";
+                    cmd.Parameters.AddWithValue("@sno", sno);
+                    cmd.Prepare();
+                    cmd.ExecuteNonQuery();
+                    employeelist.Remove((EditEmployeeList)gridemployee.SelectedItem);
+                    }
+                catch
+                {
+                    Console.WriteLine("Dasebase Deletion Failed");
+                    MessageBox.Show("Dasebase Deletion Failed,Please Try Again");
+                }
+
+
             }
             catch (Exception exception)
             {
@@ -91,11 +210,29 @@ namespace MessManagement
 
         private int LoadFromDatabase()
         {
-            employeelist.Add(new EditEmployeeList() { SNo = 1, Name = "John Legends", Bank = "SBI", Wages=400, Category="Skilled" });
-            employeelist.Add(new EditEmployeeList() { SNo = 2, Name = "Ranganathan Srinivasan", Bank = "SBI", Wages=400, Category = "Skilled" });
-            employeelist.Add(new EditEmployeeList() { SNo = 3, Name = "Ranganathan Mutthunathan", Bank = "HDFC", Wages =500, Category = "Manager" });
-            employeelist.Add(new EditEmployeeList() { SNo = 4, Name = "Terminator Adams", Bank = "ICICI", Wages=300, Category = "UnSkilled" });
+            uint Sno = 0;
+            try
+            {
+                string str = "SELECT * from employees";
+                //Console.WriteLine(str);
+                MySqlDataReader dr = null;
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Sno++;
+                    employeelist.Add(new EditEmployeeList() { SNo = dr.GetUInt32(0), Name = dr.GetString(1), Bank = dr.GetString(7), Wages = dr.GetUInt32(5), Category = dr.GetString(4) });
 
+                }
+                if (dr != null)
+                    dr.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Database query failed");
+            }
+            //employeelist.Add(new EditEmployeeList() { SNo = 1, Name = "John Legends", Bank = "SBI", Wages=400, Category="Skilled" });
+            
             return 1;
         }
 
@@ -104,6 +241,8 @@ namespace MessManagement
             //TO DO: Save only when changes noticed in the list (Add a check maybe)
             return 1;
         }
+
+       
     }
     public class EditEmployeeList
     {

@@ -19,7 +19,7 @@
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="AlternatingRowBackground" Value="#EEE" />
         </Style>
-        
+
     </UserControl.Resources>
 
     <DockPanel LastChildFill="False">
@@ -41,7 +41,7 @@
             </StatusBarItem>
         </StatusBar>
         <Grid Width="852">
-            <DataGrid x:Name="editmember" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,10,0" >
+            <DataGrid x:Name="editmember" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False"  CanUserSortColumns="False" Style="{StaticResource Menu}" Margin="0,56,10,0" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="RollNo" Binding="{Binding RollNo, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="60*"/>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="200*"/>
@@ -60,30 +60,23 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button x:Name="button_back" Style="{StaticResource btn-default}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0" Click="button_back_Click">
+            <Button x:Name="button_back" Style="{StaticResource btn-default}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0"  Height="28">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Resource/Images/Previous_16x.png"  Height="14" />
                     <TextBlock xml:space="preserve"><Run Text=" Back"/></TextBlock>
                 </StackPanel>
             </Button>
-            <Button x:Name="button_add" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="773,17,0,0" Click="button_add_Click">
+            <Button x:Name="button_add" Style="{StaticResource btn-info}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="735,17,0,0" Click="button_add_Click" Height="28">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Resource/Images/VSO_Add_whiteNoHalo_12x_16x.png"  Height="14" />
                     <TextBlock xml:space="preserve"> Add</TextBlock>
                 </StackPanel>
             </Button>
-            <Button x:Name="button_save" Style="{StaticResource btn-success}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="98,17,0,0" Click="button_save_Click">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="Resource/Images/VSO_Save_whiteNoHalo_16x.png"  Height="14" />
-                    <TextBlock xml:space="preserve"> Save Changes</TextBlock>
-                </StackPanel>
-            </Button>
-            <Button x:Name="button_reload" Style="{StaticResource btn-warning}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="636,17,0,0" Click="button_reload_Click">
-                <StackPanel Orientation="Horizontal">
-                    <Image Source="Resource/Images/Restart_16x.png"  Height="14" />
-                    <TextBlock xml:space="preserve"><Run Text=" Reload/Reset"/></TextBlock>
-                </StackPanel>
-            </Button>
+            <TextBox x:Name="textBox_roll" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="NoWrap" Text="Enter Roll No." Margin="92,17,0,0" Width="90"/>
+            <TextBox x:Name="textBox_name" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Member Name" Margin="188,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="322" />
+            <TextBox x:Name="textBox_remark" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" TextWrapping="Wrap" Text="Enter Remark" Margin="516,17,0,0" RenderTransformOrigin="-1.712,0.688" Width="213" />
+
+
         </Grid>
     </DockPanel>
 </UserControl>

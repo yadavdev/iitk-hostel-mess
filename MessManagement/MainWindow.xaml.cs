@@ -24,7 +24,7 @@ namespace MessManagement
         {
             InitializeComponent();
             Switcher.pageSwitcher = this;
-            Switcher.Switch(new MemberEntry());
+            Switcher.Switch(new Login());
         }
         public void Navigate(UserControl nextPage)
         {

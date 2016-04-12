@@ -437,7 +437,10 @@ namespace MessManagement
             Menu72.ItemsSource = weeklymenu["7"]["2"];
         }
 
-       
+        private void button_back_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new LandingPageFrontend());
+        }
     }
 
     public class DayMenu

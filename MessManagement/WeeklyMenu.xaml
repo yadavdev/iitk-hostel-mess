@@ -41,7 +41,7 @@
             </StatusBarItem>
         </StatusBar>
         <Grid>
-            <TabControl>
+            <TabControl Margin="0,42,0,0">
                 <TabItem Header="Monday">
                     <TabControl TabStripPlacement="Left" Margin="0,-2,0,3"  >
                         <TabItem  Header="Breakfast">
@@ -746,7 +746,12 @@
                     </TabControl>
                 </TabItem>
             </TabControl>
-
+            <Button x:Name="button_back" Style="{StaticResource btn-default}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="756,14,0,0" Click="button_back_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Resource/Images/Previous_16x.png"  Height="14" />
+                    <TextBlock xml:space="preserve"><Run Text=" Back"/></TextBlock>
+                </StackPanel>
+            </Button>
 
         </Grid>
     </DockPanel>

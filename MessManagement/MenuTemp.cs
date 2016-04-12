@@ -8,7 +8,7 @@ namespace MessManagement
 {
     class MenuTemp
     {
-       public static List<DayMenu> tempmenu = new List<DayMenu>();
-
+        public static List<DayMenu> tempmenu = new List<DayMenu>();
+        public static int fixedmealtoday = -1;
     }
 }

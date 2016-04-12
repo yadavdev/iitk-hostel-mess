@@ -35,6 +35,7 @@
             </Button>
             <Button x:Name="button_menuchoose" Content="Start Mess" Style="{StaticResource btn-default}" HorizontalAlignment="Left" Margin="321,148,0,0" VerticalAlignment="Top" Width="229" Height="51" Click="button_menuchoose_Click" FontSize="16"/>
             <Button x:Name="button_gen_excel" Content="Generate Dues" Style="{StaticResource btn-default}" HorizontalAlignment="Left" Margin="321,235,0,0" VerticalAlignment="Top" Width="229" Height="51" Click="button_gen_excel_Click" FontSize="16"/>
+            <Button x:Name="button_weeklymenu" Content="Weekly Menu" Style="{StaticResource btn-default}" HorizontalAlignment="Left" Margin="321,308,0,0" VerticalAlignment="Top" Width="229" Height="51" Click="button_weekmenu_Click" FontSize="16"/>
 
         </Grid>
     </DockPanel>

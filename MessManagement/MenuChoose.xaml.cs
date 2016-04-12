@@ -78,6 +78,8 @@ namespace MessManagement
         private void button_continue_Click(object sender, RoutedEventArgs e)
         {
             tempmenu.CommitEdit();
+            MenuTemp.fixedmealtoday = comboboxlist_meal.SelectedIndex;
+
             if (conn != null)
                 conn.Close();
             Switcher.Switch(new MemberEntry());

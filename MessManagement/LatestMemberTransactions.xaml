@@ -48,7 +48,7 @@
         <Grid Width="852">
             <DataGrid x:Name="latestmembertransactions" CanUserSortColumns="False" AutoGenerateColumns="False" CanUserDeleteRows = "True" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="0,56,10,0" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="RollNo" Binding="{Binding RollNo, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="70*"/>
+                    <DataGridTextColumn Header="RollNo" Binding="{Binding Roll, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="70*"/>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="300*"/>
                     <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="50*"/>
                     <DataGridTextColumn Header="Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="150"/>

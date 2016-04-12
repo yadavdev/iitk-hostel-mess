@@ -39,5 +39,10 @@ namespace MessManagement
         {
             Switcher.Switch(new Login());
         }
+
+        private void button_weekmenu_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new WeeklyMenu());
+        }
     }
 }

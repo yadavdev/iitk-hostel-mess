@@ -93,15 +93,11 @@ namespace MessManagement
                     }
                 }
             }
-
-
             catch
             {
                 MessageBox.Show("Enter valid Roll No!");
-            }
-           
-            
-         editmember.Items.Refresh();
+            }    
+            editmember.Items.Refresh();
         }
     
         private void button_remove_Click(object sender, RoutedEventArgs e)
@@ -123,10 +119,10 @@ namespace MessManagement
                     cmd.ExecuteNonQuery();
                     memberlist.Remove((EditMemberList)editmember.SelectedItem);
                     }
-                catch
+                catch(Exception ex)
                 {
                     Console.WriteLine("Dasebase Deletion Failed");
-                    MessageBox.Show("Dasebase Deletion Failed,Please Try Again");
+                    MessageBox.Show("Dasebase Deletion Failed,Please Try Again"+ex.ToString() );
                 }
             
                 
@@ -159,22 +155,35 @@ namespace MessManagement
                 MySqlDataReader dr = null;
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 dr = cmd.ExecuteReader();
+                int rollno = 0;
+                string name = "";
+                string remarks = "";
                 while (dr.Read())
                 {
-                    memberlist.Add(new EditMemberList() { RollNo = dr.GetInt32(1), Name = dr.GetString(0), Remarks = dr.GetString(2) });
+                    Console.WriteLine(dr);
+                    rollno = dr.GetInt32(1);
+                    name = dr.GetString(0);
+                    remarks = dr.GetString(2);
+                    memberlist.Add(new EditMemberList() { RollNo = rollno, Name = name, Remarks = remarks });
 
                 }
                 if (dr != null)
                     dr.Close();
             }
-            catch
+            catch(Exception ex)
             {
-               MessageBox.Show("Database query failed");
+               MessageBox.Show("Database query failed:\n" + ex.ToString() );
             }
             
             return 1;
         }
-        
+
+        private void button_back_Click(object sender, RoutedEventArgs e)
+        {
+            if(conn!=null)
+                conn.Close();
+            Switcher.Switch(new AdminPanel());
+        }
     }
     public class EditMemberList
     {

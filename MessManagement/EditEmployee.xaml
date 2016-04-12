@@ -63,7 +63,7 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button x:Name="button_back" Style="{StaticResource btn-default}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0"  Height="28">
+            <Button x:Name="button_back" Style="{StaticResource btn-default}" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="10,17,0,0"  Height="28" Click="button_back_Click_1">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Resource/Images/Previous_16x.png"  Height="14" />
                     <TextBlock xml:space="preserve"><Run Text=" Back"/></TextBlock>

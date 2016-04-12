@@ -46,12 +46,6 @@ namespace MessManagement
             InitializeComponent();
             LoadMemberList();
         }
-
-        private void button_back_Click(object sender, RoutedEventArgs e)
-        {
-            //Switcher.Switch(new ____());
-        }
-
         private void button_save_Click(object sender, RoutedEventArgs e)
         {
             gridemployee.CommitEdit();
@@ -74,7 +68,7 @@ namespace MessManagement
             gridemployee.CommitEdit();
             //Dissallow same SNo.
             string name="",category="",address="",accno="",bankName="";
-            uint wage = 0; long mobile=0;
+            long wage = 0; long mobile=0;
             try
             {
                 if (uint.Parse(textBox_wage.Text) > 0)
@@ -107,6 +101,37 @@ namespace MessManagement
                                     accno = "";
                                 if (bankName == "Enter Bank Name")
                                     bankName = "";
+                                /*Enter in database*/
+                                try
+                                {
+                                    MySqlCommand cmd = new MySqlCommand();
+                                    cmd.Connection = conn;
+                                    cmd.CommandText = "INSERT INTO employees(name,addr,mobno,category,wage,accno,bankname) VALUES(@member,@addr,@mobno,@cat,@wage,@accno,@bank)";
+                                    cmd.Prepare();
+                                    cmd.Parameters.AddWithValue("@member", name);
+                                    cmd.Parameters.AddWithValue("@addr", address);
+                                    cmd.Parameters.AddWithValue("@mobno", mobile.ToString());
+                                    cmd.Parameters.AddWithValue("@cat", category);
+                                    cmd.Parameters.AddWithValue("@wage", wage);
+                                    cmd.Parameters.AddWithValue("@accno", accno);
+                                    cmd.Parameters.AddWithValue("@bank", bankName);
+                                    cmd.ExecuteNonQuery();
+                                    MessageBox.Show("Member successfully added");
+                                    textBox_name.Text = "Enter Member Name";
+                                    textBox_wage.Text = "Enter Wage";
+                                    textBox_mobile.Text = "Enter Mobile No.";
+                                    textBox_category.Text = "Enter Wage Category";
+                                    textBox_Bank.Text = "Enter Bank Name";
+                                    textBox_Address.Text = "Enter Address";
+                                    textBox_Account.Text = "Enter Account No.";
+                                    //employeelist.Add(new EditEmployeeList() { Name = name, Bank = bankName, Wages = wage, Category = category });
+                                    LoadFromDatabase();
+                                }
+                                catch(Exception ex)
+                                {
+                                    Console.WriteLine("Database query failed." + ex.ToString());
+                                    MessageBox.Show("Possibly Member alredy exists! or Try Again"+ ex.ToString());
+                                }
                             }
                         }
                     }
@@ -117,37 +142,7 @@ namespace MessManagement
                 }
                     
 
-                    /*Enter in database*/
-                    try
-                    {
-                        MySqlCommand cmd = new MySqlCommand();
-                        cmd.Connection = conn;
-                        cmd.CommandText = "INSERT INTO employees(name,addr,mobno,category,wage,accno,bankname) VALUES(@member,@addr,@mobno,@cat,@wage,@accno,@bank)";
-                        cmd.Prepare();
-                        cmd.Parameters.AddWithValue("@member", name);
-                        cmd.Parameters.AddWithValue("@addr", address);
-                        cmd.Parameters.AddWithValue("@mobno",mobile.ToString() );
-                        cmd.Parameters.AddWithValue("@cat", category);
-                        cmd.Parameters.AddWithValue("@wage", wage);
-                        cmd.Parameters.AddWithValue("@accno", accno);
-                        cmd.Parameters.AddWithValue("@bank", bankName);
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Member successfully added");
-                        textBox_name.Text = "Enter Member Name";
-                        textBox_wage.Text = "Enter Wage";
-                        textBox_mobile.Text = "Enter Mobile No.";
-                        textBox_category.Text = "Enter Wage Category";
-                        textBox_Bank.Text = "Enter Bank Name";
-                        textBox_Address.Text = "Enter Address";
-                        textBox_Account.Text = "Enter Account No.";
-                    //employeelist.Add(new EditEmployeeList() { Name = name, Bank = bankName, Wages = wage, Category = category });
-                    LoadFromDatabase();
-                }
-                    catch
-                    {
-                        Console.WriteLine("Database query failed.");
-                        MessageBox.Show("Possibly Member alredy exists! or Try Again");
-                    }
+                    
                 }
             
 
@@ -244,7 +239,13 @@ namespace MessManagement
             return 1;
         }
 
-       
+        private void button_back_Click_1(object sender, RoutedEventArgs e)
+        {
+            //Switcher.Switch(new ____());
+            if (conn != null)
+                conn.Close();
+            Switcher.Switch(new AdminPanel());
+        }
     }
     public class EditEmployeeList
     {

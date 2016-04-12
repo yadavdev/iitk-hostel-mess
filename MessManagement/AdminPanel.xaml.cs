@@ -39,7 +39,7 @@ namespace MessManagement
         }
         private void button_vendoradd_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new VendorsInvoices());
+            Switcher.Switch(new EditVendors());
         }
         private void button_invoices_Click(object sender, RoutedEventArgs e)
         {

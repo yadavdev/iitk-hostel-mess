@@ -169,7 +169,12 @@ namespace MessManagement
             return 1;
         }
 
-       
+        private void button_back_Click(object sender, RoutedEventArgs e)
+        {
+            if (conn != null)
+                conn.Close();
+            Switcher.Switch(new AdminPanel());
+        }
     }
     public class EditVendorList
     {

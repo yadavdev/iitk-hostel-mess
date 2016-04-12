@@ -85,9 +85,10 @@ namespace MessManagement
                 //set membername = datafromquery['name']
                 label_name.Content = membername;
                 label_rollno.Content = memberid;
+                int db_day = 7 * 10 + MenuTemp.fixedmealtoday;
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conn;
-                cmd.CommandText = "Select * from  fixedmenu";
+                cmd.CommandText = "SELECT * from menu where  day =" + db_day.ToString();
                 cmd.Prepare();
                 MySqlDataReader dr = null;
                 dr = cmd.ExecuteReader();

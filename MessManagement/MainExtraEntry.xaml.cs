@@ -28,7 +28,7 @@ namespace MessManagement
             "SERVER=localhost;" +
             "DATABASE=mess_db;" +
             "UID=root;" +
-            "PASSWORD=gaurav;";
+            "PASSWORD=rootpa55word;";
         MySqlConnection conn = null;
         MySqlTransaction tr = null;
         public MainExtraEntry(int roll, string name)
@@ -40,6 +40,7 @@ namespace MessManagement
                 membername = name;
                 todayspecialextra.ItemsSource = today_special;
                 fixedextra.ItemsSource = today_fixed;
+                todayspecialextra.CellEditEnding += Todayspecialextra_CellEditEnding;
             }
             catch (Exception ex)
             {
@@ -62,7 +63,28 @@ namespace MessManagement
                     conn.Close();
 
             }
+        }
 
+        private void Todayspecialextra_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            if (e.EditAction == DataGridEditAction.Commit)
+            {
+                var column = e.Column as DataGridBoundColumn;
+                if (column != null)
+                {
+                    var bindPath = (column.Binding as Binding).Path.Path;
+                    if (bindPath == "Quantity")
+                    {
+                        var element = e.EditingElement as TextBox; // element.Text has the new, user-entered value
+                        int x;
+                        if (!(int.TryParse(element.Text, out x) && x >= 0))
+                        {
+                            element.Text = "0";
+                            MessageBox.Show("Quantity should be 0 or a positive integer.");
+                        }
+                    }
+                }
+            }
         }
 
         private void button_back_Click(object sender, RoutedEventArgs e)
@@ -76,7 +98,9 @@ namespace MessManagement
             button_back.IsEnabled = false;
             UpdateDatabase(); /*And Add to Latest Transaction*/
             Switcher.Switch(new MemberEntry());
+            
         }
+
         private void LoadExtras()
         {
             try
@@ -124,6 +148,8 @@ namespace MessManagement
         }
         private void UpdateDatabase()
         {
+            todayspecialextra.CommitEdit();
+            fixedextra.CommitEdit();
             try
             {
                 tr = conn.BeginTransaction();
@@ -182,6 +208,16 @@ namespace MessManagement
             }
 
         }
+
+        private void License(object sender, RoutedEventArgs e)
+        {
+            MenuBarFunctions.License(sender, e);
+        }
+        private void Contributors(object sender, RoutedEventArgs e)
+        {
+            MenuBarFunctions.Contributors(sender, e);
+        }
+
     }
 
     public class DailyMenuEntry

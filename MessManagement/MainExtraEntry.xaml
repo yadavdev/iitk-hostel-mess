@@ -36,8 +36,8 @@
                 <MenuItem Header="_Test Option 1" />
             </MenuItem>
             <MenuItem Header="_About">
-                <MenuItem Header="_License" />
-                <MenuItem Header="_Contributors" />
+                <MenuItem Header="_License" Click="License" />
+                <MenuItem Header="_Contributors" Click="Contributors" />
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
@@ -47,14 +47,14 @@
         </StatusBar>
         <Grid Width="852">
             <Image x:Name="image_id" HorizontalAlignment="Left" Height="175" Source="Resource/Images/member_256x256.png" Margin="23,25,0,0" VerticalAlignment="Top" Width="140" Stretch="Fill" />
-            <DataGrid x:Name="fixedextra" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserDeleteRows = "False" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="207,93,31,258" >
+            <DataGrid x:Name="fixedextra" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserDeleteRows = "False" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="Cell" Style="{StaticResource Menu}" Margin="207,93,31,258" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="200*"/>
                     <DataGridTextColumn Header="Unit Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="50*"/>
                     <DataGridTextColumn Header="Enter Quantity" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}" Width="80*"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid x:Name="todayspecialextra" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserDeleteRows = "False" CanUserAddRows="False" Style="{StaticResource Menu}" Margin="207,340,31,56"  >
+            <DataGrid x:Name="todayspecialextra" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserDeleteRows = "False" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="Cell"  Style="{StaticResource Menu}" Margin="207,340,31,56"  >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="200*"/>
                     <DataGridTextColumn Header="Unit Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="50*"/>

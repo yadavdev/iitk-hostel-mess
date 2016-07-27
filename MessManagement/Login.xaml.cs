@@ -25,7 +25,7 @@ namespace MessManagement
             "SERVER=localhost;" +
             "DATABASE=mess_login;" +
             "UID=root;" +
-            "PASSWORD=gaurav;";
+            "PASSWORD=rootpa55word;";
        private MySqlConnection conn = null;
         public Login()
         {
@@ -92,6 +92,14 @@ namespace MessManagement
             {
                 MessageBox.Show("Error: During Database Connection. Contact Administrator or Retry.\n" + ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+        private void License(object sender, RoutedEventArgs e)
+        {
+            MenuBarFunctions.License(sender, e);
+        }
+        private void Contributors(object sender, RoutedEventArgs e)
+        {
+            MenuBarFunctions.Contributors(sender, e);
         }
     }
 }

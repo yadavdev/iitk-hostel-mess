@@ -40,5 +40,13 @@ namespace MessManagement
         {
 
         }
+        private void License(object sender, RoutedEventArgs e)
+        {
+            MenuBarFunctions.License(sender, e);
+        }
+        private void Contributors(object sender, RoutedEventArgs e)
+        {
+            MenuBarFunctions.Contributors(sender, e);
+        }
     }
 }

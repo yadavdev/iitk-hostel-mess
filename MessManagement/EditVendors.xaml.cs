@@ -26,7 +26,7 @@ namespace MessManagement
             "SERVER=localhost;" +
             "DATABASE=mess_db;" +
             "UID=root;" +
-            "PASSWORD=gaurav;";
+            "PASSWORD=rootpa55word;";
         MySqlConnection conn = null;
 
         public EditVendors()
@@ -174,6 +174,15 @@ namespace MessManagement
             if (conn != null)
                 conn.Close();
             Switcher.Switch(new AdminPanel());
+        }
+
+        private void License(object sender, RoutedEventArgs e)
+        {
+            MenuBarFunctions.License(sender, e);
+        }
+        private void Contributors(object sender, RoutedEventArgs e)
+        {
+            MenuBarFunctions.Contributors(sender, e);
         }
     }
     public class EditVendorList

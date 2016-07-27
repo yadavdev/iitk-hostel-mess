@@ -29,7 +29,7 @@ namespace MessManagement
             "SERVER=localhost;" +
             "DATABASE=mess_db;" +
             "UID=root;" +
-            "PASSWORD=gaurav;";
+            "PASSWORD=rootpa55word;";
         private MySqlConnection conn = null;
 
         public MemberDuesGenerate()
@@ -177,6 +177,15 @@ namespace MessManagement
             }
             button_back.IsEnabled = true;
             button_generate.IsEnabled = true;
+        }
+
+        private void License(object sender, RoutedEventArgs e)
+        {
+            MenuBarFunctions.License(sender, e);
+        }
+        private void Contributors(object sender, RoutedEventArgs e)
+        {
+            MenuBarFunctions.Contributors(sender, e);
         }
     }
     public class StudentData

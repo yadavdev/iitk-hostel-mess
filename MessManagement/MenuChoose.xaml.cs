@@ -26,7 +26,7 @@ namespace MessManagement
             "SERVER=localhost;" +
             "DATABASE=mess_db;" +
             "UID=root;" +
-            "PASSWORD=gaurav;";
+            "PASSWORD=rootpa55word;";
         MySqlConnection conn = null;
         public MenuChoose()
         {
@@ -144,6 +144,15 @@ namespace MessManagement
                 MessageBox.Show("Loading from Database Failed. Retry or Contact Administrator", "Database Error",MessageBoxButton.OK, MessageBoxImage.Error);
             }
             tempmenu.Items.Refresh();
+        }
+
+        private void License(object sender, RoutedEventArgs e)
+        {
+            MenuBarFunctions.License(sender, e);
+        }
+        private void Contributors(object sender, RoutedEventArgs e)
+        {
+            MenuBarFunctions.Contributors(sender, e);
         }
     }
     public class DayChoose

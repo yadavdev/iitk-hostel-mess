@@ -39,8 +39,8 @@
                 <MenuItem Header="_Test Option 1" />
             </MenuItem>
             <MenuItem Header="_About">
-                <MenuItem Header="_License" />
-                <MenuItem Header="_Contributors" />
+                <MenuItem Header="_License" Click="License" />
+                <MenuItem Header="_Contributors" Click="Contributors" />
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">

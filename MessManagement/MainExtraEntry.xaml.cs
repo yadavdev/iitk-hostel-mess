@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using System.IO;
+using log4net;
 
 namespace MessManagement
 {
@@ -33,6 +34,7 @@ namespace MessManagement
             "PASSWORD=rootpa55word;";
         MySqlConnection conn = null;
         MySqlTransaction tr = null;
+        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public MainExtraEntry(int roll, string name)
         {
             try
@@ -40,7 +42,8 @@ namespace MessManagement
                 InitializeComponent();
                 memberid = roll;
                 membername = name;
-                if(membername == null || membername == "" || memberid <0)
+                Directory.CreateDirectory(@"C:\MessManagement\Logs");
+                if (membername == null || membername == "" || memberid <0)
                 {
                     Switcher.Switch(new MemberEntry());
                     MessageBox.Show("Page Load Error: \nClick Okay to go back", "An Error Occured", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -153,6 +156,7 @@ namespace MessManagement
             try
             {
                 tr = conn.BeginTransaction();
+                log.Info(memberid.ToString() + ": Transaction Start");
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conn;
                 cmd.Transaction = tr;
@@ -167,6 +171,7 @@ namespace MessManagement
                         cmd.Parameters.AddWithValue("@quantity", curr.Quantity);
                         cmd.Parameters.AddWithValue("@price", curr.Price * curr.Quantity);
                         cmd.ExecuteNonQuery();
+                        log.Info(memberid.ToString() +": INSERT INTO smt(roll, item, quantity, price) VALUES(" + memberid.ToString()+", '"+curr.Name+"', "+curr.Quantity.ToString()+", "+ (curr.Price * curr.Quantity).ToString() + ")");
                         cmd.Parameters.Clear();
                     }
                 }
@@ -179,22 +184,26 @@ namespace MessManagement
                         cmd.Parameters.AddWithValue("@quantity", curr.Quantity);
                         cmd.Parameters.AddWithValue("@price", curr.Price * curr.Quantity);
                         cmd.ExecuteNonQuery();
+                        log.Info(memberid.ToString() + ": INSERT INTO smt(roll, item, quantity, price) VALUES(" + memberid.ToString() + ", '" + curr.Name + "', " + curr.Quantity.ToString() + ", " + (curr.Price * curr.Quantity).ToString() + ")");
                         cmd.Parameters.Clear();
                     }
                 }
                 tr.Commit();
+                log.Info(memberid.ToString() + ": Transaction Complete: ");
             }
             catch ( Exception ex)
             {
                 try
                 {
                     tr.Rollback();
+                    log.Error(memberid.ToString() + ": Transaction Failed and Rolled Back.");
                     MessageBox.Show("Transaction didn't complete Successfully:\n" + ex.Message + "\nClick okay to go back", "Rolling Back Transaction", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 }
                 catch (MySqlException ex1)
                 {
                     Console.WriteLine("Error: {0}", ex1.ToString());
+                    log.Error(memberid.ToString() + ": Transaction Rolling Failed.");
                     MessageBox.Show("Transaction Roll Back Failed:\n" + ex1.Message + "\nCheck Latest Transaction Table or Contact Administrator", "Rolling Back Transaction", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 }
@@ -217,7 +226,6 @@ namespace MessManagement
         {
             MenuBarFunctions.Contributors(sender, e);
         }
-
     }
 
     public class DailyMenuEntry

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using log4net;
 namespace MessManagement
 {
     /// <summary>
@@ -27,6 +28,7 @@ namespace MessManagement
             "UID=root;" +
             "PASSWORD=rootpa55word;";
         MySqlConnection conn = null;
+        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public EditMember()
         {
@@ -82,6 +84,7 @@ namespace MessManagement
                         cmd.Parameters.AddWithValue("@rollno", roll);
                         cmd.Parameters.AddWithValue("@remarks", remarks);
                         cmd.ExecuteNonQuery();
+                        log.Info("New Member Added: "+roll.ToString() + " " + name);
                         MessageBox.Show("Member successfully added");
                         memberlist.Add(new EditMemberList() { RollNo = roll, Name = name, Remarks = remarks });
                         
@@ -107,25 +110,28 @@ namespace MessManagement
             {
 
                 // as EditMemberList;
-                Console.WriteLine(((EditMemberList) editmember.SelectedItem).Name);
+                Console.WriteLine(((EditMemberList)editmember.SelectedItem).Name);
                 int roll = ((EditMemberList)editmember.SelectedItem).RollNo;
-                try
+                if (MessageBox.Show("Do you want to delete this member?\n" + roll.ToString() + "\n" + ((EditMemberList)editmember.SelectedItem).Name, "Confirmation", MessageBoxButton.YesNo,MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
                 {
-                    MySqlCommand cmd = new MySqlCommand();
-                    cmd.Connection = conn;
-                    cmd.CommandText = "DELETE FROM student where roll = @rollno ";
-                    cmd.Parameters.AddWithValue("@rollno", roll);
-                    cmd.Prepare();
-                    cmd.ExecuteNonQuery();
-                    memberlist.Remove((EditMemberList)editmember.SelectedItem);
+                    try
+                    {
+                        MySqlCommand cmd = new MySqlCommand();
+                        cmd.Connection = conn;
+                        cmd.CommandText = "DELETE FROM student where roll = @rollno ";
+                        cmd.Parameters.AddWithValue("@rollno", roll);
+                        cmd.Prepare();
+                        cmd.ExecuteNonQuery();
+                        log.Info("Member Deleted: " + roll.ToString() + " " + ((EditMemberList)editmember.SelectedItem).Name);
+                        memberlist.Remove((EditMemberList)editmember.SelectedItem);
                     }
-                catch(Exception ex)
-                {
-                    Console.WriteLine("Dasebase Deletion Failed");
-                    MessageBox.Show("Dasebase Deletion Failed,Please Try Again"+ex.ToString() );
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Dasebase Deletion Failed");
+                        log.Info("Member Deletion Failed: " + roll.ToString() + " " + ((EditMemberList)editmember.SelectedItem).Name);
+                        MessageBox.Show("Dasebase Deletion Failed,Please Try Again" + ex.ToString());
+                    }
                 }
-            
-                
             }
             catch (Exception exception)
             {
@@ -157,13 +163,14 @@ namespace MessManagement
                 dr = cmd.ExecuteReader();
                 int rollno = 0;
                 string name = "";
-                string remarks = "";
+                string remarks = null;
                 while (dr.Read())
                 {
                     Console.WriteLine(dr);
                     rollno = dr.GetInt32(1);
                     name = dr.GetString(0);
-                    remarks = dr.GetString(2);
+                    if (!dr.IsDBNull(2))
+                        remarks = dr.GetString(2);
                     memberlist.Add(new EditMemberList() { RollNo = rollno, Name = name, Remarks = remarks });
 
                 }

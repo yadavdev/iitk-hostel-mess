@@ -95,17 +95,19 @@ namespace MessManagement
 
             try
             {
-                FileInfo newFile = new FileInfo("messdues.xlsx");
-                if (newFile.Exists)
-                {
-                    newFile.Delete();  // ensures we create a new workbook
-                    newFile = new FileInfo("messdues.xlsx");
-                }
+                /*Check if date is set or not and all fields required set*/
                 DateTime startdateval = startdate.SelectedDate.Value.Date;
                 DateTime enddateval = enddate.SelectedDate.Value.Date;
                 Console.WriteLine("startdate: " + string.Format("{0:yyyy-MM-dd}", startdateval));
                 Console.WriteLine("enddate: " + string.Format("{0:yyyy-MM-dd}", enddateval));
-                /*Check if date is set or not and all fields required set*/
+
+                Directory.CreateDirectory(@"C:\MessManagement\Dues");
+                FileInfo newFile = new FileInfo("C:\\MessManagement\\Dues\\messdues" + startdateval.ToShortDateString() +"-"+ enddateval.ToShortDateString() + ".xlsx");
+                if (newFile.Exists)
+                {
+                    newFile.Delete();  // ensures we create a new workbook
+                    newFile = new FileInfo("C:\\MessManagement\\Dues\\messdues" + startdateval.ToShortDateString() + "-" + enddateval.ToShortDateString() + ".xlsx");
+                }
                 using (ExcelPackage objExcelPackage = new ExcelPackage(newFile))
                 {
                     ExcelWorksheet ws = objExcelPackage.Workbook.Worksheets.Add("Dues");
@@ -117,6 +119,9 @@ namespace MessManagement
                     ws.Cells[1, 1, 1, 6].Style.Font.Bold = true; //Font should be bold
                     ws.Cells[1, 1, 1, 6].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center; // Aligmnet is center
                     ws.Cells[2, 1].Value = "For Dates(both inclusive): " + startdateval.ToShortDateString() + " to " + enddateval.ToShortDateString();
+                    ws.Cells[2, 1, 2, 6].Merge = true; //Merge columns start and end range
+                    ws.Cells[2, 1, 2, 6].Style.Font.Bold = true; //Font should be bold
+                    ws.Cells[2, 1, 2, 6].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center; // Aligmnet is center
                     ws.Cells[3, 1].Value = "Sno";
                     ws.Cells[3, 2].Value = "Rollno";
                     ws.Cells[3, 3].Value = "Name";
@@ -155,6 +160,7 @@ namespace MessManagement
                                 sno += 1;
                                 i += 1;
                             }
+                            ws.Cells[ws.Dimension.Address].AutoFitColumns();
                             objExcelPackage.Save();
                             MessageBox.Show("Excel File generated from database!", "Generation Succed",MessageBoxButton.OK,MessageBoxImage.Information);
 

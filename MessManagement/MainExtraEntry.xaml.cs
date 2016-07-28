@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using System.IO;
+
 namespace MessManagement
 {
     /// <summary>
@@ -113,8 +115,9 @@ namespace MessManagement
             {
                 label_name.Content = membername;
                 label_rollno.Content = memberid;
-                if (System.IO.File.Exists("C:\\MessManagement\\StudentImages\\" + memberid.ToString() + "_0.jpg"))
-                    image_id.Source = new BitmapImage(new Uri("C:\\MessManagement\\StudentImages\\"+memberid.ToString()+"_0.jpg", UriKind.Absolute));
+                Directory.CreateDirectory(@"C:\MessManagement\MemberImages");
+                if (File.Exists("C:\\MessManagement\\MemberImages\\" + memberid.ToString() + "_0.jpg"))
+                    image_id.Source = new BitmapImage(new Uri("C:\\MessManagement\\MemberImages\\"+memberid.ToString()+"_0.jpg", UriKind.Absolute));
                 else
                     image_id.Source = new BitmapImage(new Uri("pack://application:,,,/Resource/Images/member_256x256.png"));
                 int db_day = 7 * 10 + MenuTemp.fixedmealtoday;

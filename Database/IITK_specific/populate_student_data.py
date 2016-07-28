@@ -17,14 +17,6 @@ except MySQLdb.Error, e:
 	print "Database Connection Error"
 	raise e
 
-
-# Adding students to database
-y14 = open("y14.txt")
-y15 = open("y15.txt")
-y16 = open("y16.txt")
-
-
-
 print "WARNING: This script will create tables in the database named "+DATABASE_NAME+".\nAll previous data and application login information (the login table) might be overwritten"
 print "If updating database make sure to take a backup first. Run \" mysqldump -uUSER -pYOURPASSWORD DATABASE_NAME > backup_orig.sql\" "
 print "Note: Change the username and password for mysql as and when required"

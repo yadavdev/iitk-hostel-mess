@@ -6,7 +6,7 @@
 *.user
 *.userosscache
 *.sln.docstates
-
+Database/IITK_specific/Images
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

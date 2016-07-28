@@ -102,11 +102,11 @@ namespace MessManagement
                 Console.WriteLine("enddate: " + string.Format("{0:yyyy-MM-dd}", enddateval));
 
                 Directory.CreateDirectory(@"C:\MessManagement\Dues");
-                FileInfo newFile = new FileInfo("C:\\MessManagement\\Dues\\messdues" + startdateval.ToShortDateString() +"-"+ enddateval.ToShortDateString() + ".xlsx");
+                FileInfo newFile = new FileInfo("C:\\MessManagement\\Dues\\messdues.xlsx");
                 if (newFile.Exists)
                 {
                     newFile.Delete();  // ensures we create a new workbook
-                    newFile = new FileInfo("C:\\MessManagement\\Dues\\messdues" + startdateval.ToShortDateString() + "-" + enddateval.ToShortDateString() + ".xlsx");
+                    newFile = new FileInfo("C:\\MessManagement\\Dues\\messdues.xlsx");
                 }
                 using (ExcelPackage objExcelPackage = new ExcelPackage(newFile))
                 {

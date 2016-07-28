@@ -38,9 +38,15 @@ namespace MessManagement
                 InitializeComponent();
                 memberid = roll;
                 membername = name;
+                if(membername == null || membername == "" || memberid <0)
+                {
+                    Switcher.Switch(new MemberEntry());
+                    MessageBox.Show("Page Load Error: \nClick Okay to go back", "An Error Occured", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 todayspecialextra.ItemsSource = today_special;
                 fixedextra.ItemsSource = today_fixed;
-                todayspecialextra.CellEditEnding += Todayspecialextra_CellEditEnding;
+                todayspecialextra.CellEditEnding += ExtraEntry_CellEditEnding;
+                fixedextra.CellEditEnding += ExtraEntry_CellEditEnding;
             }
             catch (Exception ex)
             {
@@ -65,7 +71,7 @@ namespace MessManagement
             }
         }
 
-        private void Todayspecialextra_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        private void ExtraEntry_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
@@ -105,10 +111,12 @@ namespace MessManagement
         {
             try
             {
-                //load from database where membername = memberid
-                //set membername = datafromquery['name']
                 label_name.Content = membername;
                 label_rollno.Content = memberid;
+                if (System.IO.File.Exists("C:\\MessManagement\\StudentImages\\" + memberid.ToString() + "_0.jpg"))
+                    image_id.Source = new BitmapImage(new Uri("C:\\MessManagement\\StudentImages\\"+memberid.ToString()+"_0.jpg", UriKind.Absolute));
+                else
+                    image_id.Source = new BitmapImage(new Uri("pack://application:,,,/Resource/Images/member_256x256.png"));
                 int db_day = 7 * 10 + MenuTemp.fixedmealtoday;
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conn;
@@ -127,20 +135,9 @@ namespace MessManagement
                 {
                     today_special.Add(new DailyMenuEntry() { Name = curr.Name, Quantity = 0, Price = curr.Price });
                 }
-                //today_special.Add(new DailyMenuEntry() { Name = "Chicken Curry", Quantity = 0, Price = 86 });
-                //today_special.Add(new DailyMenuEntry() { Name = "Veg Curry", Quantity = 0, Price = 345 });
-                //today_special.Add(new DailyMenuEntry() { Name = "Hall2 Special Curry", Quantity = 0, Price = 104 });
-                //today_special.Add(new DailyMenuEntry() { Name = "Hall2 Special Curry", Quantity = 0, Price = 104 });
-                //today_special.Add(new DailyMenuEntry() { Name = "Hall2 Special Curry", Quantity = 0, Price = 104 });
-                //today_fixed.Add(new DailyMenuEntry() { Name = "Chicken Curry", Quantity = 0, Price = 86 });
-                //today_fixed.Add(new DailyMenuEntry() { Name = "Veg Curry", Quantity = 0, Price = 345 });
-                //today_fixed.Add(new DailyMenuEntry() { Name = "Hall2 Special Curry", Quantity = 0, Price = 104 });
-                //today_fixed.Add(new DailyMenuEntry() { Name = "Chicken Curry", Quantity = 0, Price = 86 });
-                //today_fixed.Add(new DailyMenuEntry() { Name = "Veg Curry", Quantity = 0, Price = 345 });
-                //today_fixed.Add(new DailyMenuEntry() { Name = "Hall2 Special Curry", Quantity = 0, Price = 104 });
             }
             catch(Exception ex){
-                MessageBox.Show("Error: " + ex.Message + "\nTry Again. Click okay to go back", "Database Error Occured", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Error: " + ex.Message + "\nTry Again. Click okay and go back", "Error Occured", MessageBoxButton.OK, MessageBoxImage.Error);
                 Switcher.Switch(new MemberEntry());
                 if (conn != null)
                     conn.Close();

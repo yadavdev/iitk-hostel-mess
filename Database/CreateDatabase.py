@@ -59,7 +59,7 @@ print "Creating Table: Smt"
 createtable = """CREATE TABLE  IF NOT EXISTS Smt(
                 sid INT not null auto_increment primary key, 
                 roll INT not null,
-                date DATETIME not null DEFAULT CURRENT_TIMESTAMP,
+                date TIMESTAMP not null DEFAULT CURRENT_TIMESTAMP,
                 item VARCHAR(45) not null,
                 quantity INT not null default 0,
                 foreign key(roll) references Student(roll),
@@ -102,7 +102,7 @@ createtable = """CREATE TABLE  IF NOT EXISTS  VendorInvoices(
                 sid INT not null ,
                 invno VARCHAR(30) not null,
                 item VARCHAR(50) not null,
-                date DATETIME not null Default CURRENT_TIMESTAMP,
+                date TIMESTAMP not null Default CURRENT_TIMESTAMP,
                 foreign key(sid) references Supplier(sid),
                 puramt DOUBLE,
                 discount DOUBLE

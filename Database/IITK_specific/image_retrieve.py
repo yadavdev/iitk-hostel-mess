@@ -18,18 +18,18 @@ with open("y14.txt") as f:
         rollno = line.split()[0]
         print rollno
         image_url = "http://oa.cc.iitk.ac.in:8181/Oa/Jsp/Photo/"+ rollno + "_0.jpg"
-        urllib.urlretrieve(image_url, str(i[2]) + "_0.jpg")
+        urllib.urlretrieve(image_url, rollno + "_0.jpg")
 
 with open("y15.txt") as f:
     for line in f:
         rollno = line.split()[0]
         print rollno
         image_url = "http://oa.cc.iitk.ac.in:8181/Oa/Jsp/Photo/"+ rollno + "_0.jpg"
-        urllib.urlretrieve(image_url, str(i[2]) + "_0.jpg")
+        urllib.urlretrieve(image_url, rollno + "_0.jpg")
 
 with open("y16.txt") as f:
     for line in f:
         rollno = line.split()[0]
         print rollno
         image_url = "http://oa.cc.iitk.ac.in:8181/Oa/Jsp/Photo/"+ rollno + "_0.jpg"
-        urllib.urlretrieve(image_url, str(i[2]) + "_0.jpg")
+        urllib.urlretrieve(image_url, rollno + "_0.jpg")

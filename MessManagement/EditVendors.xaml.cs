@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using log4net;
 
 namespace MessManagement
 {
@@ -28,6 +29,7 @@ namespace MessManagement
             "UID=root;" +
             "PASSWORD=rootpa55word;";
         MySqlConnection conn = null;
+        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public EditVendors()
         {
@@ -40,6 +42,7 @@ namespace MessManagement
             }
             catch (MySqlException ex)
             {
+                log.Error("Error: " + ex.Message);
                 Console.WriteLine("Error: {0}", ex.ToString());
 
             }

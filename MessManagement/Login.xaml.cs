@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using log4net;
 
 namespace MessManagement
 {
@@ -26,7 +27,9 @@ namespace MessManagement
             "DATABASE=mess_login;" +
             "UID=root;" +
             "PASSWORD=rootpa55word;";
-       private MySqlConnection conn = null;
+        private MySqlConnection conn = null;
+        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public Login()
         {
             InitializeComponent();
@@ -39,6 +42,7 @@ namespace MessManagement
             }
             catch (MySqlException ex)
             {
+                log.Error("Error: " + ex.Message);
                 Console.WriteLine("Error: {0}", ex.ToString());
                 MessageBox.Show("Error: Connecting to the Database. Contact Administrator or Retry.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -68,10 +72,14 @@ namespace MessManagement
                     {
                         if (dr.GetInt32(2) == 0)
                         {
+                            if (conn != null)
+                                conn.Close();
                             Switcher.Switch(new LandingPageAdmin());
                         }
                         else
                         {
+                            if (conn != null)
+                                conn.Close();
                             Switcher.Switch(new LandingPageFrontend());
                         }
                         if (conn != null)
@@ -90,6 +98,7 @@ namespace MessManagement
             }
             catch(MySqlException ex)
             {
+                log.Error("Error: " + ex.Message);
                 MessageBox.Show("Error: During Database Connection. Contact Administrator or Retry.\n" + ex.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

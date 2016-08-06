@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using log4net;
+
 namespace MessManagement
 {
     /// <summary>
@@ -27,6 +29,7 @@ namespace MessManagement
             "UID=root;" +
             "PASSWORD=rootpa55word;";
         MySqlConnection conn = null;
+        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public LatestMemberTransactions()
         {
@@ -39,6 +42,7 @@ namespace MessManagement
             }
             catch (MySqlException ex)
             {
+                log.Error("Error: " + ex.Message);
                 MessageBox.Show("Dasebase Connection Failed, Go back and Try Again");
                 Console.WriteLine("Error: {0}", ex.ToString());
 
@@ -77,6 +81,8 @@ namespace MessManagement
         private void button_back_Click(object sender, RoutedEventArgs e)
         {
             UpdateDatabase();
+            if (conn != null)
+                conn.Close();
             Switcher.Switch(new MemberEntry());
         }
 

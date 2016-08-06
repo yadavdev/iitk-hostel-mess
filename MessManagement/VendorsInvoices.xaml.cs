@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using log4net;
 
 namespace MessManagement
 {
@@ -29,6 +30,8 @@ namespace MessManagement
             "UID=root;" +
             "PASSWORD=rootpa55word;";
         MySqlConnection conn = null;
+        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public VendorsInvoices()
         {
             try
@@ -42,6 +45,7 @@ namespace MessManagement
             }
             catch (MySqlException ex)
             {
+                log.Error("Error: " + ex.Message);
                 Console.WriteLine("Error: {0}", ex.ToString());
                 MessageBox.Show("Error Connecting to Database");
                 Switcher.Switch(new AdminPanel());
@@ -50,6 +54,8 @@ namespace MessManagement
         
         private void button_back_Click(object sender, RoutedEventArgs e)
         {
+            if (conn != null)
+                conn.Close();
             Switcher.Switch(new AdminPanel());
         }
 

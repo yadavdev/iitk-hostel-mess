@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using log4net;
+
 namespace MessManagement
 {
     /// <summary>
@@ -27,6 +29,8 @@ namespace MessManagement
             "UID=root;" +
             "PASSWORD=rootpa55word;";
         MySqlConnection conn = null;
+        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private string membername = null;
         public MemberEntry()
         {
             InitializeComponent();
@@ -40,6 +44,7 @@ namespace MessManagement
             catch (MySqlException ex)
             {
                 Console.WriteLine("Error: {0}", ex.ToString());
+                log.Error("Error: " + ex.Message);
                 MessageBox.Show("Dasebase Connection Failed, Go back and Try Again or Contact Administrator");
 
             }
@@ -75,12 +80,16 @@ namespace MessManagement
                     }
                     else
                     {
-                        Switcher.Switch(new MainExtraEntry(rolltosend, dr["name"].ToString() ));
-                    }  
+                        membername = dr["name"].ToString();
+                        if (conn != null)
+                            conn.Close();
+                        Switcher.Switch(new MainExtraEntry(rolltosend, membername));
+                    }
                 }
-                catch
+                catch(Exception ex)
                 {
-                    label_error.Content = "Database query failed.";
+                    log.Error(id_field.Text + ": Database query failed. " + ex.ToString());
+                    label_error.Content = "Database query failed. Please contact the Administrator or Restart";
                 }
             }
             catch
@@ -91,6 +100,8 @@ namespace MessManagement
 
         private void button_latest_transactions_Click(object sender, RoutedEventArgs e)
         {
+            if (conn != null)
+                conn.Close();
             Switcher.Switch(new LatestMemberTransactions());
         }
         private void License(object sender, RoutedEventArgs e)

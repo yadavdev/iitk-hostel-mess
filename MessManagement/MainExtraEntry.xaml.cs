@@ -67,11 +67,12 @@ namespace MessManagement
             }
             catch (MySqlException ex)
             {
+                log.Error("Error: " + ex.Message);
                 MessageBox.Show("Error: " + ex.Message + "\nClick Ok to go back", "Database Connection failed.", MessageBoxButton.OK, MessageBoxImage.Error);
                 Console.WriteLine("Error: {0}", ex.ToString());
-                Switcher.Switch(new MemberEntry());
                 if (conn != null)
                     conn.Close();
+                Switcher.Switch(new MemberEntry());
 
             }
         }
@@ -100,6 +101,8 @@ namespace MessManagement
 
         private void button_back_Click(object sender, RoutedEventArgs e)
         {
+            if (conn != null)
+                conn.Close();
             Switcher.Switch(new MemberEntry());
         }
 
@@ -108,6 +111,8 @@ namespace MessManagement
             button_enter.IsEnabled = false;
             button_back.IsEnabled = false;
             UpdateDatabase(); /*And Add to Latest Transaction*/
+            if (conn != null)
+                conn.Close();
             Switcher.Switch(new MemberEntry());
             
         }
@@ -143,10 +148,11 @@ namespace MessManagement
                 }
             }
             catch(Exception ex){
-                MessageBox.Show("Error: " + ex.Message + "\nTry Again. Click okay and go back", "Error Occured", MessageBoxButton.OK, MessageBoxImage.Error);
-                Switcher.Switch(new MemberEntry());
                 if (conn != null)
                     conn.Close();
+                log.Error("Error: " + ex.Message);
+                MessageBox.Show("Error: " + ex.Message + "\nTry Again. Click okay and go back", "Error Occured", MessageBoxButton.OK, MessageBoxImage.Error);
+                Switcher.Switch(new MemberEntry());
             }
         }
         private void UpdateDatabase()
@@ -196,6 +202,7 @@ namespace MessManagement
                 try
                 {
                     tr.Rollback();
+                    log.Info(memberid.ToString() + ": Transaction Failed and Rolled Back.");
                     log.Error(memberid.ToString() + ": Transaction Failed and Rolled Back.");
                     MessageBox.Show("Transaction didn't complete Successfully:\n" + ex.Message + "\nClick okay to go back", "Rolling Back Transaction", MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -203,6 +210,7 @@ namespace MessManagement
                 catch (MySqlException ex1)
                 {
                     Console.WriteLine("Error: {0}", ex1.ToString());
+                    log.Info(memberid.ToString() + ": Transaction Rolling Failed.");
                     log.Error(memberid.ToString() + ": Transaction Rolling Failed.");
                     MessageBox.Show("Transaction Roll Back Failed:\n" + ex1.Message + "\nCheck Latest Transaction Table or Contact Administrator", "Rolling Back Transaction", MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -211,9 +219,9 @@ namespace MessManagement
             }
             finally
             {
-                Switcher.Switch(new MemberEntry());
                 if (conn != null)
                     conn.Close();
+                Switcher.Switch(new MemberEntry());
             }
 
         }

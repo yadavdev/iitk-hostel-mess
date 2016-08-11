@@ -23,7 +23,6 @@ except MySQLdb.Error, e:
     print "Database Selection Error."
     raise e
 cursor.execute("create database if not exists "+DATABASE_NAME)
-cursor.execute("use " + DATABASE_NAME)
 
 print "WARNING: This script will create tables in the database named "+DATABASE_NAME+".\nAll previous data and application login information (the login table) might be overwritten"
 print "If updating database make sure to take a backup first. Run \" mysqldump -uUSER -pYOURPASSWORD DATABASE_NAME > backup_orig.sql\" "
@@ -41,6 +40,15 @@ while 1:
         elif call=='n':
                 print "Run script after taking proper Backup"
                 sys.exit(0)
+
+cursor.execute('CREATE DATABASE if not exists `mess_login`');
+cursor.execute('CREATE TABLE if not exists `mess_login`.`login` (id VARCHAR(45) not null primary key, password VARCHAR(45) not null, privilege INT not null DEFAULT 1)');
+#admin has privilage to access and edit employee details etc.
+cursor.execute('INSERT into `mess_login`.`login` (id, password, privilege) values ("admin", "admin", 0)')
+#operator can manage student mess entry, edit members and print dues.
+cursor.execute('INSERT into `mess_login`.`login` (id, password, privilege) values ("operator", "operator", 1)');
+
+cursor.execute("use " + DATABASE_NAME)
 
 # Below line is commented to prevent accidental deletion.
 #cursor.execute("DROP TABLE IF EXISTS Student")

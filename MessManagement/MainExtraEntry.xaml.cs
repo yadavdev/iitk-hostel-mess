@@ -89,10 +89,12 @@ namespace MessManagement
                     {
                         var element = e.EditingElement as TextBox; // element.Text has the new, user-entered value
                         int x;
-                        if (!(int.TryParse(element.Text, out x) && x >= 0))
+                        if (!(int.TryParse(element.Text, out x) && x >= 0 && x <= 10)) //remove && x < 10 if don't require a limit
                         {
                             element.Text = "0";
-                            MessageBox.Show("Quantity should be 0 or a positive integer.");
+                            // Not using message box will result in changing the value to 0 and prevents action of enter button
+                            //MessageBox.Show("Quantity should be 0 or a positive integer not greater than 10.");
+                            Console.WriteLine("MessageBox Ended now!");
                         }
                     }
                 }
@@ -159,6 +161,12 @@ namespace MessManagement
         {
             todayspecialextra.CommitEdit();
             fixedextra.CommitEdit();
+            if (!datavalidiated())
+            {
+                // This should have been tackled in cellEditEnding. Do it here too, to be extra sure.
+                MessageBox.Show("Data Validiation failed. Quantity should be 0 or a positive integer not greater than 10.");
+                return;
+            }
             try
             {
                 tr = conn.BeginTransaction();
@@ -224,6 +232,24 @@ namespace MessManagement
                 Switcher.Switch(new MemberEntry());
             }
 
+        }
+        private bool datavalidiated()
+        {
+            foreach (DailyMenuEntry curr in today_special)
+            {
+                if (curr.Quantity < 0 || curr.Quantity > 10)
+                {
+                    return false;
+                }
+            }
+            foreach (DailyMenuEntry curr in today_fixed)
+            {
+                if (curr.Quantity < 0 || curr.Quantity > 10)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         private void License(object sender, RoutedEventArgs e)

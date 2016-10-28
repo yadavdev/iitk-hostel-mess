@@ -104,6 +104,13 @@ namespace MessManagement
                 conn.Close();
             Switcher.Switch(new LatestMemberTransactions());
         }
+        private void id_field_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                button_enter_Click(sender, e);
+            }
+        }
         private void License(object sender, RoutedEventArgs e)
         {
             MenuBarFunctions.License(sender, e);

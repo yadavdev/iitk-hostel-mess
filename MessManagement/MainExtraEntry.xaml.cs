@@ -93,7 +93,7 @@ namespace MessManagement
                         {
                             element.Text = "0";
                             // Not using message box will result in changing the value to 0 and prevents action of enter button
-                            //MessageBox.Show("Quantity should be 0 or a positive integer not greater than 10.");
+                            MessageBox.Show("Quantity should be 0 or a positive integer not greater than 10.");
                             Console.WriteLine("MessageBox Ended now!");
                         }
                     }

@@ -252,6 +252,22 @@ namespace MessManagement
             return true;
         }
 
+        private void datagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                DataGrid dataGrid = sender as DataGrid;
+                DataGridRow row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(dataGrid.SelectedIndex);
+                DataGridCell cell = dataGrid.Columns[2].GetCellContent(row).Parent as DataGridCell;
+                cell.Focus();
+                dataGrid.BeginEdit();
+            }
+            catch(Exception ex)
+            {
+                log.Error("Selection cell failed: " + ex.ToString());
+            }
+        }
+
         private void License(object sender, RoutedEventArgs e)
         {
             MenuBarFunctions.License(sender, e);

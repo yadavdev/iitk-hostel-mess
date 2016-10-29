@@ -257,6 +257,7 @@ namespace MessManagement
             try
             {
                 DataGrid dataGrid = sender as DataGrid;
+                if (dataGrid.SelectedIndex == -1) return; // 4. workaround(see 3.) Execution sequence: first the grid losing focus then the grid/button gaining focus
                 DataGridRow row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(dataGrid.SelectedIndex);
                 DataGridCell cell = dataGrid.Columns[2].GetCellContent(row).Parent as DataGridCell;
                 cell.Focus();
@@ -265,6 +266,26 @@ namespace MessManagement
             catch(Exception ex)
             {
                 log.Error("Selection cell failed: " + ex.ToString());
+                MessageBox.Show("An Error Occured, Please report this to the maintainer :\nSelectionChanged: " + ex.ToString());
+            }
+        }
+        // 1. Function to unselect the row of current datagrid once the datagrid is out of focus.
+        // This is required because selectionchanged event doesn't get fired if returning
+        // to the same row where we left. As a result the quantity column doesn't automatically get selected
+        private void datagrid_LostFocus(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DataGrid dataGrid = sender as DataGrid;
+                if (!dataGrid.IsKeyboardFocusWithin)
+                    dataGrid.UnselectAll(); // 2. change selection only if focus going outside
+                // 3. the above code creates a problem. when focus moves outside  we do UnselectAll()
+                // but this fires the selectionchange event where selectedelement is now null or -1.
+            }
+            catch (Exception ex)
+            {
+                log.Error("Lost focus failed: " + ex.ToString());
+                MessageBox.Show("An Error Occured, Please report this to the maintainer :\nLost Focus: " + ex.ToString());
             }
         }
 

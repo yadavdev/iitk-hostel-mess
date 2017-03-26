@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using log4net;
+using System.Configuration;
 
 namespace MessManagement
 {
@@ -23,11 +24,7 @@ namespace MessManagement
     /// </summary>
     public partial class MemberEntry : UserControl
     {
-        string cs =
-            "SERVER=localhost;" +
-            "DATABASE=mess_db;" +
-            "UID=root;" +
-            "PASSWORD=rootpa55word;";
+        string cs = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
         MySqlConnection conn = null;
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private string membername = null;

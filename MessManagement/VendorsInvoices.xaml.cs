@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using log4net;
+using System.Configuration;
 
 namespace MessManagement
 {
@@ -24,11 +25,7 @@ namespace MessManagement
     {
         List<PurchaseInvoiceClass> invoiceslist = new List<PurchaseInvoiceClass>();
         List<VendorListClass> vendorlist = new List<VendorListClass>();
-        string cs =
-            "SERVER=localhost;" +
-            "DATABASE=mess_db;" +
-            "UID=root;" +
-            "PASSWORD=rootpa55word;";
+        string cs = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
         MySqlConnection conn = null;
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

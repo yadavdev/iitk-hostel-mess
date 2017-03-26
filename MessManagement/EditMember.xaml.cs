@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using log4net;
+using System.Configuration;
+
 namespace MessManagement
 {
     /// <summary>
@@ -22,11 +24,7 @@ namespace MessManagement
     public partial class EditMember : UserControl
     {
         List<EditMemberList> memberlist = new List<EditMemberList>();
-        string cs =
-            "SERVER=localhost;" +
-            "DATABASE=mess_db;" +
-            "UID=root;" +
-            "PASSWORD=rootpa55word;";
+        string cs = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
         MySqlConnection conn = null;
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -164,16 +162,17 @@ namespace MessManagement
                 dr = cmd.ExecuteReader();
                 int rollno = 0;
                 string name = "";
-                string remarks = null;
+                string remark = null;
                 while (dr.Read())
                 {
                     Console.WriteLine(dr);
                     rollno = dr.GetInt32(1);
                     name = dr.GetString(0);
                     if (!dr.IsDBNull(2))
-                        remarks = dr.GetString(2);
-                    memberlist.Add(new EditMemberList() { RollNo = rollno, Name = name, Remarks = remarks });
-
+                        remark = dr.GetString(2);
+                    else
+                        remark = string.Empty;
+                    memberlist.Add(new EditMemberList() { RollNo = rollno, Name = name, Remarks = remark });
                 }
                 if (dr != null)
                     dr.Close();

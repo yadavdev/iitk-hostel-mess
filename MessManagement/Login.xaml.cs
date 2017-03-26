@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using log4net;
+using System.Configuration;
 
 namespace MessManagement
 {
@@ -22,11 +23,7 @@ namespace MessManagement
     /// </summary>
     public partial class Login : UserControl
     {
-        private string cs =
-            "SERVER=localhost;" +
-            "DATABASE=mess_login;" +
-            "UID=root;" +
-            "PASSWORD=rootpa55word;";
+        private string cs = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
         private MySqlConnection conn = null;
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -35,6 +32,22 @@ namespace MessManagement
             InitializeComponent();
             try
             {
+                /* Configure log4net to use the application base directory to store logs */
+                log4net.GlobalContext.Properties["ApplicationDataBaseDirectory"] = ConfigurationManager.AppSettings["ApplicationDataBaseDirectory"];
+                log4net.Config.XmlConfigurator.Configure();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: Setting the log directory. Contact Administrator.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                /* Set a default directory */
+                log4net.GlobalContext.Properties["ApplicationDataBaseDirectory"] = @"C:\MessManagement";
+                log4net.Config.XmlConfigurator.Configure();
+                log.Error("Error: " + ex.Message);
+            }
+
+            try
+            {
+                /* Try MySql Connection and check if successful */
                 conn = new MySqlConnection(cs);
                 conn.Open();
                 Console.WriteLine("MySQL version : {0}", conn.ServerVersion);
@@ -45,7 +58,6 @@ namespace MessManagement
                 log.Error("Error: " + ex.Message);
                 Console.WriteLine("Error: {0}", ex.ToString());
                 MessageBox.Show("Error: Connecting to the Database. Contact Administrator or Retry.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
             }
         }
         private void button_login_Click(object sender, RoutedEventArgs e)
@@ -72,12 +84,16 @@ namespace MessManagement
                     {
                         if (dr.GetInt32(2) == 0)
                         {
+                            if (dr != null)
+                                dr.Close();
                             if (conn != null)
                                 conn.Close();
                             Switcher.Switch(new LandingPageAdmin());
                         }
                         else
                         {
+                            if (dr != null)
+                                dr.Close();
                             if (conn != null)
                                 conn.Close();
                             Switcher.Switch(new LandingPageFrontend());

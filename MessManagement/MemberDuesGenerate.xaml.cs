@@ -18,6 +18,7 @@ using OfficeOpenXml.Style;
 using System.IO;
 using MySql.Data.MySqlClient;
 using log4net;
+using System.Configuration;
 
 namespace MessManagement
 {
@@ -26,11 +27,7 @@ namespace MessManagement
     /// </summary>
     public partial class MemberDuesGenerate : UserControl
     {
-        private string cs =
-            "SERVER=localhost;" +
-            "DATABASE=mess_db;" +
-            "UID=root;" +
-            "PASSWORD=rootpa55word;";
+        private string cs = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
         private MySqlConnection conn = null;
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -68,12 +65,12 @@ namespace MessManagement
             button_back.IsEnabled = false;
             button_generate.IsEnabled = false;
             Dictionary<int, StudentData> tempdata = new Dictionary<int, StudentData >();
+            MySqlDataReader dr = null;
             try
             {
                 string sql = "SELECT * from Student ";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 Console.WriteLine(sql);
-                MySqlDataReader dr = null;
                 dr = cmd.ExecuteReader();
                 if (!dr.HasRows)
                 {
@@ -85,18 +82,23 @@ namespace MessManagement
                     {
                         Console.WriteLine(dr["roll"] + " " + dr["name"] );
                         tempdata.Add(Convert.ToInt32(dr["roll"]),new StudentData());
-                        tempdata[Convert.ToInt32(dr["roll"] )].Name = dr["name"].ToString();
+                        tempdata[Convert.ToInt32(dr["roll"])].Name = dr["name"].ToString();
+                        if (!Convert.IsDBNull(dr["remark"]))
+                            tempdata[Convert.ToInt32(dr["roll"])].Remark = dr["remark"].ToString();
+                        else tempdata[Convert.ToInt32(dr["roll"])].Remark = string.Empty;
                     }
                 }
-                if (dr != null)
-                    dr.Close();
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error Database queries Failed:\n" + ex.ToString());
             }
-
+            finally
+            {
+                if (dr != null)
+                    dr.Close();
+                dr = null;
+            }
 
             try
             {
@@ -106,12 +108,12 @@ namespace MessManagement
                 Console.WriteLine("startdate: " + string.Format("{0:yyyy-MM-dd}", startdateval));
                 Console.WriteLine("enddate: " + string.Format("{0:yyyy-MM-dd}", enddateval));
 
-                Directory.CreateDirectory(@"C:\MessManagement\Dues");
-                FileInfo newFile = new FileInfo("C:\\MessManagement\\Dues\\messdues.xlsx");
+                Directory.CreateDirectory(ConfigurationManager.AppSettings["ApplicationDataBaseDirectory"] + "\\Dues");
+                FileInfo newFile = new FileInfo(ConfigurationManager.AppSettings["ApplicationDataBaseDirectory"] + "\\Dues\\messdues.xlsx");
                 if (newFile.Exists)
                 {
                     newFile.Delete();  // ensures we create a new workbook
-                    newFile = new FileInfo("C:\\MessManagement\\Dues\\messdues.xlsx");
+                    newFile = new FileInfo(ConfigurationManager.AppSettings["ApplicationDataBaseDirectory"] + "\\Dues\\messdues.xlsx");
                 }
                 using (ExcelPackage objExcelPackage = new ExcelPackage(newFile))
                 {
@@ -130,8 +132,9 @@ namespace MessManagement
                     ws.Cells[3, 1].Value = "Sno";
                     ws.Cells[3, 2].Value = "Rollno";
                     ws.Cells[3, 3].Value = "Name";
-                    ws.Cells[3, 4].Value = "Mess Extras";
-                    ws.Cells[3, 5].Value = "Total";
+                    ws.Cells[3, 4].Value = "Remark";
+                    ws.Cells[3, 5].Value = "Mess Extras";
+                    ws.Cells[3, 6].Value = "Total";
                     try
                     {
                         string sql = "SELECT * from Smt WHERE date<='"+ string.Format("{0:yyyy-MM-dd}", enddateval) + " 23:59:59:999' and date>='"+ string.Format("{0:yyyy-MM-dd}", startdateval) + "'";
@@ -140,7 +143,6 @@ namespace MessManagement
                         //cmd.Parameters.AddWithValue("@startdate", string.Format("{0:yyyy-MM-dd}", startdateval));
                         //cmd.Parameters.AddWithValue("@enddate", string.Format("{0:yyyy-MM-dd}", enddateval));
                         Console.WriteLine(sql);
-                        MySqlDataReader dr = null;
                         dr = cmd.ExecuteReader();
                         if(!dr.HasRows)
                         {
@@ -160,16 +162,15 @@ namespace MessManagement
                                 ws.Cells[i, 1].Value = sno;
                                 ws.Cells[i, 2].Value = mydata.Key;
                                 ws.Cells[i, 3].Value = mydata.Value.Name;
-                                ws.Cells[i, 4].Value = mydata.Value.Price;
+                                ws.Cells[i, 4].Value = mydata.Value.Remark;
                                 ws.Cells[i, 5].Value = mydata.Value.Price;
+                                ws.Cells[i, 6].Value = mydata.Value.Price;
                                 sno += 1;
                                 i += 1;
                             }
                             ws.Cells[ws.Dimension.Address].AutoFitColumns();
                             objExcelPackage.Save();
-                            MessageBox.Show("Excel File generated from database!", "Generation Succed",MessageBoxButton.OK,MessageBoxImage.Information);
-
-                            
+                            MessageBox.Show("Excel File generated from database!\nCheck\n" + ConfigurationManager.AppSettings["ApplicationDataBaseDirectory"] + "\\Dues\\messdues.xlsx", "Generation Succed",MessageBoxButton.OK,MessageBoxImage.Information);  
                         }
                         if (dr != null)
                             dr.Close();
@@ -202,7 +203,7 @@ namespace MessManagement
     public class StudentData
     {
         public string Name { get; set; }
-
+        public string Remark { get; set; }
         public int Price { get; set; }
     }
 

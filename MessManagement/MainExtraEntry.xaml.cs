@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using System.IO;
 using log4net;
+using System.Configuration;
 
 namespace MessManagement
 {
@@ -25,13 +26,10 @@ namespace MessManagement
     {
         List<DailyMenuEntry> today_fixed = new List<DailyMenuEntry>();
         List<DailyMenuEntry> today_special = new List<DailyMenuEntry>();
+        int maxQuantityLimit = 0;
         int memberid = 0;
         string membername = "";
-        string cs =
-            "SERVER=localhost;" +
-            "DATABASE=mess_db;" +
-            "UID=root;" +
-            "PASSWORD=rootpa55word;";
+        string cs = ConfigurationManager.ConnectionStrings["DatabaseConnectionString"].ConnectionString;
         MySqlConnection conn = null;
         MySqlTransaction tr = null;
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -42,7 +40,8 @@ namespace MessManagement
                 InitializeComponent();
                 memberid = roll;
                 membername = name;
-                Directory.CreateDirectory(@"C:\MessManagement\Logs");
+                maxQuantityLimit = int.Parse(ConfigurationManager.AppSettings["MessQuantityMaxLimit"]);
+                Directory.CreateDirectory(ConfigurationManager.AppSettings["ApplicationDataBaseDirectory"] + "\\Logs");
                 if (membername == null || membername == "" || memberid <0)
                 {
                     Switcher.Switch(new MemberEntry());
@@ -89,11 +88,11 @@ namespace MessManagement
                     {
                         var element = e.EditingElement as TextBox; // element.Text has the new, user-entered value
                         int x;
-                        if (!(int.TryParse(element.Text, out x) && x >= 0 && x <= 10)) //remove && x < 10 if don't require a limit
+                        if (!(int.TryParse(element.Text, out x) && x >= 0 && x <= maxQuantityLimit)) //remove && x < 10 if don't require a limit
                         {
                             element.Text = "0";
                             // Not using message box will result in changing the value to 0 and prevents action of enter button
-                            MessageBox.Show("Quantity should be 0 or a positive integer not greater than 10.");
+                            MessageBox.Show("Quantity should be 0 or a positive integer not greater than " + maxQuantityLimit.ToString());
                             Console.WriteLine("MessageBox Ended now!");
                         }
                     }
@@ -125,11 +124,20 @@ namespace MessManagement
             {
                 label_name.Content = membername;
                 label_rollno.Content = memberid;
-                Directory.CreateDirectory(@"C:\MessManagement\MemberImages");
-                if (File.Exists("C:\\MessManagement\\MemberImages\\" + memberid.ToString() + "_0.jpg"))
-                    image_id.Source = new BitmapImage(new Uri("C:\\MessManagement\\MemberImages\\"+memberid.ToString()+"_0.jpg", UriKind.Absolute));
+                Directory.CreateDirectory(ConfigurationManager.AppSettings["ApplicationDataBaseDirectory"] + "\\MemberImages");
+                if (File.Exists(ConfigurationManager.AppSettings["ApplicationDataBaseDirectory"] + "\\MemberImages\\" + memberid.ToString() + "_0.jpg"))
+                    image_id.Source = new BitmapImage(new Uri(ConfigurationManager.AppSettings["ApplicationDataBaseDirectory"] + "\\MemberImages\\" + memberid.ToString() + "_0.jpg", UriKind.Absolute));
                 else
                     image_id.Source = new BitmapImage(new Uri("pack://application:,,,/Resource/Images/member_256x256.png"));
+            }
+            catch (Exception ex)
+            {
+                log.Error("Error: " + ex.Message);
+                image_id.Source = new BitmapImage(new Uri("pack://application:,,,/Resource/Images/member_256x256.png"));
+                MessageBox.Show("Error: " + ex.Message + "\nError: Malformed Image. Check image folder.", "Error Occured", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            try
+            {
                 int db_day = 7 * 10 + MenuTemp.fixedmealtoday;
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.Connection = conn;
@@ -164,7 +172,7 @@ namespace MessManagement
             if (!datavalidiated())
             {
                 // This should have been tackled in cellEditEnding. Do it here too, to be extra sure.
-                MessageBox.Show("Data Validiation failed. Quantity should be 0 or a positive integer not greater than 10.");
+                MessageBox.Show("Data Validiation failed. Quantity should be 0 or a positive integer not greater than " + maxQuantityLimit.ToString());
                 return;
             }
             try
@@ -237,14 +245,14 @@ namespace MessManagement
         {
             foreach (DailyMenuEntry curr in today_special)
             {
-                if (curr.Quantity < 0 || curr.Quantity > 10)
+                if (curr.Quantity < 0 || curr.Quantity > maxQuantityLimit)
                 {
                     return false;
                 }
             }
             foreach (DailyMenuEntry curr in today_fixed)
             {
-                if (curr.Quantity < 0 || curr.Quantity > 10)
+                if (curr.Quantity < 0 || curr.Quantity > maxQuantityLimit)
                 {
                     return false;
                 }

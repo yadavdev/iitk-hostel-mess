@@ -80,20 +80,20 @@ namespace MessManagement
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                var column = e.Column as DataGridBoundColumn;
+                var column = e.EditingElement as ContentPresenter;
                 if (column != null)
                 {
-                    var bindPath = (column.Binding as Binding).Path.Path;
-                    if (bindPath == "Quantity")
+                    var element = (Xceed.Wpf.Toolkit.IntegerUpDown)VisualTreeHelper.GetChild(column, 0);
+                    
+                    if (element.Name == "myQuantityUpDown")
                     {
-                        var element = e.EditingElement as TextBox; // element.Text has the new, user-entered value
-                        int x;
-                        if (!(int.TryParse(element.Text, out x) && x >= 0 && x <= maxQuantityLimit)) //remove && x < 10 if don't require a limit
+                        Nullable<int> val = element.Value;
+
+                        if( val == null || !(val >= 0 && val <= maxQuantityLimit)) //remove && x < 10 if don't require a limit
                         {
-                            element.Text = "0";
+                            element.Value = 0;
                             // Not using message box will result in changing the value to 0 and prevents action of enter button
                             MessageBox.Show("Quantity should be 0 or a positive integer not greater than " + maxQuantityLimit.ToString());
-                            Console.WriteLine("MessageBox Ended now!");
                         }
                     }
                 }
@@ -172,7 +172,7 @@ namespace MessManagement
             if (!datavalidiated())
             {
                 // This should have been tackled in cellEditEnding. Do it here too, to be extra sure.
-                MessageBox.Show("Data Validiation failed. Quantity should be 0 or a positive integer not greater than " + maxQuantityLimit.ToString());
+                MessageBox.Show("Retry. Data Validiation failed. Quantity should be 0 or a positive integer not greater than " + maxQuantityLimit.ToString());
                 return;
             }
             try
@@ -277,6 +277,11 @@ namespace MessManagement
                 MessageBox.Show("An Error Occured, Please report this to the maintainer :\nSelectionChanged: " + ex.ToString());
             }
         }
+        private void datagrid_PreparingCellForEdit(object sender, DataGridPreparingCellForEditEventArgs e)
+        {
+            var element = (Xceed.Wpf.Toolkit.IntegerUpDown)VisualTreeHelper.GetChild(e.EditingElement, 0);
+            element.Focus();
+        }
         // 1. Function to unselect the row of current datagrid once the datagrid is out of focus.
         // This is required because selectionchanged event doesn't get fired if returning
         // to the same row where we left. As a result the quantity column doesn't automatically get selected
@@ -296,7 +301,38 @@ namespace MessManagement
                 MessageBox.Show("An Error Occured, Please report this to the maintainer :\nLost Focus: " + ex.ToString());
             }
         }
+        private void datagrid_gotFocusUpDown(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var elem = VisualTreeHelper.GetParent((DependencyObject)sender);
+                while (elem != null && !(elem is DataGridRow))
+                {
+                    elem = VisualTreeHelper.GetParent((DependencyObject)elem);
+                }
+                DataGridRow myRow = (DataGridRow)elem;
 
+                while (elem != null && !(elem is DataGrid))
+                {
+                    elem = VisualTreeHelper.GetParent((DependencyObject)elem);
+                }
+                /* comes to this function multiple times and crashes: selected row quantity updown in focus. Now click on another row updown focus*/
+                if (elem == null) return; //this turns to null in last turn.
+
+                DataGrid myGrid = (DataGrid)elem;
+                int rowidx = myRow.GetIndex();
+                if(myGrid.SelectedIndex != rowidx)
+                {
+                    myGrid.SelectedIndex = rowidx;
+                }
+            }
+            catch(Exception ex)
+            {
+                log.Error("gotFocusUpDown failed: " + ex.ToString());
+                MessageBox.Show("An Error Occured, Please report this to the maintainer :\nLost Focus: " + ex.ToString());
+            }
+            
+        }
         private void License(object sender, RoutedEventArgs e)
         {
             MenuBarFunctions.License(sender, e);

@@ -35,35 +35,38 @@ namespace MessManagement
             {
                 conn = new MySqlConnection(cs);
                 conn.Open();
-                Console.WriteLine("MySQL version : {0}", conn.ServerVersion);
-                LoadExtras();
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine("Error: {0}", ex.ToString());
                 log.Error("Error: " + ex.Message);
                 MessageBox.Show("Dasebase Connection Failed, Go back and Try Again or Contact Administrator");
-
             }
 
         }
-        private void LoadExtras()
+        private void MemberEntryControl_Loaded(object sender, RoutedEventArgs e)
         {
-            menutoday.ItemsSource = MenuTemp.tempmenu;
+            try
+            {
+                menutoday.ItemsSource = MenuTemp.tempmenu;
+                var idTextBox = (TextBox)this.FindName("id_field");
+                idTextBox.Focus();
+            }
+            catch(Exception ex)
+            {
+                log.Error("Error: " + ex.Message);
+                MessageBox.Show("Loading Extras Failed, Try Again or Contact Administrator");
+            }
         }
-
         private void button_enter_Click(object sender, RoutedEventArgs e)
         {
             /*Logic to Store and Check Member Id from database*/
             try
             {
                 int rolltosend = int.Parse(id_field.Text);
-                Console.WriteLine(rolltosend.ToString());
                 //check if in database
                 try
                 {
                     string str = "SELECT * from student where roll ="+ rolltosend.ToString();
-                    Console.WriteLine(str);
                     MySqlDataReader dr = null;
                     MySqlCommand cmd = new MySqlCommand(str, conn);
                     dr = cmd.ExecuteReader();

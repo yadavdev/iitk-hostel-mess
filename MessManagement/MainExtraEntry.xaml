@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MessManagement"
+        xmlns:xctk="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         mc:Ignorable="d"
         d:DesignHeight="640" d:DesignWidth="852">
 
@@ -47,18 +48,32 @@
         </StatusBar>
         <Grid Width="852">
             <Image x:Name="image_id" HorizontalAlignment="Left" Height="175" Source="Resource/Images/member_256x256.png" Margin="23,25,0,0" VerticalAlignment="Top" Width="140" Stretch="Fill" />
-            <DataGrid x:Name="fixedextra" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserDeleteRows = "False" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" Style="{StaticResource Menu}" Margin="207,93,31,258" SelectionChanged="datagrid_SelectionChanged" LostFocus="datagrid_LostFocus">
+            <DataGrid x:Name="fixedextra" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserDeleteRows = "False" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow" Style="{StaticResource Menu}" Margin="207,93,31,258" SelectionChanged="datagrid_SelectionChanged" LostFocus="datagrid_LostFocus" PreparingCellForEdit="datagrid_PreparingCellForEdit">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="200*"/>
                     <DataGridTextColumn Header="Unit Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="50*"/>
-                    <DataGridTextColumn Header="Enter Quantity" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}" Width="80*"/>
+                    <!--<DataGridTextColumn Header="Enter Quantity" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}" Width="80*"/>-->
+                    <DataGridTemplateColumn Header="Enter Quantity" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <xctk:IntegerUpDown x:Name="myQuantityUpDown" Value="{Binding Quantity, UpdateSourceTrigger=LostFocus}" Minimum="0" Focusable="True" GotFocus="datagrid_gotFocusUpDown" ClipValueToMinMax="True"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <DataGrid x:Name="todayspecialextra" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserDeleteRows = "False" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow"  Style="{StaticResource Menu}" Margin="207,340,31,56" SelectionChanged="datagrid_SelectionChanged" LostFocus="datagrid_LostFocus">
+            <DataGrid x:Name="todayspecialextra" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserDeleteRows = "False" CanUserAddRows="False" SelectionMode="Single" SelectionUnit="FullRow"  Style="{StaticResource Menu}" Margin="207,340,31,56" SelectionChanged="datagrid_SelectionChanged" LostFocus="datagrid_LostFocus" PreparingCellForEdit="datagrid_PreparingCellForEdit">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="200*"/>
                     <DataGridTextColumn Header="Unit Price" Binding="{Binding Price, UpdateSourceTrigger=LostFocus}"  IsReadOnly="True" Width="50*"/>
-                    <DataGridTextColumn Header="Enter Quantity" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}" Width="80*"/>
+                    <!--<DataGridTextColumn Header="Enter Quantity" Binding="{Binding Quantity, UpdateSourceTrigger=LostFocus}" Width="80*"/>-->
+                    <DataGridTemplateColumn Header="Enter Quantity" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <xctk:IntegerUpDown x:Name="myQuantityUpDown" Value="{Binding Quantity, UpdateSourceTrigger=LostFocus}" Minimum="0" Focusable="True" GotFocus="datagrid_gotFocusUpDown" ClipValueToMinMax="True"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <Label x:Name="label_name" Content="John The Legend" HorizontalAlignment="Left" Margin="207,25,0,0" VerticalAlignment="Top" FontSize="24" Width="527"/>
